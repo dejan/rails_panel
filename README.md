@@ -3,6 +3,8 @@ Rails panel
 
 Chrome extension for Rails development.
 
+![](https://dl.dropbox.com/u/69357609/Captured/xCFGZ.png)
+
 ## Licence
 
 Copyright (c) 2012 Dejan Simic
