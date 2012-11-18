@@ -5,6 +5,23 @@ Chrome extension for Rails development.
 
 ![](https://dl.dropbox.com/u/69357609/Captured/xCFGZ.png)
 
+## Installation
+
+Add radiowaves gem to development group in Gemfile:
+
+    group :development do
+      gem 'radiowaves'
+    end
+
+
+Start radiowaves websocket server:
+   
+    bundle exec rake radiowaves:start
+
+
+Install this extension in Chrome ("Load unpacked extension"). 
+
+
 ## Licence
 
 Copyright (c) 2012 Dejan Simic
