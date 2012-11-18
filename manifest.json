@@ -1,0 +1,11 @@
+{
+  "name": "Rails panel",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Devtools panel for Rails development",
+  "devtools_page": "devtools.html",
+  "permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}

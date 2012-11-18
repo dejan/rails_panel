@@ -1,0 +1,92 @@
+* {
+  -webkit-box-sizing: border-box;
+}
+
+.data-grid {
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.data-grid table {
+  table-layout: fixed;
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  font-family: Lucida Grande, sans-serif;
+  font-size: 11px;
+}
+
+.data-grid table th {
+    background-image: url(images/glossyHeader.png);
+    background-repeat: repeat-x;
+    border-right: 1px solid rgb(179, 179, 179);
+    border-bottom: 1px solid rgb(179, 179, 179);
+    height: 30px;
+    font-weight: bold;
+    padding: 0 4px;
+    white-space: nowrap;
+}
+
+.data-grid table td {
+  line-height: 17px;
+  height: 37px;
+  border-right: 1px solid #D2D2D2;
+  vertical-align: middle;
+  padding: 8px 4px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+
+.data-grid .data-container {
+    position: absolute;
+    top: 30px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-x: hidden;
+    overflow-y: overlay;
+}
+
+
+
+th, td {
+  text-align: left;
+}
+
+.view, .db, .duration {
+  text-align: right;
+}
+
+.data-container table tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+td.method, td.controller, td.action, td.format, td.status, td.view, td.db, td.duration {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+table.header th {
+  background: -webkit-gradient(linear, left top, left bottom, from(#ECECEC), to(#D9D9D9))
+}
+
+.method, .format, .status {
+  width: 50px;
+}
+
+.controller {
+  width: 200px;
+}
+
+.action {
+  width: 100px;
+}
+
+.view, .db, .duration {
+  width: 70px;
+}
