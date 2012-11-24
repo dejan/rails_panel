@@ -32,7 +32,7 @@ chrome.devtools.network.onRequestFinished.addListener(
   function(request) {
     if (connection == null) {
       headers = request.response.headers;
-      radiowavesURI = headers.find(function(x) { return x.name == 'X-Radiowaves-URI' })
+      radiowavesURI = headers.find(function(x) { return x.name == 'X-Radiowaves-Uri' })
       if (typeof radiowavesURI != 'undefined') {
         connectToRadiowaves(radiowavesURI.value);
       }
