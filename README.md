@@ -13,12 +13,6 @@ Add radiowaves gem to development group in Gemfile:
       gem 'radiowaves'
     end
 
-
-Start radiowaves websocket server:
-   
-    bundle exec rake radiowaves:start
-
-
 Install this extension in Chrome ("Load unpacked extension"). 
 
 
