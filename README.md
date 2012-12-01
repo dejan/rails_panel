@@ -9,9 +9,11 @@ Chrome extension for Rails development.
 
 Add radiowaves gem to development group in Gemfile:
 
-    group :development do
-      gem 'radiowaves'
-    end
+```ruby
+group :development do
+  gem 'radiowaves'
+end
+```
 
 Install this extension in Chrome ("Load unpacked extension"). 
 

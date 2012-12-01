@@ -17,8 +17,7 @@ function appendRequest(data) {
   $('#log').append('<tr>'+
     '<td class="path">'       + data.payload.path                  + '</td>' +
     '<td class="method">'     + data.payload.method                + '</td>' +
-    '<td class="controller">' + data.payload.controller            + '</td>' +
-    '<td class="action">'     + data.payload.action                + '</td>' +
+    '<td class="controller">' + data.payload.controller + data.payload.action + '</td>' +
     '<td class="format">'     + data.payload.format                + '</td>' +
     '<td class="status">'     + data.payload.status                + '</td>' +
     '<td class="view">'       + data.payload.view_runtime.round(2) + '</td>' +
@@ -28,15 +27,15 @@ function appendRequest(data) {
   $('.data-container').scrollTop(100000000)
 }
 
-chrome.devtools.network.onRequestFinished.addListener(
-  function(request) {
-    if (connection == null) {
-      headers = request.response.headers;
-      radiowavesURI = headers.find(function(x) { return x.name == 'X-Radiowaves-Uri' })
-      if (typeof radiowavesURI != 'undefined') {
-        connectToRadiowaves(radiowavesURI.value);
-      }
-    }
-  }
-);
+//chrome.devtools.network.onRequestFinished.addListener(
+  //function(request) {
+    //if (connection == null) {
+      //headers = request.response.headers;
+      //radiowavesURI = headers.find(function(x) { return x.name == 'X-Radiowaves-Uri' })
+      //if (typeof radiowavesURI != 'undefined') {
+        //connectToRadiowaves(radiowavesURI.value);
+      //}
+    //}
+  //}
+//);
 
