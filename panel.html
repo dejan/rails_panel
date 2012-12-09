@@ -27,7 +27,7 @@
               </ul>
             </div>
           </div> 
-          <div class="tabbed-pane-content">
+          <div class="tabbed-pane-content data-grid data-grid-details">
             <div id="tab-db">
               <table id="db">
                 <tr>
@@ -38,7 +38,7 @@
                 <tr ng-repeat="sql in activeSqls()">
                   <td>{{sql.payload.name}}</td>
                   <td>{{sql.payload.sql}}</td>
-                  <td>{{sql.duration}}</td>
+                  <td>{{sql.duration | number:3}}</td>
                 </tr>
               </table>
             </div>
@@ -50,7 +50,7 @@
                 </tr>
                 <tr ng-repeat="view in activeViews()">
                   <td>{{view.payload.identifier}}</td>
-                  <td>{{view.duration}}</td>
+                  <td>{{view.duration | number:3}}</td>
                 </tr>
               </table>
             </div>
@@ -61,9 +61,8 @@
         <div class="data-grid">
           <table class="header">
             <tr>
-              <th class='path'>Path</th>
-              <th class='method'>Method</th>
               <th class='controller'>Controller#Action</th>
+              <th class='method'>Method</th>
               <th class='format'>Format</th>
               <th class='status'>Status</th>
               <th class='view'>View</th>
@@ -74,15 +73,14 @@
           <div class="data-container">
             <table id="requests">
               <tr ng-repeat="request in requests()" ng-click="setActive(request.key)" ng-class="getClass(request.key)">
-                <td class='path'>{{request.payload.path}}</td>
-                <td class='method'>{{request.payload.method}}</td>
                 <td
                   class='controller'>{{request.payload.controller}}#{{request.payload.action}}</td>
+                <td class='method'>{{request.payload.method}}</td>
                 <td class='format'>{{request.payload.format}}</td>
                 <td class='status'>{{request.payload.status}}</td>
-                <td class='view'>{{request.payload.view_runtime}}</td>
-                <td class='db'>{{request.payload.db_runtime}}</td>
-                <td class='duration'>{{request.duration}}</td>
+                <td class='view'>{{request.payload.view_runtime | number:0}}</td>
+                <td class='db'>{{request.payload.db_runtime | number:0}}</td>
+                <td class='duration'>{{request.duration | number:0}}</td>
               </tr>
             </table>
           </div>
