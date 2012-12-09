@@ -17,21 +17,31 @@ function connectToRadiowaves(uri) {
   }
 }
 
-
 $(function() {
-  $('#tabs').tabs();
-});
 
-// TODO if devtools is undefined load mock data
-chrome.devtools.network.onRequestFinished.addListener(
-  function(request) {
-    if (connection == null) {
-      headers = request.response.headers;
-      radiowavesURI = headers.find(function(x) { return x.name == 'X-Radiowaves-Uri' })
-      if (typeof radiowavesURI != 'undefined') {
-        connectToRadiowaves(radiowavesURI.value);
+  // tabs
+  $('#tabs').tabs();
+
+  // load mock data if runing outisde of chrome devtools env
+  if (typeof chrome.devtools == 'undefined') {
+    // mock data
+    s = angular.element('.split-view').scope();
+    new TransactionsCtrl(s);
+    mockTransactions().each(function(n) { s.$apply(function() { s.parseNotification(n) } ) } );
+  } else {
+    // real data
+    chrome.devtools.network.onRequestFinished.addListener(
+      function(request) {
+        if (connection == null) {
+          headers = request.response.headers;
+          radiowavesURI = headers.find(function(x) { return x.name == 'X-Radiowaves-Uri' })
+          if (typeof radiowavesURI != 'undefined') {
+            connectToRadiowaves(radiowavesURI.value);
+          }
+        }
       }
-    }
+    );
   }
-);
+
+});
 

@@ -168,8 +168,4 @@ function mockTransactions() {
   ]
 } 
 
-$(function() {
-  s = angular.element('.split-view').scope()
-  new TransactionsCtrl(s)
-  mockTransactions().each(function(n) { s.$apply(function() { s.parseNotification(n) } ) } );
-});
+
