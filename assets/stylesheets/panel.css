@@ -84,6 +84,10 @@ table.header th {
   width: 40px;
 }
 
+.status, .method, .format {
+  text-align: center;
+}
+
 .split-view {
   position: absolute;
   top: 0;
