@@ -136,6 +136,11 @@ table.header th {
   margin: 0 10px;
 }
 
+ul.tabbed-pane-header-tabs {
+  position:relative;
+  top:-16px
+}
+
 .tabbed-pane-header-tab {
   float: left;
   margin-top: 2px;
