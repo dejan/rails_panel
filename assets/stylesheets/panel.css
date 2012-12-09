@@ -75,12 +75,8 @@ table.header th {
   background: -webkit-gradient(linear, left top, left bottom, from(#ECECEC), to(#D9D9D9))
 }
 
-.controller {
-  width: 250px;
-}
-
 .method, .format, .status, .view, .db, .duration {
-  width: 35px;
+  width: 50px;
 }
 
 .status, .method, .format {
@@ -107,13 +103,13 @@ table.header th {
 
 .split-view-contents-requests {
   left: 0px;
-  width: 700px;
+  width: 680px;
   border-right: 1px solid #fff;
 }
 
 .split-view-contents-details {
   right: 0px;
-  left: 700px;
+  left: 680px;
 }
 
 
@@ -138,7 +134,8 @@ table.header th {
 
 ul.tabbed-pane-header-tabs {
   position:relative;
-  top:-16px
+  top:-16px;
+  left:-50px;
 }
 
 .tabbed-pane-header-tab {
