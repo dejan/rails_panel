@@ -32,12 +32,12 @@
                 <tr>
                   <th>Type</th>
                   <th>SQL</th>
-                  <th>Duration</th>
+                  <th class="duration">Duration</th>
                 </tr>
                 <tr ng-repeat="sql in activeSqls()">
                   <td>{{sql.payload.name}}</td>
                   <td>{{sql.payload.sql}}</td>
-                  <td>{{sql.duration | number:3}}</td>
+                  <td class="duration">{{sql.duration | number:3}}</td>
                 </tr>
               </table>
             </div>
@@ -45,11 +45,11 @@
               <table id="views">
                 <tr>
                   <th>View</th>
-                  <th>Duration</th>
+                  <th class="duration">Duration</th>
                 </tr>
                 <tr ng-repeat="view in activeViews()">
                   <td>{{view.payload.virtual_path}}</td>
-                  <td>{{view.duration | number:3}}</td>
+                  <td class="duration">{{view.duration | number:3}}</td>
                 </tr>
               </table>
             </div>
@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="split-view-contents split-view-contents-requests">
-        <div class="data-grid">
+        <div class="data-grid data-grid-requests">
           <table class="header">
             <tr>
               <th class='status'>Status</th>

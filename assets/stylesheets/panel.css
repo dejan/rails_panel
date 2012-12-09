@@ -21,7 +21,7 @@
 }
 
 .data-grid table th {
-    background-image: url(images/glossyHeader.png);
+    background-image: url(../images/glossyHeader.png);
     background-repeat: repeat-x;
     border-right: 1px solid rgb(179, 179, 179);
     border-bottom: 1px solid rgb(179, 179, 179);
@@ -35,7 +35,6 @@
   line-height: 17px;
   height: 37px;
   border-right: 1px solid rgba(0, 0, 0, 0.07);
-  /*#D2D2D2;*/
   vertical-align: middle;
   padding: 8px 4px;
   white-space: nowrap;
@@ -52,7 +51,30 @@
     overflow-y: overlay;
 }
 
+.data-grid-details table tr {
+  border-bottom: 1px solid #eee;
+}
+.data-grid-details table td {
+  white-space: normal;
+  vertical-align:top;
+  line-height: 12px;
+  height: auto;
+  border-right: 1px solid #eee;
+}
 
+.data-grid-details table {
+  table-layout: auto;
+}
+
+.data-grid-details table th {
+    background-image: none;
+    border-right: none;
+    border-bottom: none;
+    height: 18px;
+    font-weight: bold;
+    padding: 0 4px;
+    white-space: nowrap;
+}
 
 th, td {
   text-align: left;
@@ -69,6 +91,11 @@ th, td {
 
 td.method, td.format, td.status, td.view, td.db, td.duration {
   background: rgba(0, 0, 0, 0.07);
+}
+
+.data-grid-details td.duration {
+  background: white;
+  border-right: none;
 }
 
 table.header th {
@@ -198,5 +225,6 @@ table#requests tr.selected {
   background: #3879D9;
   color: white
 }
+
 
 
