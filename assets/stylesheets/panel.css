@@ -34,14 +34,13 @@
 .data-grid table td {
   line-height: 17px;
   height: 37px;
-  /*border-right: 1px solid #D2D2D2;*/
+  border-right: 1px solid rgba(0, 0, 0, 0.07);
+  /*#D2D2D2;*/
   vertical-align: middle;
   padding: 8px 4px;
   white-space: nowrap;
   overflow: hidden;
 }
-
-
 
 .data-grid .data-container {
     position: absolute;
@@ -81,7 +80,7 @@ table.header th {
 }
 
 .method, .format, .status, .view, .db, .duration {
-  width: 40px;
+  width: 35px;
 }
 
 .status, .method, .format {
@@ -163,6 +162,9 @@ table.header th {
   color: #2E2E2E;
   text-shadow: rgba(255, 255, 255, 0.5) 0 1px 0;
   white-space: nowrap;
+  display:block;
+  width:50px;
+  text-align: center;
 }
 
 .tabbed-pane-header-tab.ui-tabs-active {
@@ -195,4 +197,4 @@ table#requests tr.selected {
   color: white
 }
 
-.data-grid-details
+
