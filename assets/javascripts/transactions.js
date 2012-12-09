@@ -37,7 +37,7 @@ function TransactionsCtrl($scope) {
   $scope.parseNotification = function(data) {
     switch(data.name) {
     case "start_processing.action_controller":
-      key = Math.floor(Math.random()*100000000);
+      key = Math.floor(Math.random()*100000000); // TODO improve
       $scope.setActive(key);
       break;
     case "process_action.action_controller":
@@ -45,8 +45,8 @@ function TransactionsCtrl($scope) {
       $scope.requestsMap[key] = data;
       $scope.transactionKeys.push(key);
       break;
-    case "render_template.action_view":
-      key = $scope.activeKey; // data.transaction_id
+    case "!render_template.action_view":
+      key = $scope.activeKey;
       value = $scope.viewsMap[key];
       if (typeof value == 'undefined') {
         $scope.viewsMap[key] = [data];
@@ -55,7 +55,7 @@ function TransactionsCtrl($scope) {
       }
       break;
     case "sql.active_record":
-      key = $scope.activeKey; // data.transaction_id
+      key = $scope.activeKey;
       value = $scope.sqlsMap[key];
       if (typeof value == 'undefined') {
         $scope.sqlsMap[key] = [data];
