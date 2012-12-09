@@ -1,37 +1,71 @@
 function TransactionsCtrl($scope) {
-  $scope.transactionKeys = ['371131b57ce19c8bcc3d', '5ec801dc01e98e8c50ba'] 
-  $scope.transactions = {
-    '371131b57ce19c8bcc3d': { 
-      request: {transactionId:'371131b57ce19c8bcc3d', path:'/articles', method:'GET', controller:'ArticlesController', action:'index', format:'html', status:'200', view:'110.23', db:'50.01', duration:'160.24'}, 
-      views: [{"payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_nav.html.haml"}, "time":"2012-11-25T16:53:11+01:00","transaction_id":"371131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":1.7429999999999999}, {"payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_content.html.haml"},"time":"2012-11-25T16:53:11+01:00","transaction_id":"371131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":0.9600000000000001}],
-      sqls: []
-    },
-    '5ec801dc01e98e8c50ba': {
-      request: {transactionId:'5ec801dc01e98e8c50ba', path:'/articles/17', method:'PUT', controller:'ArticlesController', action:'update', format:'html', status:'200', view:'10.78', db:'250.10', duration:'260.88'},
-      views: [],
-      sqls: []
-    }
-  }
+  $scope.transactionKeys = [];
+  $scope.requestsMap = {}; // {transactionKey: {...}, ... }
+  $scope.viewsMap = {};    // {transactionKey: [{...}, {...}], ... }
+  $scope.sqlsMap = {};     // {transactionKey: [{...}, {...}], ... }
   
-
   $scope.requests = function() {
     return $scope.transactionKeys.map(function(n) {
-      return $scope.transactions[n].request
+      request = $scope.requestsMap[n];
+      request.key = n;
+      return request;
     });
-  }()
+  }
   
-  $scope.activeKey = '371131b57ce19c8bcc3d'
+  $scope.activeKey = null;
 
-  $scope.active = function() {
-    return $scope.transactions[$scope.activeKey]
-  }  
+  $scope.activeViews = function() {
+    return $scope.viewsMap[$scope.activeKey];
+  }
+
+  $scope.activeSqls = function() {
+    return $scope.sqlsMap[$scope.activeKey];
+  }
 
   $scope.setActive = function(transactionId) {
-    console.log(transactionId);
     $scope.activeKey = transactionId;
   }
 
-  $scope.activeRequest = $scope.active().request;
-  $scope.activeViews = $scope.active().views;
-  $scope.activeSqls = $scope.active().sqls;
+  $scope.getClass = function(transactionId) {
+    if (transactionId == $scope.activeKey) {
+      return 'selected';
+    } else {
+      return '';
+    }
+  }
+
+  $scope.parseNotification = function(data) {
+    switch(data.name) {
+    case "start_processing.action_controller":
+      key = Math.floor(Math.random()*100000000);
+      $scope.setActive(key);
+      break;
+    case "process_action.action_controller":
+      key = $scope.activeKey;
+      $scope.requestsMap[key] = data;
+      $scope.transactionKeys.push(key);
+      break;
+    case "render_template.action_view":
+      key = $scope.activeKey; // data.transaction_id
+      value = $scope.viewsMap[key];
+      if (typeof value == 'undefined') {
+        $scope.viewsMap[key] = [data];
+      } else {
+        value.push(data) 
+      }
+      break;
+    case "sql.active_record":
+      key = $scope.activeKey; // data.transaction_id
+      value = $scope.sqlsMap[key];
+      if (typeof value == 'undefined') {
+        $scope.sqlsMap[key] = [data];
+      } else {
+        value.push(data);
+      }
+      break;
+    default:
+      console.log('Notification not supported:' + data.name);
+    }
+  }
+
 }

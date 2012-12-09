@@ -2,38 +2,58 @@
   <head>
     <link rel="stylesheet" type="text/css" href="assets/stylesheets/panel.css">
     <script src="vendor/javascripts/jquery-1.8.3.min.js"></script>
+    <script src="vendor/javascripts/jquery-ui-1.9.2.tabs.min.js"></script>
     <script src="vendor/javascripts/sugar-1.3.6.min.js"></script>
     <script src="vendor/javascripts/angular.min.js"></script>
     <script src="assets/javascripts/transactions.js"></script>
     <script src="assets/javascripts/panel.js"></script>
+
+    <script src="assets/javascripts/development.js"></script>
+
   </head>
   <body>
     <div class="split-view" ng-controller='TransactionsCtrl'>
       <div class="split-view-contents split-view-contents-details">
-        <div class="tabbed-pane">
+        <div id="tabs" class="tabbed-pane">
           <div class="tabbed-pane-header">
             <div class="tabbed-pane-header-contents">
-              <div class="tabbed-pane-header-tabs">
-                <div class="tabbed-pane-header-tab selected">
-                  <span class="tabbed-pane-header-tab-title">Views</span>
-                </div>
-                <div class="tabbed-pane-header-tab">
-                  <span class="tabbed-pane-header-tab-title">DB</span>
-                </div>
-              </div>
+              <ul class="tabbed-pane-header-tabs" style="position:relative;top:-16px">
+                <li class="tabbed-pane-header-tab ">
+                  <a href="#tab-db" class="tabbed-pane-header-tab-title">DB</a>
+                </li>
+                <li class="tabbed-pane-header-tab">
+                  <a href="#tab-views" class="tabbed-pane-header-tab-title">Views</a>
+                </li>
+              </ul>
             </div>
           </div> 
           <div class="tabbed-pane-content">
-            <table id="views">
-              <tr>
-                <th>Template</th>
-                <th>Duration</th>
-              </tr>
-              <tr ng-repeat="view in activeViews">
-                <td>{{view.payload.identifier}}</td>
-                <td>{{view.duration}}</td>
-              </tr>
-            </table>
+            <div id="tab-db">
+              <table id="db">
+                <tr>
+                  <th>Type</th>
+                  <th>SQL</th>
+                  <th>Duration</th>
+                </tr>
+                <tr ng-repeat="sql in activeSqls()">
+                  <td>{{sql.payload.name}}</td>
+                  <td>{{sql.payload.sql}}</td>
+                  <td>{{sql.duration}}</td>
+                </tr>
+              </table>
+            </div>
+            <div id="tab-views">
+              <table id="views">
+                <tr>
+                  <th>View</th>
+                  <th>Duration</th>
+                </tr>
+                <tr ng-repeat="view in activeViews()">
+                  <td>{{view.payload.identifier}}</td>
+                  <td>{{view.duration}}</td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -52,16 +72,16 @@
             </tr>
           </table>
           <div class="data-container">
-            <table id="log">
-              <tr ng-repeat="request in requests">
-                <td class='path'
-                  ng-click="setActive(request.transactionId)">{{request.path}}</td>
-                <td class='method'>{{request.method}}</td>
-                <td class='controller'>{{request.controller}}#{{request.action}}</td>
-                <td class='format'>{{request.format}}</td>
-                <td class='status'>{{request.status}}</td>
-                <td class='view'>{{request.view}}</td>
-                <td class='db'>{{request.db}}</td>
+            <table id="requests">
+              <tr ng-repeat="request in requests()" ng-click="setActive(request.key)" ng-class="getClass(request.key)">
+                <td class='path'>{{request.payload.path}}</td>
+                <td class='method'>{{request.payload.method}}</td>
+                <td
+                  class='controller'>{{request.payload.controller}}#{{request.payload.action}}</td>
+                <td class='format'>{{request.payload.format}}</td>
+                <td class='status'>{{request.payload.status}}</td>
+                <td class='view'>{{request.payload.view_runtime}}</td>
+                <td class='db'>{{request.payload.db_runtime}}</td>
                 <td class='duration'>{{request.duration}}</td>
               </tr>
             </table>

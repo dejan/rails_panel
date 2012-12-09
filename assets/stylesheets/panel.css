@@ -34,7 +34,7 @@
 .data-grid table td {
   line-height: 17px;
   height: 37px;
-  border-right: 1px solid #D2D2D2;
+  /*border-right: 1px solid #D2D2D2;*/
   vertical-align: middle;
   padding: 8px 4px;
   white-space: nowrap;
@@ -131,7 +131,6 @@ table.header th {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ECECEC), to(#D9D9D9));
   border-bottom: 1px solid #A3A3A3;
 }
-}
 
 .tabbed-pane-header-contents {
   margin: 0 10px;
@@ -165,10 +164,18 @@ table.header th {
   white-space: nowrap;
 }
 
-.tabbed-pane-header-tab.selected {
+.tabbed-pane-header-tab.ui-tabs-active {
   background-color: white;
   border: 1px solid #A3A3A3;
   border-bottom: none;
+}
+
+.tabbed-pane-header-tab a {
+  text-decoration: none;
+}
+
+.tabbed-pane-header-tab, .tabbed-pane-header-tab a, .tabbed-pane-header-tab a:active {
+  outline: none;
 }
 
 .tabbed-pane-content {
@@ -176,4 +183,13 @@ table.header th {
   position: relative;
   overflow: auto;
   padding: 10px;
+}
+
+table#requests tr {
+  cursor:pointer;
+}
+
+table#requests tr.selected {
+  background: #3879D9;
+  color: white
 }
