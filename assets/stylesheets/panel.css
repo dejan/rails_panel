@@ -67,7 +67,8 @@ th, td {
   background: rgba(0, 0, 0, 0.07);
 }
 
-td.method, td.controller, td.action, td.format, td.status, td.view, td.db, td.duration {
+
+td.method, td.format, td.status, td.view, td.db, td.duration {
   background: rgba(0, 0, 0, 0.07);
 }
 
@@ -75,16 +76,12 @@ table.header th {
   background: -webkit-gradient(linear, left top, left bottom, from(#ECECEC), to(#D9D9D9))
 }
 
-.method, .format, .status {
-  width: 50px;
-}
-
 .controller {
   width: 250px;
 }
 
-.view, .db, .duration {
-  width: 70px;
+.method, .format, .status, .view, .db, .duration {
+  width: 40px;
 }
 
 .split-view {
@@ -107,13 +104,13 @@ table.header th {
 
 .split-view-contents-requests {
   left: 0px;
-  width: 800px;
+  width: 700px;
   border-right: 1px solid #fff;
 }
 
 .split-view-contents-details {
   right: 0px;
-  left: 800px;
+  left: 700px;
 }
 
 
@@ -193,3 +190,5 @@ table#requests tr.selected {
   background: #3879D9;
   color: white
 }
+
+.data-grid-details
