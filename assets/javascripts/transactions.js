@@ -40,34 +40,30 @@ function TransactionsCtrl($scope) {
   }
 
   $scope.parseNotification = function(data) {
+    var key = data.transaction_id;
     switch(data.name) {
-    case "start_processing.action_controller":
-      key = Math.floor(Math.random()*100000000); // TODO improve
-      $scope.setActive(key);
-      break;
     case "process_action.action_controller":
-      key = $scope.activeKey;
       $scope.requestsMap[key] = data;
       $scope.transactionKeys.push(key);
+      $scope.setActive(key);
       break;
     case "process_action.action_controller.exception":
-      $scope.pushToMap($scope.exceptionsMap, data);
+      $scope.pushToMap($scope.exceptionsMap, key, data);
       $scope.exceptionsMap[key] = data;
       break;
     case "!render_template.action_view":
-      $scope.pushToMap($scope.viewsMap, data);
+      $scope.pushToMap($scope.viewsMap, key, data);
       break;
     case "sql.active_record":
-      $scope.pushToMap($scope.sqlsMap, data);
+      $scope.pushToMap($scope.sqlsMap, key, data);
       break;
     default:
       console.log('Notification not supported:' + data.name);
     }
   }
 
-  $scope.pushToMap = function(map, data) {
-    key = $scope.activeKey;
-    value = map[key];
+  $scope.pushToMap = function(map, key, data) {
+    var value = map[key];
     if (typeof value == 'undefined') {
       map[key] = [data];
     } else {
