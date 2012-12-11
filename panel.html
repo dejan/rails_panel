@@ -23,6 +23,9 @@
                 <li class="tabbed-pane-header-tab">
                   <a href="#tab-views" class="tabbed-pane-header-tab-title">View</a>
                 </li>
+                <li class="tabbed-pane-header-tab">
+                  <a href="#tab-exception" class="tabbed-pane-header-tab-title">Error</a>
+                </li>
               </ul>
             </div>
           </div> 
@@ -53,6 +56,11 @@
                 </tr>
               </table>
             </div>
+
+            <div id="tab-exception">
+              <pre>{{activeException().payload.exception}}</pre>
+            </div>
+
           </div>
         </div>
       </div>

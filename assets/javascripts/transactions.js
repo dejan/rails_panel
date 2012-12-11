@@ -1,8 +1,9 @@
 function TransactionsCtrl($scope) {
   $scope.transactionKeys = [];
-  $scope.requestsMap = {}; // {transactionKey: {...}, ... }
-  $scope.viewsMap = {};    // {transactionKey: [{...}, {...}], ... }
-  $scope.sqlsMap = {};     // {transactionKey: [{...}, {...}], ... }
+  $scope.requestsMap = {};  // {transactionKey: {...}, ... }
+  $scope.exceptionsMap = {} // {transactionKey: {...}, ... }
+  $scope.viewsMap = {};     // {transactionKey: [{...}, {...}], ... }
+  $scope.sqlsMap = {};      // {transactionKey: [{...}, {...}], ... }
   
   $scope.requests = function() {
     return $scope.transactionKeys.map(function(n) {
@@ -20,6 +21,10 @@ function TransactionsCtrl($scope) {
 
   $scope.activeSqls = function() {
     return $scope.sqlsMap[$scope.activeKey];
+  }
+
+  $scope.activeException = function() {
+    return $scope.exceptionsMap[$scope.activeKey];
   }
 
   $scope.setActive = function(transactionId) {
@@ -45,26 +50,28 @@ function TransactionsCtrl($scope) {
       $scope.requestsMap[key] = data;
       $scope.transactionKeys.push(key);
       break;
+    case "process_action.action_controller.exception":
+      $scope.pushToMap($scope.exceptionsMap, data);
+      $scope.exceptionsMap[key] = data;
+      break;
     case "!render_template.action_view":
-      key = $scope.activeKey;
-      value = $scope.viewsMap[key];
-      if (typeof value == 'undefined') {
-        $scope.viewsMap[key] = [data];
-      } else {
-        value.push(data) 
-      }
+      $scope.pushToMap($scope.viewsMap, data);
       break;
     case "sql.active_record":
-      key = $scope.activeKey;
-      value = $scope.sqlsMap[key];
-      if (typeof value == 'undefined') {
-        $scope.sqlsMap[key] = [data];
-      } else {
-        value.push(data);
-      }
+      $scope.pushToMap($scope.sqlsMap, data);
       break;
     default:
       console.log('Notification not supported:' + data.name);
+    }
+  }
+
+  $scope.pushToMap = function(map, data) {
+    key = $scope.activeKey;
+    value = map[key];
+    if (typeof value == 'undefined') {
+      map[key] = [data];
+    } else {
+      value.push(data) 
     }
   }
 
