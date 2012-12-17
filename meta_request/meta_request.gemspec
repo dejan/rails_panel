@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = MetaRequest::VERSION
   gem.authors       = ["Dejan Simic"]
   gem.email         = ["desimic@gmail.com"]
-  gem.description   = %q{TODO: Request your request}
-  gem.summary       = %q{TODO: Supporting gem for Rails Panel (Google Chrome extension for Rails development)}
+  gem.description   = %q{Request your request}
+  gem.summary       = %q{Supporting gem for Rails Panel (Google Chrome extension for Rails development)}
   gem.homepage      = "https://github.com/dejan/rails_panel/meta_request"
 
   gem.add_dependency('rails')
