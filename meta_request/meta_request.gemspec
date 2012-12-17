@@ -13,7 +13,6 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/dejan/rails_panel/meta_request"
 
   gem.add_dependency('rails')
-  gem.add_dependency('activesupport')
   gem.add_dependency('rack-contrib')
 
   gem.files         = `git ls-files`.split($/)
