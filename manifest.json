@@ -1,11 +1,13 @@
 {
   "name": "Rails panel",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
   "description": "Devtools panel for Rails development",
   "devtools_page": "devtools.html",
+  "background": {
+    "scripts": ["vendor/javascripts/jquery-1.8.3.min.js", "background.js"]
+  },
   "permissions": [
-    "http://*/*",
-    "https://*/*"
+    "tabs", "http://*/*"
   ]
 }

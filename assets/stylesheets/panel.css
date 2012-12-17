@@ -32,9 +32,7 @@
 }
 
 .data-grid table td {
-  line-height: 17px;
-  height: 37px;
-  border-right: 1px solid rgba(0, 0, 0, 0.07);
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
   vertical-align: middle;
   padding: 8px 4px;
   white-space: nowrap;
@@ -85,18 +83,19 @@ th, td {
 }
 
 .data-container table tr:nth-child(even) {
-  background: rgba(0, 0, 0, 0.07);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 
 td.method, td.format, td.status, td.view, td.db, td.duration {
-  background: rgba(0, 0, 0, 0.07);
+  background: rgba(0, 0, 0, 0.05);
 }
 
-.data-grid-details td.duration {
+.data-grid-details td:last-child {
   background: white;
   border-right: none;
 }
+
 
 table.header th {
   background: -webkit-gradient(linear, left top, left bottom, from(#ECECEC), to(#D9D9D9))

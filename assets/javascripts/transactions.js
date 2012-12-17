@@ -1,8 +1,9 @@
 function TransactionsCtrl($scope) {
   $scope.transactionKeys = [];
   $scope.requestsMap = {};  // {transactionKey: {...}, ... }
-  $scope.exceptionsMap = {} // {transactionKey: {...}, ... }
+  $scope.exceptionCallsMap = {} // {transactionKey: {...}, ... }
   $scope.viewsMap = {};     // {transactionKey: [{...}, {...}], ... }
+  $scope.paramsMap = {};     // {transactionKey: [{...}, {...}], ... }
   $scope.sqlsMap = {};      // {transactionKey: [{...}, {...}], ... }
   
   $scope.requests = function() {
@@ -23,8 +24,12 @@ function TransactionsCtrl($scope) {
     return $scope.sqlsMap[$scope.activeKey];
   }
 
-  $scope.activeException = function() {
-    return $scope.exceptionsMap[$scope.activeKey];
+  $scope.activeParams = function() {
+    return $scope.paramsMap[$scope.activeKey];
+  }
+
+  $scope.activeExceptionCalls = function() {
+    return $scope.exceptionCallsMap[$scope.activeKey];
   }
 
   $scope.setActive = function(transactionId) {
@@ -44,12 +49,14 @@ function TransactionsCtrl($scope) {
     switch(data.name) {
     case "process_action.action_controller":
       $scope.requestsMap[key] = data;
+      Object.keys(data.payload.params).each(function(n) { 
+        $scope.pushToMap($scope.paramsMap, key, {name:n, value:data.payload.params[n]});
+      });
       $scope.transactionKeys.push(key);
       $scope.setActive(key);
       break;
     case "process_action.action_controller.exception":
-      $scope.pushToMap($scope.exceptionsMap, key, data);
-      $scope.exceptionsMap[key] = data;
+      $scope.pushToMap($scope.exceptionCallsMap, key, data);
       break;
     case "!render_template.action_view":
       $scope.pushToMap($scope.viewsMap, key, data);
