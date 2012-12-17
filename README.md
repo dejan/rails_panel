@@ -3,15 +3,13 @@ Rails panel
 
 Chrome extension for Rails development.
 
-![](https://dl.dropbox.com/u/69357609/Captured/xCFGZ.png)
-
 ## Installation
 
-Add radiowaves gem to development group in Gemfile:
+Add meta_request gem to development group in Gemfile:
 
 ```ruby
 group :development do
-  gem 'radiowaves'
+  gem 'meta_request'
 end
 ```
 
