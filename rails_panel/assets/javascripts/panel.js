@@ -1,10 +1,14 @@
 chrome_getJSON = function(url, callback) {
-  console.log("sending RPC");
+  console.log("sending RPC:" + url);
   chrome.extension.sendRequest({action:'getJSON',url:url}, callback);
 }
 
-addData = function(scope, data) {
-  data.each(function(n) { scope.$apply(function() { scope.parseNotification(n) } ) } );
+addData = function(requestId, scope, data) {
+  data.each(function(n) { 
+    scope.$apply(function() {
+      scope.parseNotification(requestId, n);
+    }); 
+  });
 }
 
 $(function() {
@@ -15,19 +19,20 @@ $(function() {
   new TransactionsCtrl(scope);
 
   if (typeof chrome.devtools == 'undefined') {
-    addData(scope, mockTransactions());
+    addData('1', scope, mockTransactions());
   } else {
     chrome.devtools.network.onRequestFinished.addListener(
       function(request) {
         headers = request.response.headers;
-        requestId = headers.find(function(x) { return x.name == 'X-Request-Id' });
-        if (typeof requestId != 'undefined') {
+        var requestId = headers.find(function(x) { return x.name == 'X-Request-Id' });
+        var metaRequestVersion = headers.find(function(x) { return x.name == 'X-MetaRequest-Version' });
+        if (typeof metaRequestVersion != 'undefined') {
 
           var uri = new URI(request.request.url);
           uri.pathname('/__meta_request/' + requestId.value + '.json');
 
           chrome_getJSON(uri.toString(), function(data) {
-            addData(scope, data);
+            addData(requestId.value, scope, data);
             $('.data-container').scrollTop(100000000);
           });
         }

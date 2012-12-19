@@ -4,4 +4,3 @@ gemspec
 
 gem 'rails'
 gem 'rack-contrib'
-

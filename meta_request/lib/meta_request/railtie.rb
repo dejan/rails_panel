@@ -1,19 +1,20 @@
-require 'rack/contrib/response_headers'
 require 'rails/railtie'
 
 module MetaRequest
   class Railtie < ::Rails::Railtie
 
     initializer 'meta_request.inject_middlewares' do |app|
-      app.middleware.use Rack::ResponseHeaders do |headers|
-        headers['X-MetaRequest-Version'] = VERSION
-      end
-      app.middleware.use MetaRequest::Middlewares::Interceptor
+      app.middleware.use Middlewares::MetaRequestHandler
+      app.middleware.use Middlewares::Headers, app.config
+      app.middleware.use Middlewares::AppRequestHandler
     end
 
     initializer 'meta_request.subscribe_to_notifications' do
-      MetaRequest::NotificationSubscriber.new
+      ActiveSupport::Notifications.subscribe do |*args|
+        AppRequest.current.events << Event.new(*args) if AppRequest.current
+      end
     end
+
   end
 end
 

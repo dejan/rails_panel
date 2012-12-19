@@ -44,8 +44,7 @@ function TransactionsCtrl($scope) {
     }
   }
 
-  $scope.parseNotification = function(data) {
-    var key = data.transaction_id;
+  $scope.parseNotification = function(key, data) {
     switch(data.name) {
     case "process_action.action_controller":
       $scope.requestsMap[key] = data;
