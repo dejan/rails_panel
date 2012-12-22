@@ -9,5 +9,10 @@
   },
   "permissions": [
     "tabs", "http://*/*"
-  ]
+  ],
+  "icons": { 
+     "16": "assets/images/Rails_Logo_16x16.png", 
+     "48": "assets/images/Rails_Logo_48x48.png", 
+    "128": "assets/images/Rails_Logo_128x128.png" 
+  }
 }
