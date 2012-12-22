@@ -1,4 +1,4 @@
-Rails panel
+RailsPanel
 ===========
 
 Chrome extension for Rails development.
