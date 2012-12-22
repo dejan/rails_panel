@@ -91,6 +91,7 @@
               <th class='format'>Format</th>
               <th class='db'>DB</th>
               <th class='view'>View</th>
+              <th class='other'>Other</th>
               <th class='duration'>Total</th>
             </tr>
           </table>
@@ -104,6 +105,7 @@
                 <td class='format'>{{request.payload.format}}</td>
                 <td class='db'>{{request.payload.db_runtime | number:0}}</td>
                 <td class='view'>{{request.payload.view_runtime | number:0}}</td>
+                <td class='other'>{{request.payload.other_runtime | number:0}}</td>
                 <td class='duration'>{{request.duration | number:0}}</td>
               </tr>
             </table>

@@ -47,6 +47,10 @@ function TransactionsCtrl($scope) {
   $scope.parseNotification = function(key, data) {
     switch(data.name) {
     case "process_action.action_controller":
+      data.payload.other_runtime = function() {
+        var sum = data.payload.db_runtime.round() + data.payload.view_runtime.round()
+        return data.duration.round() - sum;
+      }();
       $scope.requestsMap[key] = data;
       Object.keys(data.payload.params).each(function(n) { 
         $scope.pushToMap($scope.paramsMap, key, {name:n, value:data.payload.params[n]});
