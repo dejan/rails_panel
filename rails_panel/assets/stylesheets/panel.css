@@ -86,7 +86,6 @@ th, td {
   background: rgba(0, 0, 0, 0.05);
 }
 
-
 td.method, td.format, td.status, td.view, td.db, td.other, td.duration {
   background: rgba(0, 0, 0, 0.05);
 }
@@ -95,7 +94,6 @@ td.method, td.format, td.status, td.view, td.db, td.other, td.duration {
   background: white;
   border-right: none;
 }
-
 
 table.header th {
   background: -webkit-gradient(linear, left top, left bottom, from(#ECECEC), to(#D9D9D9))

@@ -106,7 +106,8 @@
                 <td class='db'>{{request.payload.db_runtime | number:0}}</td>
                 <td class='view'>{{request.payload.view_runtime | number:0}}</td>
                 <td class='other'>{{request.payload.other_runtime | number:0}}</td>
-                <td class='duration'>{{request.duration | number:0}}</td>
+                <td class='duration'><strong>{{request.duration |
+                    number:0}}</strong></td>
               </tr>
             </table>
           </div>
