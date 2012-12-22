@@ -29,7 +29,13 @@ module MetaRequest
 
     private 
     def self.storage
-      @@storage ||= ActiveSupport::Cache::FileStore.new(Dir.pwd)
+      @@storage ||= build_storage
+    end
+
+    def self.build_storage
+      dir_path = File.join(Dir.pwd, 'tmp/cache/meta_request')
+      FileUtils.mkdir_p dir_path
+      ActiveSupport::Cache::FileStore.new(dir_path)
     end
   end
 end
