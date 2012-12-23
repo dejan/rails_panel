@@ -3,6 +3,8 @@ RailsPanel
 
 Chrome extension for Rails development.
 
+![](https://dl.dropbox.com/u/69357609/Captured/WOvkF.png)
+
 ## Installation
 
 Add meta_request gem to development group in Gemfile:
@@ -13,7 +15,7 @@ group :development do
 end
 ```
 
-Install this extension in Chrome ("Load unpacked extension"). 
+Install the extension from [Chrome WebStore](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg).
 
 
 ## Licence
