@@ -11,7 +11,7 @@
     ]
   },
   "permissions": [
-    "tabs", "http://*/*"
+    "http://*/*"
   ],
   "icons": { 
      "16": "assets/images/Rails_Logo_16x16.png", 
