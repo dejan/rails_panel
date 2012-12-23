@@ -20,14 +20,31 @@ module MetaRequest
     end
 
     def save
-      self.class.storage.write(id, events)
+      storage.write(id, events)
+      maintain_key_pool(id)
+      self
     end
 
     def destroy
-      self.class.storage.delete(id)
+      storage.delete(id)
     end
 
-    private 
+    private
+    # keeps cache size small
+    def maintain_key_pool(id, size=10)
+      key_pool = storage.read(:key_pool) || []
+      key_pool.unshift(id)
+      keep, clear = key_pool.each_slice(size).to_a
+      (clear||[]).each do |key|
+        storage.delete(key)
+      end
+      storage.write(:key_pool, keep)
+    end
+
+    def storage
+      self.class.storage
+    end
+
     def self.storage
       @@storage ||= build_storage
     end
