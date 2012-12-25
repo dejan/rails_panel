@@ -22,6 +22,7 @@ module MetaRequest
     def save
       storage.write(id, events)
       maintain_key_pool(id)
+      logger.debug("REQUEST-ID: #{id}; EVENTS: #{events.inspect}")
       self
     end
 
@@ -53,6 +54,10 @@ module MetaRequest
       dir_path = File.join(Dir.pwd, 'tmp/cache/meta_request')
       FileUtils.mkdir_p dir_path
       ActiveSupport::Cache::FileStore.new(dir_path)
+    end
+
+    def logger
+      @logger ||= Logger.new(File.join(Dir.pwd, 'log/meta_request.log'))
     end
   end
 end

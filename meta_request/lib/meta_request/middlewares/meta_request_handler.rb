@@ -18,7 +18,6 @@ module MetaRequest
 
       def events_json(request_id)
         app_request = AppRequest.find(request_id)
-        app_request.destroy
         [200, { "Content-Type" => "text/plain; charset=utf-8" }, [app_request.events.to_json]]
       end
     end

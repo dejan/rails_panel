@@ -61,7 +61,10 @@ function TransactionsCtrl($scope) {
     case "process_action.action_controller.exception":
       $scope.pushToMap($scope.exceptionCallsMap, key, data);
       break;
-    case "!render_template.action_view":
+    case "render_template.action_view":
+      $scope.pushToMap($scope.viewsMap, key, data);
+      break;
+    case "render_partial.action_view":
       $scope.pushToMap($scope.viewsMap, key, data);
       break;
     case "sql.active_record":
