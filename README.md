@@ -11,7 +11,7 @@ To use this extension you need to add meta_request gem to your app's Gemfile:
 
 ```ruby
 group :development do
-  gem 'meta_request'
+  gem 'meta_request', '0.1.3'
 end
 ```
 
