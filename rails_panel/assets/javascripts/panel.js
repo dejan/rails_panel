@@ -25,7 +25,7 @@ $(function() {
       function(request) {
         headers = request.response.headers;
         var requestId = headers.find(function(x) { return x.name == 'X-Request-Id' });
-        var metaRequestVersion = headers.find(function(x) { return x.name == 'X-MetaRequest-Version' });
+        var metaRequestVersion = headers.find(function(x) { return x.name == 'X-Meta-Request-Version' });
         if (typeof metaRequestVersion != 'undefined') {
 
           var uri = new URI(request.request.url);
