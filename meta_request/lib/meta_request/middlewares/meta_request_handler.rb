@@ -17,8 +17,8 @@ module MetaRequest
       private
 
       def events_json(request_id)
-        app_request = AppRequest.find(request_id)
-        [200, { "Content-Type" => "text/plain; charset=utf-8" }, [app_request.events.to_json]]
+        events_json = Storage.new(request_id).read
+        [200, { "Content-Type" => "text/plain; charset=utf-8" }, [events_json]]
       end
     end
   end

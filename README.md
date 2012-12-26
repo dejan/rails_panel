@@ -11,9 +11,10 @@ To use this extension you need to add meta_request gem to your app's Gemfile:
 
 ```ruby
 group :development do
-  gem 'meta_request', '0.1.4'
+  gem 'meta_request', '0.2.0'
 end
 ```
+
 
 Install the extension from [Chrome WebStore](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg).
 
