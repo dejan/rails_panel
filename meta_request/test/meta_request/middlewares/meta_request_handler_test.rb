@@ -1,6 +1,6 @@
 require 'test_helper'
 
-describe MetaRequest::Middlewares::AppRequestHandler do
+describe MetaRequest::Middlewares::MetaRequestHandler do
   before do
     MetaRequest::Storage.new('1234').write('abcdef')
     @app = MiniTest::Mock.new
