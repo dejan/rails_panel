@@ -11,7 +11,8 @@
     ]
   },
   "permissions": [
-    "http://*/*"
+    "http://*/*", 
+    "https://*/*"
   ],
   "icons": { 
      "16": "assets/images/Rails_Logo_16x16.png", 
