@@ -52,6 +52,16 @@
 .data-grid-details table tr {
   border-bottom: 1px solid #eee;
 }
+
+.data-grid-details table a {
+  text-decoration: none;
+  color: #0859C9;
+}
+
+.data-grid-details table a:hover {
+  text-decoration: underline;
+}
+
 .data-grid-details table td {
   white-space: normal;
   vertical-align:top;
