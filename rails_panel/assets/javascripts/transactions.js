@@ -48,7 +48,7 @@ function TransactionsCtrl($scope) {
     switch(data.name) {
     case "process_action.action_controller":
       data.durationRounded = function() {
-        return data.duration.round();
+        return data.duration ? data.duration.round() : 0;
       }();
       data.payload.dbRuntimeRounded = function() {
         return data.payload.db_runtime ? data.payload.db_runtime.round() : 0;
