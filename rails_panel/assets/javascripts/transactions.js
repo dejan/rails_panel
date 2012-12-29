@@ -48,7 +48,7 @@ function TransactionsCtrl($scope) {
     switch(data.name) {
     case "process_action.action_controller":
       data.payload.other_runtime = function() {
-        var sum = data.payload.db_runtime.round() + data.payload.view_runtime.round()
+        var sum = (data.payload.db_runtime ? data.payload.db_runtime.round() : 0) + data.payload.view_runtime.round()
         return data.duration.round() - sum;
       }();
       $scope.requestsMap[key] = data;
