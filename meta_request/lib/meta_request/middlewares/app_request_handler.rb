@@ -14,7 +14,7 @@ module MetaRequest
         app_request.events.push(*Event.events_for_exception(wrapper))
         raise
       ensure
-        app_request.save
+        Storage.new(app_request.id).write(app_request.events.to_json) unless app_request.events.empty?
       end
     end
   end

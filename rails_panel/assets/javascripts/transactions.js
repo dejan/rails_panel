@@ -47,9 +47,17 @@ function TransactionsCtrl($scope) {
   $scope.parseNotification = function(key, data) {
     switch(data.name) {
     case "process_action.action_controller":
-      data.payload.other_runtime = function() {
-        var sum = data.payload.db_runtime.round() + data.payload.view_runtime.round()
-        return data.duration.round() - sum;
+      data.durationRounded = function() {
+        return data.duration ? data.duration.round() : 0;
+      }();
+      data.payload.dbRuntimeRounded = function() {
+        return data.payload.db_runtime ? data.payload.db_runtime.round() : 0;
+      }();
+      data.payload.viewRuntimeRounded = function() {
+        return data.payload.view_runtime ? data.payload.view_runtime.round() : 0;
+      }();
+      data.payload.otherRuntimeRounded = function() {
+        return data.durationRounded - data.payload.dbRuntimeRounded - data.payload.viewRuntimeRounded;
       }();
       $scope.requestsMap[key] = data;
       Object.keys(data.payload.params).each(function(n) { 
@@ -68,7 +76,9 @@ function TransactionsCtrl($scope) {
       $scope.pushToMap($scope.viewsMap, key, data);
       break;
     case "sql.active_record":
-      $scope.pushToMap($scope.sqlsMap, key, data);
+      if (data.payload.name !== "SCHEMA") {
+        $scope.pushToMap($scope.sqlsMap, key, data);
+      }
       break;
     default:
       console.log('Notification not supported:' + data.name);

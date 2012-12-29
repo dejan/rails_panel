@@ -1,6 +1,6 @@
 {
   "name": "RailsPanel",
-  "version": "0.0.6",
+  "version": "0.0.9",
   "manifest_version": 2,
   "description": "Devtools panel for Rails development",
   "devtools_page": "devtools.html",
@@ -11,7 +11,8 @@
     ]
   },
   "permissions": [
-    "http://*/*"
+    "http://*/*", 
+    "https://*/*"
   ],
   "icons": { 
      "16": "assets/images/Rails_Logo_16x16.png", 

@@ -1,4 +1,4 @@
-function mockTransactions() {
+function mockTransactions1() {
   return [
 {"name":"start_processing.action_controller","payload":{"controller":"DemosController","action":"auto_html","params":{"controller":"demos","action":"auto_html"},"format":"html","method":"GET","path":"/demos/auto_html"},"time":"2012-11-25T16:52:48+01:00","transaction_id":"371131b57ce19c8bcc3d","end":"2012-11-25T16:52:48+01:00","duration":0.004},
 {"name":"sql.active_record","payload":{"sql":"SHOW FULL FIELDS FROM `demos`","name":"SCHEMA","connection_id":70276910374180,"binds":[]},"time":"2012-11-25T16:52:48+01:00","transaction_id":"371131b57ce19c8bcc3d","end":"2012-11-25T16:52:48+01:00","duration":1.8639999999999999},
@@ -41,7 +41,12 @@ function mockTransactions() {
 {"name":"render_partial.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_analytics.html.erb"},"time":"2012-11-25T16:52:49+01:00","transaction_id":"371131b57ce19c8bcc3d","end":"2012-11-25T16:52:49+01:00","duration":1.224},
 {"name":"!render_template.action_view","payload":{"virtual_path":"layouts/application"},"time":"2012-11-25T16:52:48+01:00","transaction_id":"371131b57ce19c8bcc3d","end":"2012-11-25T16:52:49+01:00","duration":947.2270000000001},
 {"name":"process_action.action_controller","payload":{"controller":"DemosController","action":"auto_html","params":{"controller":"demos","action":"auto_html"},"format":"html","method":"GET","path":"/demos/auto_html","status":200,"view_runtime":1112.7160000000001,"db_runtime":38.32399999999999},"time":"2012-11-25T16:52:48+01:00","transaction_id":"371131b57ce19c8bcc3d","end":"2012-11-25T16:52:49+01:00","duration":1198.751},
-{"name":"start_processing.action_controller","payload":{"controller":"DemosController","action":"auto_html","params":{"controller":"demos","action":"auto_html"},"format":"html","method":"GET","path":"/demos/auto_html"},"time":"2012-11-25T16:53:07+01:00","transaction_id":"471131b57ce19c8bcc3d","end":"2012-11-25T16:53:07+01:00","duration":0.003},
+{"name":"start_processing.action_controller","payload":{"controller":"DemosController","action":"auto_html","params":{"controller":"demos","action":"auto_html"},"format":"html","method":"GET","path":"/demos/auto_html"},"time":"2012-11-25T16:53:07+01:00","transaction_id":"471131b57ce19c8bcc3d","end":"2012-11-25T16:53:07+01:00","duration":0.003}
+  ];
+}
+
+function mockTransactions2() {
+  return [
 {"name":"sql.active_record","payload":{"sql":"SELECT  `demos`.* FROM `demos`  WHERE `demos`.`title` = 'auto_html demo' LIMIT 1","name":"Demo Load","connection_id":70276910374180,"binds":[]},"time":"2012-11-25T16:53:07+01:00","transaction_id":"471131b57ce19c8bcc3d","end":"2012-11-25T16:53:07+01:00","duration":0.29300000000000004},
 {"name":"sql.active_record","payload":{"sql":"SELECT `comments`.* FROM `comments`  WHERE `comments`.`commentable_id` = 1 AND `comments`.`commentable_type` = 'Demo'","name":"Comment Load","connection_id":70276910374180,"binds":[]},"time":"2012-11-25T16:53:07+01:00","transaction_id":"471131b57ce19c8bcc3d","end":"2012-11-25T16:53:07+01:00","duration":0.355},
 {"name":"sql.active_record","payload":{"sql":"SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1 LIMIT 1","name":"User Load","connection_id":70276910374180,"binds":[]},"time":"2012-11-25T16:53:07+01:00","transaction_id":"471131b57ce19c8bcc3d","end":"2012-11-25T16:53:07+01:00","duration":0.347},
@@ -73,6 +78,11 @@ function mockTransactions() {
 {"name":"render_partial.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_analytics.html.erb"},"time":"2012-11-25T16:53:07+01:00","transaction_id":"471131b57ce19c8bcc3d","end":"2012-11-25T16:53:07+01:00","duration":0.393},
 {"name":"!render_template.action_view","payload":{"virtual_path":"layouts/application"},"time":"2012-11-25T16:53:07+01:00","transaction_id":"471131b57ce19c8bcc3d","end":"2012-11-25T16:53:07+01:00","duration":90.732},
 {"name":"process_action.action_controller","payload":{"controller":"DemosController","action":"auto_html","params":{"controller":"demos","action":"auto_html"},"format":"html","method":"GET","path":"/demos/auto_html","status":200,"view_runtime":123.194,"db_runtime":1.008},"time":"2012-11-25T16:53:07+01:00","transaction_id":"471131b57ce19c8bcc3d","end":"2012-11-25T16:53:07+01:00","duration":125.92200000000001},
+  ];
+}
+
+function mockTransactions3() {
+  return [
 {"name":"start_processing.action_controller","payload":{"controller":"DemosController","action":"auto_html","params":{"_pjax":"[data-pjax-container]","controller":"demos","action":"auto_html"},"format":"html","method":"GET","path":"/demos/auto_html?_pjax=%5Bdata-pjax-container%5D"},"time":"2012-11-25T16:53:08+01:00","transaction_id":"571131b57ce19c8bcc3d","end":"2012-11-25T16:53:08+01:00","duration":0.005},
 {"name":"sql.active_record","payload":{"sql":"SELECT  `demos`.* FROM `demos`  WHERE `demos`.`title` = 'auto_html demo' LIMIT 1","name":"Demo Load","connection_id":70276910374180,"binds":[]},"time":"2012-11-25T16:53:08+01:00","transaction_id":"571131b57ce19c8bcc3d","end":"2012-11-25T16:53:08+01:00","duration":0.314},
 {"name":"sql.active_record","payload":{"sql":"SELECT `comments`.* FROM `comments`  WHERE `comments`.`commentable_id` = 1 AND `comments`.`commentable_type` = 'Demo'","name":"Comment Load","connection_id":70276910374180,"binds":[]},"time":"2012-11-25T16:53:08+01:00","transaction_id":"571131b57ce19c8bcc3d","end":"2012-11-25T16:53:08+01:00","duration":0.38699999999999996},
@@ -105,6 +115,11 @@ function mockTransactions() {
 {"name":"render_partial.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_analytics.html.erb"},"time":"2012-11-25T16:53:08+01:00","transaction_id":"571131b57ce19c8bcc3d","end":"2012-11-25T16:53:08+01:00","duration":0.501},
 {"name":"!render_template.action_view","payload":{"virtual_path":"layouts/application"},"time":"2012-11-25T16:53:08+01:00","transaction_id":"571131b57ce19c8bcc3d","end":"2012-11-25T16:53:08+01:00","duration":64.547},
 {"name":"process_action.action_controller","payload":{"controller":"DemosController","action":"auto_html","params":{"_pjax":"[data-pjax-container]","controller":"demos","action":"auto_html"},"format":"html","method":"GET","path":"/demos/auto_html?_pjax=%5Bdata-pjax-container%5D","status":200,"view_runtime":102.831,"db_runtime":0.9749999999999999},"time":"2012-11-25T16:53:08+01:00","transaction_id":"571131b57ce19c8bcc3d","end":"2012-11-25T16:53:08+01:00","duration":106.041},
+  ];
+}
+
+function mockTransactions4() {
+  return [
 {"name":"start_processing.action_controller","payload":{"controller":"AboutController","action":"show","params":{"_pjax":"[data-pjax-container]","controller":"about","action":"show"},"format":"html","method":"GET","path":"/about?_pjax=%5Bdata-pjax-container%5D"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"671131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":0.004},
 {"name":"!render_template.action_view","payload":{"virtual_path":"about/show"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"671131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":6.587},
 {"name":"render_template.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/about/show.html.haml","layout":"layouts/application"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"671131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":7.129},
@@ -115,18 +130,12 @@ function mockTransactions() {
 {"name":"!render_template.action_view","payload":{"virtual_path":"/layouts/application/_analytics"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"671131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":0.033},
 {"name":"render_partial.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_analytics.html.erb"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"671131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":0.45899999999999996},
 {"name":"!render_template.action_view","payload":{"virtual_path":"layouts/application"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"671131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":59.052},
-{"name":"process_action.action_controller","payload":{"controller":"AboutController","action":"show","params":{"_pjax":"[data-pjax-container]","controller":"about","action":"show"},"format":"html","method":"GET","path":"/about?_pjax=%5Bdata-pjax-container%5D","status":200,"view_runtime":129.25900000000001,"db_runtime":0},"time":"2012-11-25T16:53:10+01:00","transaction_id":"671131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":130.408},
-{"name":"start_processing.action_controller","payload":{"controller":"DemosController","action":"index","params":{"_pjax":"[data-pjax-container]","controller":"demos","action":"index"},"format":"html","method":"GET","path":"/demos?_pjax=%5Bdata-pjax-container%5D"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"771131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":0.003},
-{"name":"!render_template.action_view","payload":{"virtual_path":"demos/index"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"771131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":4.186},
-{"name":"render_template.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/demos/index.html.haml","layout":"layouts/application"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"771131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":4.7540000000000004},
-{"name":"!render_template.action_view","payload":{"virtual_path":"/layouts/application/_nav"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"771131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":1.4300000000000002},
-{"name":"render_partial.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_nav.html.haml"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"771131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":1.9580000000000002},
-{"name":"!render_template.action_view","payload":{"virtual_path":"layouts/application/_content"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"771131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":0.252},
-{"name":"render_partial.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_content.html.haml"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"771131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":0.869},
-{"name":"!render_template.action_view","payload":{"virtual_path":"/layouts/application/_analytics"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"771131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":0.043000000000000003},
-{"name":"render_partial.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_analytics.html.erb"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"771131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":0.55},
-{"name":"!render_template.action_view","payload":{"virtual_path":"layouts/application"},"time":"2012-11-25T16:53:10+01:00","transaction_id":"771131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":63.374},
-{"name":"process_action.action_controller","payload":{"controller":"DemosController","action":"index","params":{"_pjax":"[data-pjax-container]","controller":"demos","action":"index"},"format":"html","method":"GET","path":"/demos?_pjax=%5Bdata-pjax-container%5D","status":200,"view_runtime":83.60900000000001,"db_runtime":0},"time":"2012-11-25T16:53:10+01:00","transaction_id":"771131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":84.395},
+{"name":"process_action.action_controller","payload":{"controller":"AboutController","action":"show","params":{"_pjax":"[data-pjax-container]","controller":"about","action":"show"},"format":"html","method":"GET","path":"/about?_pjax=%5Bdata-pjax-container%5D","status":200,"view_runtime":129.25900000000001},"time":"2012-11-25T16:53:10+01:00","transaction_id":"671131b57ce19c8bcc3d","end":"2012-11-25T16:53:10+01:00","duration":130.408},
+  ];
+}
+
+function mockTransactions5() {
+  return [
 {"name":"start_processing.action_controller","payload":{"controller":"ArticlesController","action":"index","params":{"_pjax":"[data-pjax-container]","controller":"articles","action":"index"},"format":"html","method":"GET","path":"/?_pjax=%5Bdata-pjax-container%5D"},"time":"2012-11-25T16:53:11+01:00","transaction_id":"871131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":0.004},
 {"name":"sql.active_record","payload":{"sql":"SHOW FULL FIELDS FROM `articles`","name":"SCHEMA","connection_id":70276910374180,"binds":[]},"time":"2012-11-25T16:53:11+01:00","transaction_id":"871131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":1.685},
 {"name":"sql.active_record","payload":{"sql":"SHOW TABLES LIKE 'articles'","name":"SCHEMA","connection_id":70276910374180,"binds":[]},"time":"2012-11-25T16:53:11+01:00","transaction_id":"871131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":0.266},
@@ -142,6 +151,11 @@ function mockTransactions() {
 {"name":"render_partial.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_analytics.html.erb"},"time":"2012-11-25T16:53:11+01:00","transaction_id":"871131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":0.626},
 {"name":"!render_template.action_view","payload":{"virtual_path":"layouts/application"},"time":"2012-11-25T16:53:11+01:00","transaction_id":"871131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":59.223},
 {"name":"process_action.action_controller","payload":{"controller":"ArticlesController","action":"index","params":{"_pjax":"[data-pjax-container]","controller":"articles","action":"index"},"format":"html","method":"GET","path":"/?_pjax=%5Bdata-pjax-container%5D","status":200,"view_runtime":285.588,"db_runtime":2.4770000000000003},"time":"2012-11-25T16:53:11+01:00","transaction_id":"871131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":317.57},
+  ];
+}
+
+function mockTransactions6() {
+  return [
 {"name":"start_processing.action_controller","payload":{"controller":"ArticlesController","action":"index","params":{"_pjax":"[data-pjax-container]","controller":"articles","action":"index"},"format":"html","method":"GET","path":"/?_pjax=%5Bdata-pjax-container%5D"},"time":"2012-11-25T16:53:11+01:00","transaction_id":"971131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":0.004},
 {"name":"sql.active_record","payload":{"sql":"SELECT `articles`.* FROM `articles`  WHERE (published_on <= '2012-11-25') ORDER BY published_on desc","name":"Article Load","connection_id":70276910374180,"binds":[]},"time":"2012-11-25T16:53:11+01:00","transaction_id":"971131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":0.51},
 {"name":"!render_template.action_view","payload":{"virtual_path":"articles/index"},"time":"2012-11-25T16:53:11+01:00","transaction_id":"971131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":9.891},
@@ -154,23 +168,7 @@ function mockTransactions() {
 {"name":"render_partial.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_analytics.html.erb"},"time":"2012-11-25T16:53:11+01:00","transaction_id":"971131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":0.422},
 {"name":"!render_template.action_view","payload":{"virtual_path":"layouts/application"},"time":"2012-11-25T16:53:11+01:00","transaction_id":"971131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":151.565},
 {"name":"process_action.action_controller","payload":{"controller":"ArticlesController","action":"index","params":{"_pjax":"[data-pjax-container]","controller":"articles","action":"index"},"format":"html","method":"GET","path":"/?_pjax=%5Bdata-pjax-container%5D","status":200,"view_runtime":164.775,"db_runtime":0.51},"time":"2012-11-25T16:53:11+01:00","transaction_id":"971131b57ce19c8bcc3d","end":"2012-11-25T16:53:11+01:00","duration":166.03},
-{"name":"start_processing.action_controller","payload":{"controller":"ContactsController","action":"index","params":{"action":"index","controller":"contacts"},"format":"html","method":"GET","path":"/contacts"},"time":"2012-12-10T09:40:49+01:00","transaction_id":"778bc6f854dd63ae4f52","end":"2012-12-10T09:40:49+01:00","duration":0.003},
-{"name":"process_action.action_controller","payload":{"status":"500", "controller":"ContactsController","action":"index","params":{"action":"index","controller":"contacts"},"format":"html","method":"GET","path":"/contacts","exception":["RuntimeError","1"]},"time":"2012-12-10T09:40:49+01:00","transaction_id":"778bc6f854dd63ae4f52","end":"2012-12-10T09:40:49+01:00","duration":76.684},
-{"name":"process_action.action_controller.exception","payload":{"call":"RuntimeError (1)"},"time":"2012-12-10T09:40:49+01:00","transaction_id":"778bc6f854dd63ae4f52","end":"2012-12-10T09:40:49+01:00","duration":2.7590000000000003},
-{"name":"process_action.action_controller.exception","payload":{"call":"app/controllers/contacts_controller.rb:5:in `index'"},"time":"2012-12-10T09:40:49+01:00","transaction_id":"778bc6f854dd63ae4f52","end":"2012-12-10T09:40:49+01:00","duration":2.7590000000000003},
-{"name":"process_action.action_controller.exception","payload":{"call":"lib/request_logger.rb:52:in `log_http_request'"},"time":"2012-12-10T09:40:49+01:00","transaction_id":"778bc6f854dd63ae4f52","end":"2012-12-10T09:40:49+01:00","duration":2.7590000000000003},
-{"name":"start_processing.action_controller","payload":{"controller":"DemosController","action":"index","params":{"_pjax":"[data-pjax-container]","controller":"demos","action":"index"},"format":"html","method":"GET","path":"/demos?_pjax=%5Bdata-pjax-container%5D"},"time":"2012-11-25T16:53:13+01:00","transaction_id":"5ec801dc01e98e8c50ba","end":"2012-11-25T16:53:13+01:00","duration":0.005},
-{"name":"!render_template.action_view","payload":{"virtual_path":"demos/index"},"time":"2012-11-25T16:53:13+01:00","transaction_id":"5ec801dc01e98e8c50ba","end":"2012-11-25T16:53:13+01:00","duration":4.279},
-{"name":"render_template.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/demos/index.html.haml","layout":"layouts/application"},"time":"2012-11-25T16:53:13+01:00","transaction_id":"5ec801dc01e98e8c50ba","end":"2012-11-25T16:53:13+01:00","duration":4.8180000000000005},
-{"name":"!render_template.action_view","payload":{"virtual_path":"/layouts/application/_nav"},"time":"2012-11-25T16:53:14+01:00","transaction_id":"5ec801dc01e98e8c50ba","end":"2012-11-25T16:53:14+01:00","duration":5.0280000000000005},
-{"name":"render_partial.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_nav.html.haml"},"time":"2012-11-25T16:53:14+01:00","transaction_id":"5ec801dc01e98e8c50ba","end":"2012-11-25T16:53:14+01:00","duration":5.47},
-{"name":"!render_template.action_view","payload":{"virtual_path":"layouts/application/_content"},"time":"2012-11-25T16:53:14+01:00","transaction_id":"5ec801dc01e98e8c50ba","end":"2012-11-25T16:53:14+01:00","duration":1.6620000000000001},
-{"name":"render_partial.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_content.html.haml"},"time":"2012-11-25T16:53:14+01:00","transaction_id":"5ec801dc01e98e8c50ba","end":"2012-11-25T16:53:14+01:00","duration":2.055},
-{"name":"!render_template.action_view","payload":{"virtual_path":"/layouts/application/_analytics"},"time":"2012-11-25T16:53:14+01:00","transaction_id":"5ec801dc01e98e8c50ba","end":"2012-11-25T16:53:14+01:00","duration":0.441},
-{"name":"render_partial.action_view","payload":{"identifier":"/Users/dejan/work/rors/app/views/layouts/application/_analytics.html.erb"},"time":"2012-11-25T16:53:14+01:00","transaction_id":"5ec801dc01e98e8c50ba","end":"2012-11-25T16:53:14+01:00","duration":0.8170000000000001},
-{"name":"!render_template.action_view","payload":{"virtual_path":"layouts/application"},"time":"2012-11-25T16:53:13+01:00","transaction_id":"5ec801dc01e98e8c50ba","end":"2012-11-25T16:53:14+01:00","duration":281.914},
-{"name":"process_action.action_controller","payload":{"controller":"DemosController","action":"index","params":{"_pjax":"[data-pjax-container]","controller":"demos","action":"index"},"format":"html","method":"GET","path":"/demos?_pjax=%5Bdata-pjax-container%5D","status":200,"view_runtime":299.695,"db_runtime":0},"time":"2012-11-25T16:53:13+01:00","transaction_id":"5ec801dc01e98e8c50ba","end":"2012-11-25T16:53:14+01:00","duration":306.05199999999996}
-  ]
+  ];
 } 
 
 

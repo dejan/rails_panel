@@ -105,11 +105,10 @@
                   class='controller'>{{request.payload.controller}}#{{request.payload.action}}</td>
                 <td class='method'>{{request.payload.method}}</td>
                 <td class='format'>{{request.payload.format}}</td>
-                <td class='db'>{{request.payload.db_runtime | number:0}}</td>
-                <td class='view'>{{request.payload.view_runtime | number:0}}</td>
-                <td class='other'>{{request.payload.other_runtime | number:0}}</td>
-                <td class='duration'><strong>{{request.duration |
-                    number:0}}</strong></td>
+                <td class='db'>{{request.payload.dbRuntimeRounded}}</td>
+                <td class='view'>{{request.payload.viewRuntimeRounded}}</td>
+                <td class='other'>{{request.payload.otherRuntimeRounded}}</td>
+                <td class='duration'><strong>{{request.durationRounded}}</strong></td>
               </tr>
             </table>
           </div>
