@@ -73,7 +73,9 @@ function TransactionsCtrl($scope) {
       $scope.pushToMap($scope.viewsMap, key, data);
       break;
     case "sql.active_record":
-      $scope.pushToMap($scope.sqlsMap, key, data);
+      if (data.payload.name !== "SCHEMA") {
+        $scope.pushToMap($scope.sqlsMap, key, data);
+      }
       break;
     default:
       console.log('Notification not supported:' + data.name);
