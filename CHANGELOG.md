@@ -1,5 +1,6 @@
 ## head
 * Sublime support
+* Rails 3.1 support
 
 ## 0.1.0, released 2012-30-12 
 * Editor integration for TextMate and MacVim
