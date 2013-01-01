@@ -12,6 +12,7 @@ module MetaRequest
         request_path = env['PATH_INFO']
         middleware = Rack::ResponseHeaders.new(@app) do |headers|
           headers['X-Meta-Request-Version'] = MetaRequest::VERSION unless request_path.start_with?(assets_prefix)
+          headers['X-Meta-Request-Root'] = env['SCRIPT_NAME'] unless request_path.start_with?(assets_prefix)
         end
         middleware.call(env)
       end
