@@ -31,10 +31,17 @@ $(function() {
         headers = request.response.headers;
         var requestId = headers.find(function(x) { return x.name == 'X-Request-Id' });
         var metaRequestVersion = headers.find(function(x) { return x.name == 'X-Meta-Request-Version' });
+        var metaRequestRoot = headers.find(function(x) { return x.name == 'X-Meta-Request-Root' });
+
         if (typeof metaRequestVersion != 'undefined') {
 
+          var root = "";
+          if (typeof metaRequestRoot != 'undefined') {
+            root = metaRequestRoot.value;
+          }
+
           var uri = new URI(request.request.url);
-          uri.pathname('/__meta_request/' + requestId.value + '.json');
+          uri.pathname(root + '/__meta_request/' + requestId.value + '.json');
 
           chrome_getJSON(uri.toString(), function(data) {
             addData(requestId.value, scope, data);
