@@ -5,6 +5,7 @@ module MetaRequest
       super(name, start, ending, transaction_id, payload)
       case @name
       when 'process_action.action_controller'
+        @payload[:format] ||= (@payload[:formats]||[]).first # Rails 3.0.x Support
         @payload[:status] = '500' if @payload[:exception]
       end
     end
