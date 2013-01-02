@@ -1,7 +1,7 @@
 ## unreleased RailsPanel
 * Sublime support
 
-## unreleased meta_request
+## 2013-01-02 meta_request 0.2.1
 * Rails 3.0 & 3.1 support
 
 ## 2012-30-12 RailsPanel 0.1.0
