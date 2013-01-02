@@ -1,5 +1,6 @@
 ## unreleased RailsPanel
 * Sublime support
+* Tabs styling fix for small windows
 
 ## 2013-01-02 meta_request 0.2.1
 * Rails 3.0 & 3.1 support

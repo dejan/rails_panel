@@ -170,6 +170,7 @@ ul.tabbed-pane-header-tabs {
   position:relative;
   top:-16px;
   left:-50px;
+  min-width: 300px;
 }
 
 .tabbed-pane-header-tab {
@@ -199,7 +200,7 @@ ul.tabbed-pane-header-tabs {
   text-shadow: rgba(255, 255, 255, 0.5) 0 1px 0;
   white-space: nowrap;
   display:block;
-  width:50px;
+  width:45px;
   text-align: center;
 }
 
