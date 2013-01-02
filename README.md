@@ -16,12 +16,20 @@ end
 ```
 
 
-Install the extension from [Chrome WebStore](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg).
-
+Install the extension from [Chrome WebStore](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg). This is recommended way of installing extension, since it will auto-update on every new version. Note that you still need to update meta_request gem yourself.
 
 ## Install unpacked version
 
-If you have a problem installing extension from Chrome Store or just want to run latest and hack on it, just clone the repo (say under ~/workspace/rails_panel) and in "Developer mode" Chrome Extensions page select "Load Unpacked extension..." and select "~/workspace/rails_panel/rails_panel"
+If you have a problem installing extension from Chrome Store or just want to run latest and hack on it, just clone the repo (say under ~/workspace/rails_panel) and in "Developer mode" Chrome Extensions page select "Load Unpacked extension..." and select "~/workspace/rails_panel/rails_panel". 
+
+## Supported environments
+
+* Rails 3+
+* Pow, WEBrick (probably all servers)
+
+## Known issues
+
+* [Non-root context apps not working](https://github.com/dejan/rails_panel/pull/20)
 
 ## Licence
 
