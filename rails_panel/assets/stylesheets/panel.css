@@ -238,5 +238,10 @@ table#requests tr.selected {
   color: white
 }
 
-
+.number-of-queries {
+  font-family: Lucida Grande, sans-serif;
+  font-size: 11px;
+  padding: 7px 0 0 5px;
+  font-weight: bold;
+}
 
