@@ -3,6 +3,7 @@
     <link rel="stylesheet" type="text/css" href="assets/stylesheets/panel.css">
     <script src="vendor/assets/javascripts/jquery-1.8.3.min.js"></script>
     <script src="vendor/assets/javascripts/jquery-ui-1.9.2.tabs.min.js"></script>
+    <script src="vendor/assets/javascripts/stupidtable.min.js"></script>
     <script src="vendor/assets/javascripts/sugar-1.3.6.min.js"></script>
     <script src="vendor/assets/javascripts/sprintf-0.7-beta1.js"></script>
     <script src="vendor/assets/javascripts/URI.min.js"></script>
@@ -37,40 +38,52 @@
           <div class="tabbed-pane-content data-grid data-grid-details">
            <div id="tab-params">
               <table id="params">
-                <tr>
-                  <th>Name</th>
-                  <th>Value</th>
-                </tr>
-                <tr ng-repeat="param in activeParams()">
-                  <td>{{param.name}}</td>
-                  <td>{{param.value}}</td>
-                </tr>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="param in activeParams()">
+                    <td>{{param.name}}</td>
+                    <td>{{param.value}}</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
             <div id="tab-db">
-              <table id="db">
-                <tr>
-                  <th>Type</th>
-                  <th>SQL</th>
-                  <th class="duration">Duration</th>
-                </tr>
-                <tr ng-repeat="sql in activeSqls()">
-                  <td>{{sql.payload.name}}</td>
-                  <td>{{sql.payload.sql}}</td>
-                  <td class="duration">{{sql.duration | number:3}}</td>
-                </tr>
+              <table class="stupidtable" id="db">
+                <thead>
+                  <tr>
+                    <th data-sort="string">Type</th>
+                    <th data-sort="string">SQL</th>
+                    <th data-sort="float" class="duration">Duration</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="sql in activeSqls()">
+                    <td>{{sql.payload.name}}</td>
+                    <td>{{sql.payload.sql}}</td>
+                    <td class="duration">{{sql.duration | number:3}}</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
             <div id="tab-views">
-              <table id="views">
-                <tr>
-                  <th>View</th>
-                  <th class="duration">Duration</th>
-                </tr>
-                <tr ng-repeat="view in activeViews()">
-                  <td><a href="{{view.payload.identifier | editorify}}">{{view.payload.identifier | normalizeViewPath}}</a></td>
-                  <td class="duration">{{view.duration | number:3}}</td>
-                </tr>
+              <table class="stupidtable" id="views">
+                <thead>
+                  <tr>
+                    <th data-sort="string">View</th>
+                    <th data-sort="float" class="duration">Duration</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="view in activeViews()">
+                    <td><a href="{{view.payload.identifier | editorify}}">{{view.payload.identifier | normalizeViewPath}}</a></td>
+                    <td class="duration">{{view.duration | number:3}}</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
             <div id="tab-error">
