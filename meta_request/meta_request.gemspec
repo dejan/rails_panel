@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{Supporting gem for Rails Panel (Google Chrome extension for Rails development)}
   gem.homepage      = "https://github.com/dejan/rails_panel/tree/master/meta_request"
 
-  gem.add_dependency('rails', '>= 3.2')
+  gem.add_dependency('rails', '>= 3')
   gem.add_dependency('rack-contrib')
 
   gem.files         = `git ls-files`.split($/)
