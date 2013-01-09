@@ -43,7 +43,16 @@ function TransactionsCtrl($scope) {
       return '';
     }
   }
-
+  $scope.clearTransactions = function(){ 
+    var oldTransactions = $scope.transactionKeys
+    $scope.transactionKeys = []
+    $scope.requestsMap = {};  // {transactionKey: {...}, ... }
+    $scope.exceptionCallsMap = {} // {transactionKey: {...}, ... }
+    $scope.viewsMap = {};     // {transactionKey: [{...}, {...}], ... }
+    $scope.paramsMap = {};     // {transactionKey: [{...}, {...}], ... }
+    $scope.sqlsMap = {};      // {transactionKey: [{...}, {...}], ... }
+    }
+  
   $scope.parseNotification = function(key, data) {
     switch(data.name) {
     case "process_action.action_controller":
