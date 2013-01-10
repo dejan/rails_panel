@@ -44,13 +44,13 @@ function TransactionsCtrl($scope) {
     }
   }
   $scope.clearTransactions = function(){ 
-    var oldTransactions = $scope.transactionKeys
+    // Reset everything 
     $scope.transactionKeys = []
-    $scope.requestsMap = {};  // {transactionKey: {...}, ... }
-    $scope.exceptionCallsMap = {} // {transactionKey: {...}, ... }
-    $scope.viewsMap = {};     // {transactionKey: [{...}, {...}], ... }
-    $scope.paramsMap = {};     // {transactionKey: [{...}, {...}], ... }
-    $scope.sqlsMap = {};      // {transactionKey: [{...}, {...}], ... }
+    $scope.requestsMap = {};  
+    $scope.exceptionCallsMap = {} 
+    $scope.viewsMap = {};     
+    $scope.paramsMap = {};     
+    $scope.sqlsMap = {};  
     }
   
   $scope.parseNotification = function(key, data) {
