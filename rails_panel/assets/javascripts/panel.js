@@ -11,13 +11,25 @@ addData = function(requestId, scope, data) {
   });
 }
 
+clearData = function(scope) {
+  scope.$apply(function() {
+    scope.clear();
+  });
+}
+
+
 $(function() {
-
-  $('#tabs').tabs();
-
   var scope = angular.element('.split-view').scope();
   new TransactionsCtrl(scope);
 
+  var port = chrome.extension.connect({name: "clear"});
+  port.onMessage.addListener(function(msg) {
+    clearData(scope);
+  });
+
+  key('⌘+k, ctrl+l', function(){ clearData(scope) });
+
+  $('#tabs').tabs();
   if (typeof chrome.devtools == 'undefined') {
     addData('1', scope, mockTransactions1());
     addData('2', scope, mockTransactions2());
@@ -35,7 +47,6 @@ $(function() {
 
           var uri = new URI(request.request.url);
           uri.pathname('/__meta_request/' + requestId.value + '.json');
-
           chrome_getJSON(uri.toString(), function(data) {
             addData(requestId.value, scope, data);
             $('.data-container').scrollTop(100000000);

@@ -1,7 +1,7 @@
 function TransactionsCtrl($scope) {
   $scope.transactionKeys = [];
   $scope.requestsMap = {};  // {transactionKey: {...}, ... }
-  $scope.exceptionCallsMap = {} // {transactionKey: {...}, ... }
+  $scope.exceptionCallsMap = {}; // {transactionKey: {...}, ... }
   $scope.viewsMap = {};     // {transactionKey: [{...}, {...}], ... }
   $scope.paramsMap = {};     // {transactionKey: [{...}, {...}], ... }
   $scope.sqlsMap = {};      // {transactionKey: [{...}, {...}], ... }
@@ -15,6 +15,16 @@ function TransactionsCtrl($scope) {
   }
   
   $scope.activeKey = null;
+
+  $scope.clear = function() {
+    $scope.transactionKeys = [];
+    $scope.requestsMap = {};
+    $scope.exceptionCallsMap = {};
+    $scope.viewsMap = {};
+    $scope.paramsMap = {};
+    $scope.sqlsMap = {};
+    $scope.activeKey = null;
+  }
 
   $scope.activeViews = function() {
     return $scope.viewsMap[$scope.activeKey];
