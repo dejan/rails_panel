@@ -1,6 +1,9 @@
 ## unreleased RailsPanel
 * Sublime support
-* Tabs styling fix for small windows
+* Tabs styling fix for small windows.
+* Sorting duration table for db and view panel
+* Number of queries shown od db panel
+* Added button/shortcut (⌘+k, ctrl+l) for clearing
 
 ## 2013-01-02 meta_request 0.2.1
 * Rails 3.0 & 3.1 support
