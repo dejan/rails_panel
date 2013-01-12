@@ -53,7 +53,16 @@ function TransactionsCtrl($scope) {
       return '';
     }
   }
-
+  $scope.clearTransactions = function(){ 
+    // Reset everything 
+    $scope.transactionKeys = []
+    $scope.requestsMap = {};  
+    $scope.exceptionCallsMap = {} 
+    $scope.viewsMap = {};     
+    $scope.paramsMap = {};     
+    $scope.sqlsMap = {};  
+    }
+  
   $scope.parseNotification = function(key, data) {
     switch(data.name) {
     case "process_action.action_controller":
