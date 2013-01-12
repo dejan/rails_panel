@@ -18,6 +18,7 @@ clearData = function(scope) {
 }
 
 $(function() {
+
   $('#tabs').tabs();
   $('.stupidtable').stupidtable(); 
 
@@ -31,7 +32,6 @@ $(function() {
 
   key('⌘+k, ctrl+l', function(){ clearData(scope) });
 
-  $('#tabs').tabs();
   if (typeof chrome.devtools == 'undefined') {
     addData('1', scope, mockTransactions1());
     addData('2', scope, mockTransactions2());
