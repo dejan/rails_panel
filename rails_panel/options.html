@@ -14,7 +14,7 @@
         RailsPanel
       </h2>
       <form class="form-options" ng-controller="OptionsCtrl">
-        <legend>Editor integration</legend>
+        <legend>Editor integration <small>(OS X only)</small></legend>
         <label class="radio">
           <input type="radio" name="storage.editor" value="mate" ng-model="editor">
           TextMate
@@ -26,6 +26,9 @@
         <label class="radio">
           <input type="radio" name="storage.editor" value="subl" ng-model="editor">
           Sublime
+          <small>
+            (<a href="https://github.com/asuth/subl-handler" target="_blank">requires subl-handler</a>)
+          </small>
         </label>
       </form>
       <div class="footer">Developed by <a href="http://rors.org" target="_blank">Dejan Simic</a></div>
