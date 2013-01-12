@@ -1,4 +1,4 @@
-## unreleased RailsPanel
+## 2013-01-12 RailsPanel 0.1.1
 * Sublime support
 * Tabs styling fix for small windows.
 * Sorting duration table for db and view panel
