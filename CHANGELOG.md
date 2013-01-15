@@ -1,3 +1,6 @@
+## unrealesed RailsPanel
+* Fix clear button
+
 ## 2013-01-12 RailsPanel 0.1.1
 * Sublime support
 * Tabs styling fix for small windows.
