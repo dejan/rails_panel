@@ -1,4 +1,4 @@
-## unrealesed RailsPanel
+## 2013-01-15 RailsPanel 0.1.2
 * Fix clear button
 * Responsive design
 
