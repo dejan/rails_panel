@@ -25,13 +25,6 @@ $(function() {
   var scope = angular.element('.split-view').scope();
   new TransactionsCtrl(scope);
 
-  var port = chrome.extension.connect({name: "clear"});
-  port.onMessage.addListener(function(msg) {
-    clearData(scope);
-  });
-
-  key('⌘+k, ctrl+l', function(){ clearData(scope) });
-
   if (typeof chrome.devtools == 'undefined') {
     addData('1', scope, mockTransactions1());
     addData('2', scope, mockTransactions2());
@@ -40,6 +33,14 @@ $(function() {
     addData('5', scope, mockTransactions5());
     addData('6', scope, mockTransactions6());
   } else {
+
+    var port = chrome.extension.connect({name: "clear"});
+    port.onMessage.addListener(function(msg) {
+      clearData(scope);
+    });
+
+    key('⌘+k, ctrl+l', function(){ clearData(scope) });
+
     chrome.devtools.network.onRequestFinished.addListener(
       function(request) {
         headers = request.response.headers;
