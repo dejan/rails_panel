@@ -16,6 +16,50 @@
   </head>
   <body>
     <div class="split-view" ng-controller='TransactionsCtrl'>
+
+      <div class="split-view-contents split-view-contents-requests">
+        <div class="data-grid data-grid-requests">
+          <table class="header">
+            <tr>
+              <th class='status'>Status</th>
+              <th class='controller'>Controller#Action</th>
+              <th class='method'>Method</th>
+              <th class='format'>Format</th>
+              <th class='db'>DB</th>
+              <th class='view'>View</th>
+              <th class='other'>Other</th>
+              <th class='duration'>Total</th>
+            </tr>
+          </table>
+          <div class="data-container">
+            <table id="requests">
+              <tr ng-repeat="request in requests()" ng-click="setActive(request.key)" ng-class="getClass(request.key)">
+                <td class='status'>{{request.payload.status}}</td>
+                <td
+                  class='controller'>{{request.payload.controller}}#{{request.payload.action}}</td>
+                <td class='method'>{{request.payload.method}}</td>
+                <td class='format'>{{request.payload.format}}</td>
+                <td class='db'>{{request.payload.dbRuntimeRounded}}</td>
+                <td class='view'>{{request.payload.viewRuntimeRounded}}</td>
+                <td class='other'>{{request.payload.otherRuntimeRounded}}</td>
+                <td class='duration'><strong>{{request.durationRounded}}</strong></td>
+              </tr>
+              <tr class="filler">
+                <td class='status'></td>
+                <td
+                  class='controller'></td>
+                <td class='method'></td>
+                <td class='format'></td>
+                <td class='db'></td>
+                <td class='view'></td>
+                <td class='other'></td>
+                <td class='duration'></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <div class="split-view-contents split-view-contents-details">
         <div id="tabs" class="tabbed-pane">
           <div class="tabbed-pane-header">
@@ -95,37 +139,6 @@
                 </tr>
               </table>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="split-view-contents split-view-contents-requests">
-        <div class="data-grid data-grid-requests">
-          <table class="header">
-            <tr>
-              <th class='status'>Status</th>
-              <th class='controller'>Controller#Action</th>
-              <th class='method'>Method</th>
-              <th class='format'>Format</th>
-              <th class='db'>DB</th>
-              <th class='view'>View</th>
-              <th class='other'>Other</th>
-              <th class='duration'>Total</th>
-            </tr>
-          </table>
-          <div class="data-container">
-            <table id="requests">
-              <tr ng-repeat="request in requests()" ng-click="setActive(request.key)" ng-class="getClass(request.key)">
-                <td class='status'>{{request.payload.status}}</td>
-                <td
-                  class='controller'>{{request.payload.controller}}#{{request.payload.action}}</td>
-                <td class='method'>{{request.payload.method}}</td>
-                <td class='format'>{{request.payload.format}}</td>
-                <td class='db'>{{request.payload.dbRuntimeRounded}}</td>
-                <td class='view'>{{request.payload.viewRuntimeRounded}}</td>
-                <td class='other'>{{request.payload.otherRuntimeRounded}}</td>
-                <td class='duration'><strong>{{request.durationRounded}}</strong></td>
-              </tr>
-            </table>
           </div>
         </div>
       </div>
