@@ -50,6 +50,7 @@ $(function() {
 
           var uri = new URI(request.request.url);
           uri.pathname('/__meta_request/' + requestId.value + '.json');
+          uri.search("");
           chrome_getJSON(uri.toString(), function(data) {
             addData(requestId.value, scope, data);
             $('.data-container').scrollTop(100000000);
