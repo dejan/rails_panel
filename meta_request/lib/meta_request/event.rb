@@ -24,11 +24,11 @@ module MetaRequest
     end
 
     def ignore_closed_tempfile_params
-      @payload[:params].each do |key_1, value_1|
-        next unless value_1.is_a? Hash
-        value_1.each do |key_2, value_2|
-          if value_2.respond_to?(:tempfile) && value_2.tempfile.closed?
-            @payload[:params][key_1][key_2].tempfile = "closed tempfile"
+      @payload[:params].each do |param_key, param_value|
+        next unless param_value.is_a? Hash
+        param_value.each do |key, value|
+          if value.respond_to?(:tempfile) && value.tempfile.closed?
+            @payload[:params][param_key][key].tempfile = "closed tempfile"
           end
         end
       end
