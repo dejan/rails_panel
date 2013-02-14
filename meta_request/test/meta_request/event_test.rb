@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'tempfile'
+require 'active_support/core_ext/hash/indifferent_access'
 
 describe MetaRequest::Event do
   describe 'process_action.action_controller' do
@@ -25,13 +26,13 @@ describe MetaRequest::Event do
 
   describe 'ignore_closed_tempfile_params' do
     it 'sets closed tempfiles in params to strings on create' do
-      payload = {params: {"user" => {"upload" => OpenStruct.new(tempfile: Tempfile.new('foo'))} } }
+      payload = {params: {"user" => {"upload" => OpenStruct.new(tempfile: Tempfile.new('foo'))} } }.with_indifferent_access
       event_1 = MetaRequest::Event.new('process_action.action_controller', 10, 11, 1705, payload)
-      assert_equal payload[:params]["user"]["upload"].tempfile, event_1.payload[:params]["user"]["upload"].tempfile
+      assert_equal payload[:params][:user][:upload].tempfile, event_1.payload[:params][:user][:upload].tempfile
 
-      payload[:params]["user"]["upload"].tempfile.close
+      payload[:params][:user][:upload].tempfile.close
       event_2 = MetaRequest::Event.new('process_action.action_controller', 10, 11, 1705, payload)
-      assert_equal 'closed tempfile', event_2.payload[:params]["user"]["upload"].tempfile
+      assert_equal 'closed tempfile', event_2.payload[:params][:user][:upload].tempfile
     end
   end
 end
