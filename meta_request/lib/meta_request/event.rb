@@ -11,9 +11,14 @@ module MetaRequest
     end
 
     def self.events_for_exception(exception_wrapper)
-      exception = exception_wrapper.exception
-      trace = exception_wrapper.application_trace
-      trace = exception_wrapper.framework_trace if trace.empty?
+      if defined?(ActionDispatch::ExceptionWrapper)
+        exception = exception_wrapper.exception
+        trace = exception_wrapper.application_trace
+        trace = exception_wrapper.framework_trace if trace.empty?
+      else
+        exception = exception_wrapper
+        trace = exception.backtrace
+      end
       trace.unshift "#{exception.class} (#{exception.message})"
       trace.each do |call|
         Event.new('process_action.action_controller.exception', 0, 0, nil, {:call => call})
