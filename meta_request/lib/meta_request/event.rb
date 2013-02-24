@@ -23,7 +23,7 @@ module MetaRequest
         trace = exception.backtrace
       end
       trace.unshift "#{exception.class} (#{exception.message})"
-      trace.each do |call|
+      trace.map do |call|
         Event.new('process_action.action_controller.exception', 0, 0, nil, {:call => call})
       end
     end
