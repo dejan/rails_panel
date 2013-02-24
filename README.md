@@ -11,7 +11,7 @@ To use this extension you need to add meta_request gem to your app's Gemfile:
 
 ```ruby
 group :development do
-  gem 'meta_request', '0.2.1'
+  gem 'meta_request'
 end
 ```
 
@@ -25,7 +25,6 @@ If you have a problem installing extension from Chrome Store or just want to run
 ## Supported environments
 
 * Rails 3+
-* Pow, WEBrick (probably all servers)
 
 ## Known issues
 
