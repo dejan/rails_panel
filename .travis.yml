@@ -1,6 +1,7 @@
 env:
   global:
     - CI_HOME=`pwd`/meta_request
+script: sh -c 'cd $CI_HOME && rake'
 rvm:
   - 1.8.7
   - 1.9.2
