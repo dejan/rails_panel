@@ -1,3 +1,6 @@
+env:
+  global:
+    - CI_HOME=`pwd`/meta_request
 rvm:
   - 1.8.7
   - 1.9.2
