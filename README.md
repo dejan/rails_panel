@@ -16,7 +16,7 @@ end
 ```
 
 
-Install the extension from [Chrome WebStore](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg). This is recommended way of installing extension, since it will auto-update on every new version. Note that you still need to update meta_request gem yourself. Make sure you're signed in to chrome webstore since [apperently webstore is broken when you are not](https://github.com/dejan/rails_panel/issues/6#issuecomment-11776952).
+Install the extension from [Chrome WebStore](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg). This is recommended way of installing extension, since it will auto-update on every new version. Note that you still need to update meta_request gem yourself. Make sure you're signed in to chrome webstore since [apparently webstore is broken when you are not](https://github.com/dejan/rails_panel/issues/6#issuecomment-11776952).
 
 ## Install unpacked version
 
