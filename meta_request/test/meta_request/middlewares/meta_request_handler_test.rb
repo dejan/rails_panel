@@ -24,6 +24,14 @@ describe MetaRequest::Middlewares::MetaRequestHandler do
     end
   end
 
+  describe 'meta request call within a subfolder' do
+    it 'responds with json file' do
+      env = {'PATH_INFO' => '/any/subfolder/__meta_request/1234.json'}
+      response = @middleware.call(env)
+      assert_equal [200, { "Content-Type" => "text/plain; charset=utf-8" }, ['abcdef']], response
+    end
+  end
+
   after do
     FileUtils.rm_rf "#{Dir.pwd}/tmp"
   end
