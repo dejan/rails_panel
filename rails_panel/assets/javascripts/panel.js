@@ -49,7 +49,8 @@ $(function() {
         if (request.response.status === 500 || typeof metaRequestVersion != 'undefined') {
 
           var uri = new URI(request.request.url);
-          uri.pathname('/__meta_request/' + requestId.value + '.json');
+		  var path = uri.pathname() + '/__meta_request/' + requestId.value + '.json';
+          uri.pathname(path);
           uri.search("");
           chrome_getJSON(uri.toString(), function(data) {
             addData(requestId.value, scope, data);
