@@ -8,6 +8,7 @@ module MetaRequest
         @payload[:format] ||= (@payload[:formats]||[]).first # Rails 3.0.x Support
         @payload[:status] = '500' if @payload[:exception]
       end
+      @payload.delete(:binds)
       # When a tempfile has already been uploaded and closed/unlinked by another library (ie Dragonfly),
       # just ditch it so that #as_json won't try to read it and thereby crash Rails
       ignore_closed_tempfile_params if @payload[:params]

@@ -36,5 +36,14 @@ describe MetaRequest::Event do
       assert_equal 'closed tempfile', event_2.payload[:params][:user][:upload].tempfile
     end
   end
+
+  describe 'payload.binds' do
+    # https://github.com/dejan/rails_panel/issues/34
+    it 'should be deleted' do
+      event = MetaRequest::Event.new('sql.active_record', 10, 11, 1705, {:sql => 'select now();', :binds => Object})
+      assert_equal({:sql => 'select now();'}, event.payload)
+  
+    end
+  end
 end
 
