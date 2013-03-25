@@ -20,10 +20,16 @@ module MetaRequest
 
     def maintain_file_pool(size)
       files = Dir["#{dir_path}/*.json"]
-      files = files.sort_by { |c| -File.stat(c).ctime.to_i }
+      files = files.sort_by { |f| -file_ctime(f) }
       (files[size..-1] || []).each do |file|
-        FileUtils.rm(file)
+        FileUtils.rm_f(file)
       end
+    end
+
+    def file_ctime(file)
+      File.stat(file).ctime.to_i 
+    rescue Errno::ENOENT
+      0
     end
 
     def json_file
