@@ -1,3 +1,8 @@
+## 2013-03-24 meta_request 0.2.3
+* Change middleware to support rails app in subfolders
+* Fix Errno::ENOENT #38
+* Fix SystemStackError (stack level too deep) #34
+
 ## 2013-02-24 meta_request 0.2.2
 * fix #32 - stop crashing when trying to json encode closed tempfile params
 * relax dependency from rails to railties
