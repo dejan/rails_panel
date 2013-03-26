@@ -15,7 +15,7 @@ group :development do
 end
 ```
 
-Install the extension from [Chrome WebStore](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg). This is recommended way of installing extension, since it will auto-update on every new version. Note that you still need to update meta_request gem yourself. 
+Install RailsPanel extension from the [Chrome WebStore](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg). This is recommended way of installing extension, since it will auto-update on every new version. Note that you still need to update meta_request gem yourself. 
 
 ## Install unpacked version
 
@@ -24,10 +24,6 @@ If you have a problem installing extension from Chrome Store or just want to run
 ## Supported environments
 
 * Rails 3+
-
-## Known issues
-
-* [Non-root context apps not working](https://github.com/dejan/rails_panel/pull/20)
 
 ## Licence
 
