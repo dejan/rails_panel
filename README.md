@@ -25,6 +25,13 @@ If you have a problem installing extension from Chrome Store or just want to run
 
 * Rails 3+
 
+## Compatibility Warnings
+
+If you're using [LiveReload](http://livereload.com/) or
+[Rack::LiveReload](https://github.com/johnbintz/rack-livereload) make sure to
+exclude watching your tmp/ folder because meta_request writes a lot of data there
+and your browser will refresh like a madman.
+
 ## Licence
 
 Copyright (c) 2012 Dejan Simic
