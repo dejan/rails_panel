@@ -1,3 +1,6 @@
+## 2013-04-07 RailsPanel 0.1.4
+* Sublime in Windows support
+
 ## 2013-03-24 meta_request 0.2.3
 * Change middleware to support rails app in subfolders
 * Fix Errno::ENOENT #38
@@ -6,7 +9,7 @@
 ## 2013-02-24 meta_request 0.2.2
 * fix #32 - stop crashing when trying to json encode closed tempfile params
 * relax dependency from rails to railties
-* Handle exceptions prior to rails 3.2 
+* Handle exceptions prior to rails 3.2
 
 ## 2013-02-24 RailsPanel 0.1.3
 * emacs editor option
