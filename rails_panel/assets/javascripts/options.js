@@ -3,6 +3,8 @@ function OptionsCtrl($scope) {
 
   $scope.$watch('editor', function(value) {
     localStorage.setItem("railspanel.editor", value);
- });
+	});
+
+	$scope.is_win32 = (navigator.platform == 'Win32');
 }
 
