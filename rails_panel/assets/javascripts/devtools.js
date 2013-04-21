@@ -1,5 +1,5 @@
 
-chrome.devtools.panels.create("RailsPanel",
+chrome.devtools.panels.create("Rails",
                               "assets/images/toolbarIcon.png",
                               "panel.html",
                               function(panel) { 
