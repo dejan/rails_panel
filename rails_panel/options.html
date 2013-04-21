@@ -23,11 +23,18 @@
           <input type="radio" name="storage.editor" value="mvim" ng-model="editor">
           MacVim
         </label>
-        <label class="radio">
+        <label class="radio" ng-hide="is_win32">
           <input type="radio" name="storage.editor" value="subl" ng-model="editor">
           Sublime
           <small>
             (<a href="https://github.com/asuth/subl-handler" target="_blank">requires subl-handler</a>)
+          </small>
+        </label>
+        <label class="radio" ng-show="is_win32">
+          <input type="radio" name="storage.editor" value="sblm" ng-model="editor">
+          Sublime for Windows
+          <small>
+            (<a href="https://bitbucket.org/sublimator/sublimeprotocol/overview" target="_blank">requires SublimeProtocol</a>)
           </small>
         </label>
         <label class="radio">
