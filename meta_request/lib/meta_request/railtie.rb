@@ -10,6 +10,10 @@ module MetaRequest
       app.middleware.use Middlewares::AppRequestHandler
     end
 
+    initializer 'meta_request.log_interceptor' do
+      Rails.logger.extend(LogInterceptor) if Rails.logger
+    end
+
     initializer 'meta_request.subscribe_to_notifications' do
       ActiveSupport::Notifications.subscribe do |*args|
         AppRequest.current.events << Event.new(*args) if AppRequest.current

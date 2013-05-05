@@ -73,7 +73,10 @@
                 </li>
                 <li class="tabbed-pane-header-tab">
                   <a href="#tab-views" class="tabbed-pane-header-tab-title">View</a>
-                  </li>
+                </li>
+                <li class="tabbed-pane-header-tab">
+                  <a href="#tab-log" class="tabbed-pane-header-tab-title">Log</a>
+                </li>
                 <li class="tabbed-pane-header-tab">
                   <a href="#tab-error" class="tabbed-pane-header-tab-title">Error</a>
                 </li>
@@ -128,6 +131,15 @@
                   <tr ng-repeat="view in activeViews()">
                     <td><a href="{{view.payload.identifier | editorify}}">{{view.payload.identifier | normalizeViewPath}}</a></td>
                     <td class="duration">{{view.duration | number:3}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div id="tab-log">
+              <table class="stupidtable" id="log">
+                <tbody>
+                  <tr ng-repeat="log in activeLog()">
+                    <td>{{log.payload.line}}</td>
                   </tr>
                 </tbody>
               </table>

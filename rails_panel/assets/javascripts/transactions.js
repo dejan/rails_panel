@@ -1,10 +1,12 @@
 function TransactionsCtrl($scope) {
-  $scope.transactionKeys = [];
-  $scope.requestsMap = {};  // {transactionKey: {...}, ... }
+
+  $scope.transactionKeys   = [];
+  $scope.requestsMap       = {}; // {transactionKey: {...}, ... }
   $scope.exceptionCallsMap = {}; // {transactionKey: {...}, ... }
-  $scope.viewsMap = {};     // {transactionKey: [{...}, {...}], ... }
-  $scope.paramsMap = {};     // {transactionKey: [{...}, {...}], ... }
-  $scope.sqlsMap = {};      // {transactionKey: [{...}, {...}], ... }
+  $scope.logsMap           = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.viewsMap          = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.paramsMap         = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.sqlsMap           = {}; // {transactionKey: [{...}, {...}], ... }
   
   $scope.requests = function() {
     return $scope.transactionKeys.map(function(n) {
@@ -19,6 +21,7 @@ function TransactionsCtrl($scope) {
   $scope.clear = function() {
     $scope.transactionKeys = [];
     $scope.requestsMap = {};
+    $scope.logsMap = {};
     $scope.exceptionCallsMap = {};
     $scope.viewsMap = {};
     $scope.paramsMap = {};
@@ -36,6 +39,10 @@ function TransactionsCtrl($scope) {
 
   $scope.activeParams = function() {
     return $scope.paramsMap[$scope.activeKey];
+  }
+
+  $scope.activeLog = function() {
+    return $scope.logsMap[$scope.activeKey];
   }
 
   $scope.activeExceptionCalls = function() {
@@ -84,6 +91,9 @@ function TransactionsCtrl($scope) {
       break;
     case "render_partial.action_view":
       $scope.pushToMap($scope.viewsMap, key, data);
+      break;
+    case "meta_request.log":
+      $scope.pushToMap($scope.logsMap, key, data);
       break;
     case "sql.active_record":
       if (data.payload.name !== "SCHEMA") {

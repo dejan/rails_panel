@@ -157,7 +157,7 @@ table.header th {
 }
 
 
-@media screen and (max-width: 949px) {
+@media screen and (max-width: 1039px) {
   .split-view-contents-requests {
     left: 0px;
     width: 680px;
@@ -171,7 +171,7 @@ table.header th {
   }
 }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 1040px) {
   .split-view-contents-requests {
     bottom: none;
     left: 0px;
