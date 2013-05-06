@@ -1,3 +1,6 @@
+## 2013-05-06 RailsPanel 0.1.5 & meta_request 0.2.4
+* Log pane for server logs 
+
 ## 2013-04-07 RailsPanel 0.1.4
 * Sublime in Windows support
 
