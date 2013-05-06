@@ -5,6 +5,10 @@ module MetaRequest
   autoload :Storage,        "meta_request/storage"
   autoload :Middlewares,    "meta_request/middlewares"
   autoload :LogInterceptor, "meta_request/log_interceptor"
+
+  def self.logger
+    @@logger ||= Logger.new(File.join(Rails.root, 'log', 'meta_request.log'))
+  end
 end
 
 require "meta_request/railtie"
