@@ -1,4 +1,11 @@
-angular.module('RailsPanel', []).
+angular.module('RailsPanel', [])
+  .directive('ngHtml', function() {
+    return function(scope, element, attrs) {
+      scope.$watch(attrs.ngHtml, function(value) {
+        element[0].innerHTML = value;
+      });
+    }
+  }).
   filter('editorify', function() {
     return function(input) {
       var mapping = {
@@ -25,4 +32,9 @@ angular.module('RailsPanel', []).
     return function(input) {
       return input.remove(/.*\/app\/views/);
     }
-  });
+  }).
+  filter('ansi2html', function() {
+    return function(input) {
+      return ansi2html(input);
+    }
+});

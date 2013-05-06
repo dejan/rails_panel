@@ -8,6 +8,7 @@
     <script src="vendor/assets/javascripts/sprintf-0.7-beta1.js"></script>
     <script src="vendor/assets/javascripts/URI.min.js"></script>
     <script src="vendor/assets/javascripts/keymaster.min.js"></script>
+    <script src="vendor/assets/javascripts/ansi2html.js"></script>
     <script src="vendor/assets/javascripts/angular.min.js"></script>
     <script src="assets/javascripts/filters.js"></script>
     <script src="assets/javascripts/transactions.js"></script>
@@ -139,7 +140,7 @@
               <table class="stupidtable" id="log">
                 <tbody>
                   <tr ng-repeat="log in activeLog()">
-                    <td>{{log.payload.line}}</td>
+                    <td ng-html="log.payload.line | ansi2html"></td>
                   </tr>
                 </tbody>
               </table>
