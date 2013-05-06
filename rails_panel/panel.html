@@ -130,7 +130,7 @@
                 </thead>
                 <tbody>
                   <tr ng-repeat="view in activeViews()">
-                    <td><a href="{{view.payload.identifier | editorify}}">{{view.payload.identifier | normalizeViewPath}}</a></td>
+                    <td><a href="{{view.payload.identifier | editorify:1}}">{{view.payload.identifier | normalizeViewPath}}</a></td>
                     <td class="duration">{{view.duration | number:3}}</td>
                   </tr>
                 </tbody>
@@ -140,7 +140,7 @@
               <table class="stupidtable" id="log">
                 <tbody>
                   <tr ng-repeat="log in activeLog()">
-                    <td ng-html="log.payload.line | ansi2html"></td>
+                    <td><a href="{{log.payload.filename | editorify:log.payload.line}}" ng-html="log.payload.message | sanitize | ansi2html"></a></td>
                   </tr>
                 </tbody>
               </table>

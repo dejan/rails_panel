@@ -18,7 +18,9 @@ describe MetaRequest::LogInterceptor do
     @logger.info('Ohai!')
     assert_equal 2, @app_request.events.size
     last_event = @app_request.events.last
-    assert_equal 'Ohai!', last_event.payload[:line]
+    assert_equal 'Ohai!', last_event.payload[:message]
+    assert_equal 18, last_event.payload[:line]
+    assert_match /meta_request\/test\/meta_request\/log_interceptor_test.rb$/, last_event.payload[:filename]
     assert_equal 'info', last_event.payload[:level]
   end
 end

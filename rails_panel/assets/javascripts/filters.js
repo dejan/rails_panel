@@ -7,7 +7,7 @@ angular.module('RailsPanel', [])
     }
   }).
   filter('editorify', function() {
-    return function(input) {
+    return function(filename, line) {
       var mapping = {
         mvim: "mvim://open?url=file://%s&line=%d&column=%d",
         mate: "txmt://open?url=file://%s&line=%d&column=%d",
@@ -18,12 +18,12 @@ angular.module('RailsPanel', [])
       var editor = localStorage.getItem("railspanel.editor");
       var editorPrefix = mapping[editor]
       if (editor === 'sblm') {
-        var out = sprintf(editorPrefix, input);
+        var out = sprintf(editorPrefix, filename);
         // remove sblm:///c:/git/Icome/app/views/homes/index.html.erb the second :
         // so become sblm:///c/git/Icome/app/views/homes/index.html.erb
         out = out.slice(0, 9) + out.slice(10, out.len);
       } else {
-        var out = sprintf(editorPrefix, input, 1, 1);
+        var out = sprintf(editorPrefix, filename, line, 1);
       }
       return out;
     }
@@ -31,6 +31,14 @@ angular.module('RailsPanel', [])
   filter('normalizeViewPath', function() {
     return function(input) {
       return input.remove(/.*\/app\/views/);
+    }
+  }).
+  filter('sanitize', function() {
+    return function(input) {
+      return input.
+        replace(/&/g, '&amp;').
+        replace(/</g, '&lt;').
+        replace(/>/g, '&gt;');
     }
   }).
   filter('ansi2html', function() {

@@ -11,9 +11,10 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Request your request}
   gem.summary       = %q{Supporting gem for Rails Panel (Google Chrome extension for Rails development)}
   gem.homepage      = "https://github.com/dejan/rails_panel/tree/master/meta_request"
-
+  
   gem.add_dependency('railties')
   gem.add_dependency('rack-contrib')
+  gem.add_dependency('callsite')
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
