@@ -16,14 +16,7 @@ chrome.extension.onConnect.addListener(function(port) {
   devtoolsPort = port;
 });
 
-
 chrome.extension.onMessage.addListener(
   function(request, sender, sendResponse) {
     devtoolsPort.postMessage({});
   });
-
-
-
-
-
-

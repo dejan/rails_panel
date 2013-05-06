@@ -281,3 +281,14 @@ table#requests tr.selected {
   font-weight: bold;
 }
 
+#message-box {
+  z-index: 77777777777;
+  position:fixed;
+  bottom: 0;
+  right: 0;
+  background: orange;
+  color: black;
+  font-size: 12px;
+  padding: 1px 5px;
+  display: none;
+}

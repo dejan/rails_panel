@@ -47,9 +47,14 @@ $(function() {
         var requestId = headers.find(function(x) { return x.name == 'X-Request-Id' });
         var metaRequestVersion = headers.find(function(x) { return x.name == 'X-Meta-Request-Version' });
         if (request.response.status === 500 || typeof metaRequestVersion != 'undefined') {
-
+          console.log(metaRequestVersion);
+          if (metaRequestVersion.value < '0.2.4') {
+            $('#message-box').show();
+          } else {
+            $('#message-box').hide();
+          }
           var uri = new URI(request.request.url);
-		  var path = uri.pathname() + '/__meta_request/' + requestId.value + '.json';
+          var path = uri.pathname() + '/__meta_request/' + requestId.value + '.json';
           uri.pathname(path);
           uri.search("");
           chrome_getJSON(uri.toString(), function(data) {
