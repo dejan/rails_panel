@@ -1,3 +1,6 @@
+## 2013-05-08 meta_request 0.2.5
+* Fix bad signature logger methods 
+
 ## 2013-05-06 RailsPanel 0.1.5 & meta_request 0.2.4
 * Log pane for server logs 
 
