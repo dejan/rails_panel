@@ -37,7 +37,7 @@ module MetaRequest
     end
 
     def dir_path
-      File.join(Dir.pwd, 'tmp', 'data', 'meta_request')
+      File.join(Rails.root, 'tmp', 'data', 'meta_request')
     end
   end
 end

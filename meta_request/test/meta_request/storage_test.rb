@@ -21,6 +21,6 @@ describe MetaRequest::Storage do
   end
 
   after do
-    FileUtils.rm_rf "#{Dir.pwd}/tmp"
+    FileUtils.rm_rf "#{Rails.root}/tmp"
   end
 end
