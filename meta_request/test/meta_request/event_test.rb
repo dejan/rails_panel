@@ -38,7 +38,7 @@ describe MetaRequest::Event do
 
   describe 'filter closed io objects in payload since they error on to_json' do
     before do
-      io = IO.new(1)
+      io = Tempfile.new('foo')
       io.close
       @event = MetaRequest::Event.new('sql.active_record', 10, 11, 1705, {:sql => 'select now();', :binds => io})
     end
