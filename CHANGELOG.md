@@ -1,3 +1,7 @@
+## 2013-05-26 meta_request 0.2.6
+* Fix IOError #51, #52
+* Fix problems with apps that change working dir
+
 ## 2013-05-08 meta_request 0.2.5
 * Fix bad signature logger methods 
 
