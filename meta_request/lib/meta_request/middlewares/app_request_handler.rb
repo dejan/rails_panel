@@ -1,3 +1,5 @@
+require 'json'
+
 module MetaRequest
   module Middlewares
     class AppRequestHandler

@@ -1,6 +1,5 @@
 require 'test_helper'
 require 'tempfile'
-require 'active_support/core_ext/hash/indifferent_access'
 
 describe MetaRequest::Event do
   describe 'process_action.action_controller' do
@@ -33,16 +32,23 @@ describe MetaRequest::Event do
 
       payload[:params][:user][:upload].tempfile.close
       event_2 = MetaRequest::Event.new('process_action.action_controller', 10, 11, 1705, payload)
-      assert_equal 'closed tempfile', event_2.payload[:params][:user][:upload].tempfile
+      assert_equal 'ClosedIO', event_2.payload[:params][:user][:upload]
     end
   end
 
-  describe 'payload.binds' do
-    # https://github.com/dejan/rails_panel/issues/34
-    it 'should be deleted' do
-      event = MetaRequest::Event.new('sql.active_record', 10, 11, 1705, {:sql => 'select now();', :binds => Object})
-      assert_equal({:sql => 'select now();'}, event.payload)
-  
+  describe 'filter closed io objects in payload since they error on to_json' do
+    before do
+      io = IO.new(1)
+      io.close
+      @event = MetaRequest::Event.new('sql.active_record', 10, 11, 1705, {:sql => 'select now();', :binds => io})
+    end
+
+    it 'should be filtered out' do
+      assert_equal({'sql' => 'select now();', 'binds' => 'ClosedIO'}, @event.payload)
+    end
+
+    it 'should work to_json' do
+      @event.payload.to_json
     end
   end
 end

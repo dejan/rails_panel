@@ -1,17 +1,26 @@
+require 'active_support/json'
+require 'active_support/core_ext'
+
 module MetaRequest
   class Event < ActiveSupport::Notifications::Event
 
     def initialize(name, start, ending, transaction_id, payload)
-      super(name, start, ending, transaction_id, payload)
+      super(name, start, ending, transaction_id, payload.with_indifferent_access)
       case @name
       when 'process_action.action_controller'
         @payload[:format] ||= (@payload[:formats]||[]).first # Rails 3.0.x Support
         @payload[:status] = '500' if @payload[:exception]
       end
-      @payload.delete(:binds)
-      # When a tempfile has already been uploaded and closed/unlinked by another library (ie Dragonfly),
-      # just ditch it so that #as_json won't try to read it and thereby crash Rails
-      ignore_closed_tempfile_params if @payload[:params]
+      @payload = transform_hash(@payload, :deep => true) { |hash, key, value| 
+        begin
+          value.to_json
+          new_value = value
+        rescue 
+          new_value = 'ClosedIO'
+        end
+        hash[key] = new_value
+      }
+      @payload = @payload.with_indifferent_access
     end
 
     def self.events_for_exception(exception_wrapper)
@@ -28,16 +37,23 @@ module MetaRequest
         Event.new('process_action.action_controller.exception', 0, 0, nil, {:call => call})
       end
     end
+    
+    private
 
-    def ignore_closed_tempfile_params
-      @payload[:params].each do |param_key, param_value|
-        next unless param_value.is_a? Hash
-        param_value.each do |key, value|
-          if value.respond_to?(:tempfile) && value.tempfile.closed?
-            @payload[:params][param_key][key].tempfile = "closed tempfile"
-          end
+    # https://gist.github.com/dbenhur/1070399
+    def transform_hash(original, options={}, &block)  
+      options[:safe_descent] ||= {}
+      new_hash = {}
+      options[:safe_descent][original.object_id] = new_hash
+      original.inject(new_hash) { |result, (key,value)|  
+        if (options[:deep] && Hash === value)
+          value = options[:safe_descent].fetch( value.object_id ) {
+            transform_hash(value, options, &block)
+          }
         end
-      end
+        block.call(result,key,value)  
+        result  
+      }  
     end
 
   end
