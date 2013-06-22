@@ -16,13 +16,15 @@ describe MetaRequest::AppNotifications do
     end
 
     describe 'format' do
+      it 'sets it' do
+        ActiveSupport::Notifications.instrument 'process_action.action_controller', {:format => 'html'}
+        assert_equal 'html', @app_request.events.last.payload[:format]
+      end
+
       # Rails 3.0.x support
       it 'sets it to first of formats if not set' do
-        ActiveSupport::Notifications.instrument 'process_action.action_controller', {:format => 'html'}
         ActiveSupport::Notifications.instrument 'process_action.action_controller', {:formats => ['js']}
-        event1, event2 = @app_request.events
-        assert_equal 'html', event1.payload[:format]
-        assert_equal 'js', event2.payload[:format]
+        assert_equal 'js', @app_request.events.last.payload[:format]
       end
     end
   end
