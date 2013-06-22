@@ -14,5 +14,6 @@ module MetaRequest
     def current!
       Thread.current[:meta_request_id] = self
     end
+
   end
 end

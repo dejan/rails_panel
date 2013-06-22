@@ -15,9 +15,7 @@ module MetaRequest
     end
 
     initializer 'meta_request.subscribe_to_notifications' do
-      ActiveSupport::Notifications.subscribe do |*args|
-        AppRequest.current.events << Event.new(*args) if AppRequest.current
-      end
+      AppNotifications.subscribe
     end
 
   end
