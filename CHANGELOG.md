@@ -1,3 +1,6 @@
+## 2013-06-23 meta_request 0.2.7
+* Subscribe to only Notifications relevant to RailsPanel; Fixes #55, #59, #60, #61
+
 ## 2013-05-26 meta_request 0.2.6
 * Fix IOError #51, #52
 * Fix problems with apps that change working dir
