@@ -44,8 +44,8 @@ $(function() {
     chrome.devtools.network.onRequestFinished.addListener(
       function(request) {
         headers = request.response.headers;
-        var requestId = headers.find(function(x) { return x.name == 'X-Request-Id' });
-        var metaRequestVersion = headers.find(function(x) { return x.name == 'X-Meta-Request-Version' });
+        var requestId = headers.find(function(x) { return x.name.toLowerCase() == 'x-request-id' });
+        var metaRequestVersion = headers.find(function(x) { return x.name.toLowerCase() == 'x-meta-request-version' });
         if (request.response.status === 500 || typeof metaRequestVersion != 'undefined') {
           if (typeof metaRequestVersion != 'undefined') {
             if (metaRequestVersion.value < '0.2.4') {
