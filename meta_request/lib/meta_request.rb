@@ -13,3 +13,4 @@ module MetaRequest
 end
 
 require "meta_request/railtie"
+require 'meta_request/ar_initialize_notifier'

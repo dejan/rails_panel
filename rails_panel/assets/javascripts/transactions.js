@@ -7,7 +7,8 @@ function TransactionsCtrl($scope) {
   $scope.viewsMap          = {}; // {transactionKey: [{...}, {...}], ... }
   $scope.paramsMap         = {}; // {transactionKey: [{...}, {...}], ... }
   $scope.sqlsMap           = {}; // {transactionKey: [{...}, {...}], ... }
-  
+  $scope.activeRecordsMap  = {}; // {transactionKey: [{...}, {...}], ... }
+
   $scope.requests = function() {
     return $scope.transactionKeys.map(function(n) {
       request = $scope.requestsMap[n];
@@ -15,7 +16,7 @@ function TransactionsCtrl($scope) {
       return request;
     });
   }
-  
+
   $scope.activeKey = null;
 
   $scope.clear = function() {
@@ -26,6 +27,7 @@ function TransactionsCtrl($scope) {
     $scope.viewsMap = {};
     $scope.paramsMap = {};
     $scope.sqlsMap = {};
+    $scope.activeRecordsMap = {};
     $scope.activeKey = null;
   }
 
@@ -47,6 +49,29 @@ function TransactionsCtrl($scope) {
 
   $scope.activeExceptionCalls = function() {
     return $scope.exceptionCallsMap[$scope.activeKey];
+  }
+
+  $scope.activeRecords = function() {
+    var objs = $scope.activeRecordsMap[$scope.activeKey];
+    var map = {};
+    var uniq = [];
+
+    for (var i = 0; i < objs.length; i++) {
+      var o = objs[i];
+      var key = "" + o.payload.filename + o.payload.line + o.payload.method;
+      if (!map[key]) { map[key] = []; }
+      map[key].push(o);
+    }
+
+    for (var key in map) {
+      var obj   = map[key][0];
+      obj.payload.count = map[key].length;
+      uniq.push(obj);
+    }
+
+    uniq.total = objs.length;
+
+    return uniq.sort(function(a, b) { return a.payload.class.localeCompare(b.payload.class); });
   }
 
   $scope.setActive = function(transactionId) {
@@ -92,6 +117,8 @@ function TransactionsCtrl($scope) {
     case "render_partial.action_view":
       $scope.pushToMap($scope.viewsMap, key, data);
       break;
+    case "active_record.initialize":
+      $scope.pushToMap($scope.activeRecordsMap, key, data);
     case "meta_request.log":
       $scope.pushToMap($scope.logsMap, key, data);
       break;

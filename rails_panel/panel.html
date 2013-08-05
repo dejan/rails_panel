@@ -83,6 +83,9 @@
                 <li class="tabbed-pane-header-tab">
                   <a href="#tab-error" class="tabbed-pane-header-tab-title">Error</a>
                 </li>
+                <li class="tabbed-pane-header-tab">
+                  <a href="#tab-ar" class="tabbed-pane-header-tab-title">AR</a>
+                </li>
               </ul>
             </div>
           </div> 
@@ -153,6 +156,29 @@
                   <td>{{exception.payload.call}}</td>
                 </tr>
               </table>
+            </div>
+            <div id="tab-ar">
+              <table id="ar">
+                <thead>
+                  <tr>
+                    <th>Class</th>
+                    <th>File</th>
+                    <th>Line</th>
+                    <th>Method</th>
+                    <th>Count</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="ar in activeRecords()">
+                    <td>{{ar.payload.class}}</td>
+                    <td>{{ar.payload.filename}}</td>
+                    <td>{{ar.payload.line}}</td>
+                    <td>{{ar.payload.method}}</td>
+                    <td>{{ar.payload.count}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="number-of-queries">Number of objects: {{activeRecords().total}}</div>
             </div>
           </div>
         </div>
