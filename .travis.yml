@@ -4,8 +4,5 @@ env:
 script: sh -c 'cd meta_request && rake'
 gemfile: meta_request/Gemfile
 rvm:
-  - 1.8.7
-  - 1.9.2
   - 1.9.3
   - 2.0.0
-  - ree
