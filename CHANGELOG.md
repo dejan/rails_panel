@@ -1,3 +1,8 @@
+## 2013-08-06 RailsPanel 0.1.6 & meta_request 0.2.8
+* Fix negative time values displaying in Rails 4 #58
+* Support lowercased headers (fixes problems with pow)
+* Drop support for Ruby ver < 1.9.3
+
 ## 2013-06-23 meta_request 0.2.7
 * Subscribe to only Notifications relevant to RailsPanel; Fixes #55, #59, #60, #61
 
