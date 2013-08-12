@@ -96,7 +96,7 @@ function TransactionsCtrl($scope) {
       $scope.pushToMap($scope.logsMap, key, data);
       break;
     case "sql.active_record":
-      if (data.payload.name !== "SCHEMA") {
+      if (data.payload.name !== "SCHEMA" && data.payload.name !== "CACHE") {
         $scope.pushToMap($scope.sqlsMap, key, data);
       }
       break;
