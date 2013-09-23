@@ -17,10 +17,18 @@ clearData = function(scope) {
   });
 }
 
-$(function() {
+var panel = {
 
-  $('#tabs').tabs();
-  $('.stupidtable').stupidtable(); 
+  init: function() {
+    $('#tabs').tabs();
+    $('.stupidtable').stupidtable(); 
+    dividers.init();
+  },
+
+}
+
+$(function() {
+  panel.init();
 
   var scope = angular.element('.split-view').scope();
   new TransactionsCtrl(scope);

@@ -11,6 +11,11 @@
   bottom: 0;
 }
 
+#tabs, table, tbody, tr, th, .data-grid {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}  
+
 .data-grid table {
   table-layout: fixed;
   border-spacing: 0;
@@ -157,7 +162,7 @@ table.header th {
 }
 
 
-@media screen and (max-width: 1039px) {
+@media screen and (max-width: 1050px) {
   .split-view-contents-requests {
     left: 0px;
     width: 680px;
@@ -169,22 +174,55 @@ table.header th {
     top:50%;
     width:100%;
   }
+
+  #hdivider {
+    background: #eee;
+    border-top: 1px solid #A3A3A3;
+    height: 3px;
+    cursor: ns-resize;
+  }
+
+  #vdivider {
+    display: none;
+  }
 }
 
-@media screen and (min-width: 1040px) {
+@media screen and (min-width: 1051px) {
   .split-view-contents-requests {
     bottom: none;
+    height: 100%;
     left: 0px;
-    width: 680px;
-    border-right: 1px solid #fff;
+    width: 681px;
   }
 
   .split-view-contents-details {
-    top:none;
+    top:0px;
+    height:auto;
     right: 0px;
     left: 680px;
     width: auto;
+    min-width: 365px;
   }
+
+  #hdivider {
+    display:none;
+  }
+
+  #vdivider {
+    background: #fff;
+    border-right: 1px solid rgb(179, 179, 179);
+    width: 1px;
+    float: left;
+    height: 100%;
+    cursor: ew-resize;
+  }
+
+  .data-grid table th.duration {
+    border-right: none;
+    width: 51px;
+  }
+
+
 }
 
 .tabbed-pane {
@@ -292,3 +330,4 @@ table#requests tr.selected {
   padding: 1px 5px;
   display: none;
 }
+
