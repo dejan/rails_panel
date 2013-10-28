@@ -34,7 +34,7 @@ module MetaRequest
       return {} unless payload.is_a?(Hash)
       transform_hash(payload, :deep => true) { |hash, key, value|
         begin
-          value.to_json(methods: [:duration])
+          value.to_json(:methods => [:duration])
           new_value = value
         rescue
           new_value = 'Not JSON Encodable'
