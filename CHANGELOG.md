@@ -1,3 +1,6 @@
+## 2014-01-13 RailsPanel 0.1.8
+* Panel dividers
+
 ## 2013-08-06 RailsPanel 0.1.6 & meta_request 0.2.8
 * Fix negative time values displaying in Rails 4 #58
 * Support lowercased headers (fixes problems with pow)
