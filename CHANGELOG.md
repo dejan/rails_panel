@@ -1,3 +1,6 @@
+## 2014-04-07 meta_request 0.2.9
+* Fix logging https://github.com/dejan/rails_panel/issues/64
+
 ## 2014-01-13 RailsPanel 0.1.8
 * Panel dividers
 
