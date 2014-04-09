@@ -28,9 +28,9 @@ angular.module('RailsPanel', [])
       return out;
     }
   }).
-  filter('normalizeViewPath', function() {
-    return function(input) {
-      return input.remove(/.*\/app\/views/);
+  filter('normalizePath', function() {
+    return function(input) {      
+      return input.remove(/.*\/app\//);
     }
   }).
   filter('sanitize', function() {
