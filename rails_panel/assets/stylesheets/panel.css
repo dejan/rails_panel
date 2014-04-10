@@ -331,3 +331,6 @@ table#requests tr.selected {
   display: none;
 }
 
+table .fluid {
+  width: 100%
+}

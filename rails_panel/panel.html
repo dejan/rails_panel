@@ -112,7 +112,7 @@
 
                     <th data-sort="string">Location</th>
                     <th data-sort="string">Type</th>
-                    <th data-sort="string">SQL</th>
+                    <th data-sort="string" class="fluid">SQL</th>
                     <th data-sort="float" class="duration">Duration (ms)</th>
                   </tr>
                 </thead>
@@ -145,9 +145,16 @@
             </div>
             <div id="tab-log">
               <table class="stupidtable" id="log">
+                <thead>
+                  <tr>
+                    <th data-sort="string">Location</th>
+                    <th data-sort="string" class="fluid">Message</th>
+                  </tr>
+                </thead>
                 <tbody>
                   <tr ng-repeat="log in activeLog()">
-                    <td><a href="{{log.payload.filename | editorify:log.payload.line}}" ng-html="log.payload.message | sanitize | ansi2html"></a></td>
+                    <td><a href="{{log.payload.filename | editorify:log.payload.line}}">{{log.payload.filename | normalizePath}}:{{log.payload.line}}</a></td>
+                    <td>{{log.payload.message | sanitize | ansi2html}}</td>
                   </tr>
                 </tbody>
               </table>
