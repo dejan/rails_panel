@@ -42,11 +42,6 @@ $(function() {
     addData('6', scope, mockTransactions6());
   } else {
 
-    var port = chrome.extension.connect({name: "clear"});
-    port.onMessage.addListener(function(msg) {
-      clearData(scope);
-    });
-
     key('⌘+k, ctrl+l', function(){ clearData(scope) });
 
     chrome.devtools.network.onRequestFinished.addListener(
