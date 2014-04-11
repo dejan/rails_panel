@@ -37,9 +37,6 @@ $(function() {
     addData('1', scope, mockTransactions1());
     addData('2', scope, mockTransactions2());
     addData('3', scope, mockTransactions3());
-    addData('4', scope, mockTransactions4());
-    addData('5', scope, mockTransactions5());
-    addData('6', scope, mockTransactions6());
   } else {
 
     key('⌘+k, ctrl+l', function(){ clearData(scope) });
