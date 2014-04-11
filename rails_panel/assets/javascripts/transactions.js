@@ -1,12 +1,15 @@
 function TransactionsCtrl($scope) {
 
-  $scope.transactionKeys   = [];
-  $scope.requestsMap       = {}; // {transactionKey: {...}, ... }
-  $scope.exceptionCallsMap = {}; // {transactionKey: {...}, ... }
-  $scope.logsMap           = {}; // {transactionKey: [{...}, {...}], ... }
-  $scope.viewsMap          = {}; // {transactionKey: [{...}, {...}], ... }
-  $scope.paramsMap         = {}; // {transactionKey: [{...}, {...}], ... }
-  $scope.sqlsMap           = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.transactionKeys    = [];
+  $scope.requestsMap        = {}; // {transactionKey: {...}, ... }
+  $scope.exceptionCallsMap  = {}; // {transactionKey: {...}, ... }
+  $scope.logsMap            = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.viewsMap           = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.paramsMap          = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.sqlsMap            = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.sqlsCachedCountMap = {}; // {transactionKey: count, ...}
+  $scope.showCachedSqls     = true;
+
   
   $scope.requests = function() {
     return $scope.transactionKeys.map(function(n) {
@@ -29,12 +32,33 @@ function TransactionsCtrl($scope) {
     $scope.activeKey = null;
   }
 
+  $scope.activeExecutedSqlsCount = function() {
+    if (typeof $scope.activeSqls() !== 'undefined') {
+      return $scope.activeSqls().length - $scope.activeCachedSqlsCount();
+    } else {
+      return 0;
+    }
+  }
+
+  $scope.activeCachedSqlsCount = function() {
+    count = $scope.sqlsCachedCountMap[$scope.activeKey];
+    if (count == undefined) {
+      return 0;
+    } else {
+      return count;
+    }
+  }
+
   $scope.activeViews = function() {
     return $scope.viewsMap[$scope.activeKey];
   }
 
   $scope.activeSqls = function() {
     return $scope.sqlsMap[$scope.activeKey];
+  }
+  
+  $scope.showQuery = function(type) {
+    return $scope.showCachedSqls || type !== "CACHE";
   }
 
   $scope.activeParams = function() {
@@ -98,6 +122,15 @@ function TransactionsCtrl($scope) {
     case "sql.active_record":
       if (data.payload.name !== "SCHEMA") {
         $scope.pushToMap($scope.sqlsMap, key, data);
+      }
+      if (data.payload.name == "CACHE") {
+        val = $scope.sqlsCachedCountMap[key];
+        if (val == undefined) {
+          val = 1;
+        } else {
+          val += 1;
+        }
+        $scope.sqlsCachedCountMap[key] = val;
       }
       break;
     default:
