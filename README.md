@@ -24,7 +24,17 @@ If you have a problem installing extension from Chrome Store or just want to run
 ## Supported environments
 
 * Rails 3, Rails 4
-* Ruby 1.9.3, Ruby 2.0
+* Ruby 1.9.3, Ruby 2.0, Ruby 2.1
+
+## Editor integration
+
+Select your editor on [the extension options page](chrome-extension://gjpfobpafnhjhbajcjgccbbdofdckggg/options.html). Following editors are supported:
+
+* MacVim
+* TextMate
+* Sublime
+* Emacs 
+* RubyMine
 
 ## Compatibility Warnings
 
