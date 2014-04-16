@@ -28,7 +28,7 @@ If you have a problem installing extension from Chrome Store or just want to run
 
 ## Editor integration
 
-Select your editor on [the extension options page](chrome-extension://gjpfobpafnhjhbajcjgccbbdofdckggg/options.html). Following editors are supported:
+Select your editor on the extension options page: chrome://extensions. Following editors are supported:
 
 * MacVim
 * TextMate
