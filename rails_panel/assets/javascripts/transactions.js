@@ -120,7 +120,8 @@ function TransactionsCtrl($scope) {
       $scope.pushToMap($scope.logsMap, key, data);
       break;
     case "sql.active_record":
-      if (data.payload.name !== "SCHEMA") {
+      ignoredTypes = ["SCHEMA", "EXPLAIN"];
+      if (ignoredTypes.indexOf(data.payload.name)==-1) {
         $scope.pushToMap($scope.sqlsMap, key, data);
       }
       if (data.payload.name == "CACHE") {
