@@ -48,7 +48,7 @@ $(function() {
         var metaRequestVersion = headers.find(function(x) { return x.name.toLowerCase() == 'x-meta-request-version' });
         if (request.response.status === 500 || typeof metaRequestVersion != 'undefined') {
           if (typeof metaRequestVersion != 'undefined') {
-            if (metaRequestVersion.value < '0.2.4') {
+            if (metaRequestVersion.value < '0.3.0') {
               $('#message-box').show();
             } else {
               $('#message-box').hide();
