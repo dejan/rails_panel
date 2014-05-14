@@ -13,7 +13,6 @@
 
 #tabs, table, tbody, tr, th, .data-grid {
   -webkit-touch-callout: none;
-  -webkit-user-select: none;
 }  
 
 .data-grid table {
@@ -158,7 +157,6 @@ table.header th {
   top: 0;
   bottom: 0;
   overflow: auto;
-  cursor: default;
 }
 
 
