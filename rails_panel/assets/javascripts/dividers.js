@@ -7,8 +7,8 @@ var dividers = {
     window.onresize = function(e) {
       if (window.innerWidth > 1050) {
         if ($('.split-view').data('layout') == 'horizontal') { 
-          $('.split-view-contents-requests').css({'width': '681px', 'height': '100%'});
-          $('.split-view-contents-details').css({'left': '680px', 'top':'0'});
+          $('.split-view-contents-requests').css({'width': '481px', 'height': '100%'});
+          $('.split-view-contents-details').css({'left': '480px', 'top':'0'});
         }
         $('.split-view').data('layout', 'vertical');
       } else {
@@ -65,8 +65,8 @@ var dividers = {
     if (newWidth < 462) {
       newWidth = 462;
     }
-    if (newWidth + 365 > window.innerWidth) {
-      newWidth = window.innerWidth - 365;
+    if (newWidth + 465 > window.innerWidth) {
+      newWidth = window.innerWidth - 465;
     }
     $('.split-view-contents-requests').width(newWidth);
     $('.split-view-contents-details').css({'left': newWidth - 1 + 'px'});

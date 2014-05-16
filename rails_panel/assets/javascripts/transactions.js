@@ -60,7 +60,7 @@ function TransactionsCtrl($scope) {
   $scope.showQuery = function(type) {
     return $scope.showCachedSqls || type !== "CACHE";
   }
-
+  
   $scope.activeParams = function() {
     return $scope.paramsMap[$scope.activeKey];
   }

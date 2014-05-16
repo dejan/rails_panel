@@ -26,34 +26,23 @@
               <th class='controller'>Controller#Action</th>
               <th class='method'>Method</th>
               <th class='format'>Format</th>
-              <th class='db'>DB</th>
-              <th class='view'>View</th>
-              <th class='other'>Other</th>
-              <th class='duration'>Total</th>
+              <th class='duration'>Resp. Time</th>
             </tr>
           </table>
           <div class="data-container">
             <table id="requests">
               <tr ng-repeat="request in requests()" ng-click="setActive(request.key)" ng-class="getClass(request.key)">
                 <td class='status'>{{request.payload.status}}</td>
-                <td
-                  class='controller'>{{request.payload.controller}}#{{request.payload.action}}</td>
+                <td class='controller'>{{request.payload.controller}}#{{request.payload.action}}</td>
                 <td class='method'>{{request.payload.method}}</td>
                 <td class='format'>{{request.payload.format}}</td>
-                <td class='db'>{{request.payload.dbRuntimeRounded}}</td>
-                <td class='view'>{{request.payload.viewRuntimeRounded}}</td>
-                <td class='other'>{{request.payload.otherRuntimeRounded}}</td>
-                <td class='duration'><strong>{{request.durationRounded}}</strong></td>
+                <td class='duration'>{{request.duration | number:0}} ms</td>
               </tr>
               <tr class="filler">
                 <td class='status'></td>
-                <td
-                  class='controller'></td>
+                <td class='controller'></td>
                 <td class='method'></td>
                 <td class='format'></td>
-                <td class='db'></td>
-                <td class='view'></td>
-                <td class='other'></td>
                 <td class='duration'></td>
               </tr>
             </table>
@@ -74,10 +63,10 @@
                   <a href="#tab-params" class="tabbed-pane-header-tab-title">Params</a>
                 </li>
                 <li class="tabbed-pane-header-tab">
-                  <a href="#tab-db" class="tabbed-pane-header-tab-title">DB</a>
+                  <a href="#tab-db" class="tabbed-pane-header-tab-title tab-db">ActiveRecord</a>
                 </li>
                 <li class="tabbed-pane-header-tab">
-                  <a href="#tab-views" class="tabbed-pane-header-tab-title">View</a>
+                  <a href="#tab-views" class="tabbed-pane-header-tab-title">Views</a>
                 </li>
                 <li class="tabbed-pane-header-tab">
                   <a href="#tab-log" class="tabbed-pane-header-tab-title">Log</a>
@@ -113,7 +102,7 @@
                     <th data-sort="string">Location</th>
                     <th data-sort="string">Type</th>
                     <th data-sort="string" class="fluid">SQL</th>
-                    <th data-sort="float" class="duration">Duration (ms)</th>
+                    <th data-sort="float" class="duration">Duration</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -121,7 +110,7 @@
                     <td><a href="{{sql.payload.filename | editorify:sql.payload.line}}">{{sql.payload.filename | normalizePath}}:{{sql.payload.line}}</a>
                     <td>{{sql.payload.name}}</td>
                     <td>{{sql.payload.sql}}</td>
-                    <td class="duration">{{sql.duration | number:3}}</td>
+                    <td class="duration">{{sql.duration | number:0}} ms</td>
                   </tr>
                 </tbody>
               </table>
@@ -135,13 +124,13 @@
                 <thead>
                   <tr>
                     <th data-sort="string">View</th>
-                    <th data-sort="float" class="duration">Duration (ms)</th>
+                    <th data-sort="float" class="duration">Duration</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr ng-repeat="view in activeViews()">
                     <td><a href="{{view.payload.identifier | editorify:1}}">{{view.payload.identifier | normalizePath}}</a></td>
-                    <td class="duration">{{view.duration | number:3}}</td>
+                    <td class="duration">{{view.duration | number:0}} ms</td>
                   </tr>
                 </tbody>
               </table>

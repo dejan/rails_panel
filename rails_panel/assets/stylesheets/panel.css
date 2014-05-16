@@ -32,7 +32,7 @@
     border-bottom: 1px solid rgb(179, 179, 179);
     height: 30px;
     font-weight: bold;
-    padding: 0 4px;
+    padding: 0 6px;
     white-space: nowrap;
 }
 
@@ -60,6 +60,10 @@
 
 table#requests {
   height: 100%;
+}
+
+table#requests td {
+  padding: 8px 6px;
 }
 
 .data-container tr {
@@ -135,8 +139,12 @@ table.header th {
   background: -webkit-gradient(linear, left top, left bottom, from(#ECECEC), to(#D9D9D9))
 }
 
-.method, .format, .status, .view, .db, .other, .duration {
-  width: 50px;
+.method, .format, .status, .view, .db, .other {
+  width: 56px;
+}
+
+.duration {
+  width: 74px;
 }
 
 .status, .method, .format {
@@ -165,7 +173,7 @@ table.header th {
 @media screen and (max-width: 1050px) {
   .split-view-contents-requests {
     left: 0px;
-    width: 680px;
+    width: 480px;
     bottom:50%;
     width:100%;
   }
@@ -192,14 +200,14 @@ table.header th {
     bottom: none;
     height: 100%;
     left: 0px;
-    width: 681px;
+    width: 481px;
   }
 
   .split-view-contents-details {
     top:0px;
     height:auto;
     right: 0px;
-    left: 680px;
+    left: 480px;
     width: auto;
     min-width: 365px;
   }
@@ -219,9 +227,8 @@ table.header th {
 
   .data-grid table th.duration {
     border-right: none;
-    width: 51px;
+    width: 75px;
   }
-
 
 }
 
@@ -278,8 +285,12 @@ ul.tabbed-pane-header-tabs {
   text-shadow: rgba(255, 255, 255, 0.5) 0 1px 0;
   white-space: nowrap;
   display:block;
-  width:45px;
+  width:55px;
   text-align: center;
+}
+
+.tab-db {
+  width: 90;
 }
 
 .tabbed-pane-header-tab.ui-tabs-active {
@@ -342,3 +353,5 @@ table#db .CACHE, table#db .CACHE a {
 table .fluid {
   width: 100%
 }
+
+
