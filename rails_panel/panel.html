@@ -105,7 +105,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="sql in activeSqls()" ng-show="notEmpty(sql.payload.name)" class="{{sql.payload.name}}">
+                  <tr ng-repeat="sql in activeSqls()" ng-show="showQuery(sql.payload.name)" class="{{sql.payload.name}}">
                     <td><a href="{{sql.payload.filename | editorify:sql.payload.line}}">{{sql.payload.filename | normalizePath}}:{{sql.payload.line}}</a>
                     <td>{{sql.payload.name}}</td>
                     <td>{{sql.payload.sql}}</td>
