@@ -98,10 +98,9 @@
               <table class="stupidtable" id="db">
                 <thead>
                   <tr>
-
                     <th data-sort="string">Location</th>
                     <th data-sort="string">Type</th>
-                    <th data-sort="string" class="fluid">SQL</th>
+                    <th class="fluid">SQL</th>
                     <th data-sort="float" class="duration">Duration</th>
                   </tr>
                 </thead>
@@ -110,7 +109,7 @@
                     <td><a href="{{sql.payload.filename | editorify:sql.payload.line}}">{{sql.payload.filename | normalizePath}}:{{sql.payload.line}}</a>
                     <td>{{sql.payload.name}}</td>
                     <td>{{sql.payload.sql}}</td>
-                    <td class="duration">{{sql.duration | number:0}} ms</td>
+                    <td class="duration" data-sort-value="{{-sql.duration}}">{{sql.duration | number:0}} ms</td>
                   </tr>
                 </tbody>
               </table>
@@ -130,13 +129,13 @@
                 <tbody>
                   <tr ng-repeat="view in activeViews()">
                     <td><a href="{{view.payload.identifier | editorify:1}}">{{view.payload.identifier | normalizePath}}</a></td>
-                    <td class="duration">{{view.duration | number:0}} ms</td>
+                    <td class="duration" data-sort-value="{{-view.duration}}">{{view.duration | number:0}} ms</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div id="tab-log">
-              <table class="stupidtable" id="log">
+              <table id="log">
                 <thead>
                   <tr>
                     <th data-sort="string">Location</th>

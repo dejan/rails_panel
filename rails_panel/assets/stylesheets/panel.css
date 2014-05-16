@@ -36,7 +36,7 @@
     white-space: nowrap;
 }
 
-.data-grid table.stupidtable th {
+.data-grid table.stupidtable th[data-sort] {
     cursor: pointer;
 }
 
@@ -100,6 +100,10 @@ table#requests td {
   border-right: 1px solid #eee;
 }
 
+.data-grid-details table td.duration {
+  white-space: nowrap;
+}
+
 .data-grid-details table {
   table-layout: auto;
 }
@@ -143,7 +147,7 @@ table.header th {
   width: 56px;
 }
 
-.duration {
+#requests .duration {
   width: 74px;
 }
 
