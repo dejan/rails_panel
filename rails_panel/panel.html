@@ -79,11 +79,11 @@
           </div> 
           <div class="tabbed-pane-content data-grid data-grid-details">
            <div id="tab-params">
-              <table id="params">
+              <table id="params" class="stupidtable" ng-show="notEmpty(activeParams())" >
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Value</th>
+                    <th data-sort="string">Name</th>
+                    <th data-sort="string">Value</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -95,7 +95,7 @@
               </table>
             </div>
             <div id="tab-db">
-              <table class="stupidtable" id="db">
+              <table class="stupidtable" id="db"  ng-show="notEmpty(activeSqls())">
                 <thead>
                   <tr>
                     <th data-sort="string">Location</th>
@@ -105,7 +105,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="sql in activeSqls()" ng-show="showQuery(sql.payload.name)" class="{{sql.payload.name}}">
+                  <tr ng-repeat="sql in activeSqls()" ng-show="notEmpty(sql.payload.name)" class="{{sql.payload.name}}">
                     <td><a href="{{sql.payload.filename | editorify:sql.payload.line}}">{{sql.payload.filename | normalizePath}}:{{sql.payload.line}}</a>
                     <td>{{sql.payload.name}}</td>
                     <td>{{sql.payload.sql}}</td>
@@ -113,13 +113,13 @@
                   </tr>
                 </tbody>
               </table>
-              <div class="queries-summary">
+              <div class="queries-summary" ng-show="notEmpty(activeSqls())">
                 <div class="cached-queries-control" ng-show="activeCachedSqlsCount() > 0"><input id="show_cached_queries" type="checkbox" ng-model="showCachedSqls"/><label for="show_cached_queries">Show cached queries ({{activeCachedSqlsCount()}})</label></div>
                 Number of executed queries: {{activeExecutedSqlsCount()}}
               </div>
             </div>
             <div id="tab-views">
-              <table class="stupidtable" id="views">
+              <table class="stupidtable" id="views" ng-show="notEmpty(activeViews())">
                 <thead>
                   <tr>
                     <th data-sort="string">View</th>
@@ -135,7 +135,7 @@
               </table>
             </div>
             <div id="tab-log">
-              <table id="log">
+              <table id="log" ng-show="notEmpty(activeLog())">
                 <thead>
                   <tr>
                     <th data-sort="string">Location</th>
@@ -151,7 +151,7 @@
               </table>
             </div>
             <div id="tab-error">
-              <table id="trace">
+              <table id="trace" ng-show="notEmpty(activeExceptionCalls())">
                 <tr ng-repeat="exception in activeExceptionCalls()">
                   <td>{{exception.payload.call}}</td>
                 </tr>

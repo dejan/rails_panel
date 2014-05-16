@@ -76,3 +76,8 @@ function mockTransactions3() {
 }
 
 
+function mockTransactions4() {
+  return [
+{"name":"process_action.action_controller","payload":{"controller":"ArticlesController","action":"index","params":{},"format":"html","method":"GET","path":"/?_pjax=%5Bdata-pjax-container%5D","status":200,"view_runtime":285.588,"db_runtime":2.4770000000000003},"time":"2012-11-25T16:53:11+01:00","transaction_id":"771131b57de39c8bcc3e","end":"2012-11-25T16:53:11+01:00","duration":2217.57},
+  ];
+}

@@ -60,6 +60,14 @@ function TransactionsCtrl($scope) {
   $scope.showQuery = function(type) {
     return $scope.showCachedSqls || type !== "CACHE";
   }
+
+  $scope.notEmpty = function(col) {
+    if (col == undefined) {
+      return false;
+    } else {
+      return col.length > 0;
+    }
+  } 
   
   $scope.activeParams = function() {
     return $scope.paramsMap[$scope.activeKey];
