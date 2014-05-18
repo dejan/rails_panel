@@ -260,6 +260,10 @@ ul.tabbed-pane-header-tabs {
   min-width: 300px;
 }
 
+.fl {
+  float: left;
+}
+
 .tabbed-pane-header-tab {
   float: left;
   margin-top: 2px;
@@ -287,12 +291,8 @@ ul.tabbed-pane-header-tabs {
   text-shadow: rgba(255, 255, 255, 0.5) 0 1px 0;
   white-space: nowrap;
   display:block;
-  width:55px;
+  padding: 0 10px; 
   text-align: center;
-}
-
-.tab-db {
-  width: 90;
 }
 
 .tabbed-pane-header-tab.ui-tabs-active {
@@ -356,4 +356,21 @@ table .fluid {
   width: 100%
 }
 
+table#breakdown td {
+  vertical-align: middle;
+}
+
+table#breakdown td.meter-col {
+  padding: 2px 0;
+}
+
+.meter {
+  padding: 9px 6px;
+  height: 30px;
+  background: #eee;
+  float:left;
+}
+
+
+ 
 

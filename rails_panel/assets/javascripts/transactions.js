@@ -32,6 +32,10 @@ function TransactionsCtrl($scope) {
     $scope.activeKey = null;
   }
 
+  $scope.activeRequest = function() {
+    return $scope.requestsMap[$scope.activeKey];
+  }
+
   $scope.activeExecutedSqlsCount = function() {
     if (typeof $scope.activeSqls() !== 'undefined') {
       return $scope.activeSqls().length - $scope.activeCachedSqlsCount();

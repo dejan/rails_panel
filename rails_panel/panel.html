@@ -60,13 +60,16 @@
             <div class="tabbed-pane-header-contents">
               <ul class="tabbed-pane-header-tabs">
                 <li class="tabbed-pane-header-tab">
+                  <a href="#tab-breakdown" class="tabbed-pane-header-tab-title">Breakdown</a>
+                </li>
+                <li class="tabbed-pane-header-tab">
                   <a href="#tab-params" class="tabbed-pane-header-tab-title">Params</a>
                 </li>
                 <li class="tabbed-pane-header-tab">
-                  <a href="#tab-db" class="tabbed-pane-header-tab-title tab-db">ActiveRecord</a>
+                  <a href="#tab-db" class="tabbed-pane-header-tab-title">ActiveRecord</a>
                 </li>
                 <li class="tabbed-pane-header-tab">
-                  <a href="#tab-views" class="tabbed-pane-header-tab-title">Views</a>
+                  <a href="#tab-views" class="tabbed-pane-header-tab-title">Rendering</a>
                 </li>
                 <li class="tabbed-pane-header-tab">
                   <a href="#tab-log" class="tabbed-pane-header-tab-title">Log</a>
@@ -77,7 +80,46 @@
               </ul>
             </div>
           </div> 
+
+
           <div class="tabbed-pane-content data-grid data-grid-details">
+            <div id="tab-breakdown">
+              <table id="breakdown" class="stupidtable" ng-show="notEmpty(requests())" >
+                <thead>
+                  <tr>
+                    <th data-sort="string">Component</th>
+                    <th data-sort="float" class="duration">Execution time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="meter-col">
+                      <div class="meter" style="width:{{activeRequest().payload.dbRuntimeRounded/activeRequest().duration*100}}%;">
+                        <span class="meter-val">ActiveRecord</span>
+                      </div>
+                    </td>
+                    <td class="duration" data-sort-value="-{{activeRequest().payload.dbRuntimeRounded}}">{{activeRequest().payload.dbRuntimeRounded | number:0}} ms</td>
+                  </tr>
+                  <tr>
+                    <td class="meter-col">
+                      <div class="meter" style="width:{{activeRequest().payload.viewRuntimeRounded/activeRequest().duration*100}}%;">
+                        <span class="meter-val">Rendering</span>
+                      </div>
+                    </td>
+                    <td class="duration" data-sort-value="-{{activeRequest().payload.viewRuntimeRounded}}">{{activeRequest().payload.viewRuntimeRounded | number:0}} ms</td>
+                  </tr>
+                  <tr>
+                    <td class="meter-col">
+                      <div class="meter" style="width:{{activeRequest().payload.otherRuntimeRounded/activeRequest().duration*100}}%;">
+                        <span class="meter-val">Other</span>
+                      </div>
+                    </td>
+                    <td class="duration" data-sort-value="-{{activeRequest().payload.otherRuntimeRounded}}">{{activeRequest().payload.otherRuntimeRounded | number:0}} ms</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
            <div id="tab-params">
               <table id="params" class="stupidtable" ng-show="notEmpty(activeParams())" >
                 <thead>
