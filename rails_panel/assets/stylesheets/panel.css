@@ -227,11 +227,11 @@ table.header th {
     cursor: ew-resize;
   }
 
-  .data-grid table th.duration {
-    border-right: none;
-    width: 75px;
-  }
+}
 
+.data-grid table th.duration {
+  border-right: none;
+  width: 75px;
 }
 
 .tabbed-pane {

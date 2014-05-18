@@ -65,8 +65,8 @@ var dividers = {
     if (newWidth < 462) {
       newWidth = 462;
     }
-    if (newWidth + 465 > window.innerWidth) {
-      newWidth = window.innerWidth - 465;
+    if (newWidth + 600 > window.innerWidth) {
+      newWidth = window.innerWidth - 600;
     }
     $('.split-view-contents-requests').width(newWidth);
     $('.split-view-contents-details').css({'left': newWidth - 1 + 'px'});
