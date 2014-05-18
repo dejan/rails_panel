@@ -170,7 +170,10 @@
                 </thead>
                 <tbody>
                   <tr ng-repeat="view in activeViews()">
-                    <td><a href="{{view.payload.identifier | editorify:1}}">{{view.payload.identifier | normalizePath}}</a></td>
+                    <td>
+                      <a href="{{view.payload.identifier | editorify:1}}">{{view.payload.identifier | normalizePath}}</a>
+                      <span ng-show="view.payload.layout">within {{view.payload.layout}}</span>
+                    </td>
                     <td class="duration" data-sort-value="{{-view.duration}}">{{view.duration | number:0}} ms</td>
                   </tr>
                 </tbody>
