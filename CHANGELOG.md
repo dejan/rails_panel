@@ -1,3 +1,6 @@
+## 2014-05-18 RailsPanel 0.2.0
+* UI changes: time units, breakdown tab, minor tweaks & fixes.
+
 ## 2014-04-16 RailsPanel 0.1.9 & meta_request 0.3.0 
 * ActiveRecord & Log entries caller locations https://github.com/dejan/rails_panel/issues/13
 * Optional display for cached ActiveRecord queries https://github.com/dejan/rails_panel/pull/68
