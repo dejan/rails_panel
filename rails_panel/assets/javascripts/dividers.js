@@ -11,6 +11,15 @@ var dividers = {
           $('.split-view-contents-details').css({'left': '480px', 'top':'0'});
         }
         $('.split-view').data('layout', 'vertical');
+
+        // if details panel is too small, resize requests panel instead
+        if ($('.split-view-contents-details').width() < 600) {
+          newWidth = window.innerWidth - 600;
+          $('.split-view-contents-requests').width(newWidth);
+          $('.split-view-contents-details').css({'left': newWidth - 1 + 'px'});
+        }
+
+
       } else {
         if ($('.split-view').data('layout') == 'vertical') { 
           $('.split-view-contents-requests').css({'width': '100%', 'bottom': '50%', 'height': '50%'});
