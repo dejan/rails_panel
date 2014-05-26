@@ -1,6 +1,8 @@
 <html ng-app="RailsPanel" ng-csp="">
   <head>
     <link rel="stylesheet" type="text/css" href="assets/stylesheets/panel.css">
+
+    // 3rd party
     <script src="vendor/assets/javascripts/jquery-1.8.3.min.js"></script>
     <script src="vendor/assets/javascripts/jquery-ui-1.9.2.tabs.min.js"></script>
     <script src="vendor/assets/javascripts/stupidtable.min.js"></script>
@@ -10,11 +12,16 @@
     <script src="vendor/assets/javascripts/keymaster.min.js"></script>
     <script src="vendor/assets/javascripts/ansi2html.js"></script>
     <script src="vendor/assets/javascripts/angular.min.js"></script>
+
+    // the app
     <script src="assets/javascripts/filters.js"></script>
     <script src="assets/javascripts/transactions.js"></script>
-    <script src="assets/javascripts/development.js"></script>
+    <script src="assets/javascripts/standalone.js"></script>
     <script src="assets/javascripts/dividers.js"></script>
     <script src="assets/javascripts/panel.js"></script>
+    <script src="assets/javascripts/requests.js"></script>
+    <script src="assets/javascripts/init.js"></script>
+
   </head>
   <body>
     <div class="split-view" ng-controller='TransactionsCtrl'>
@@ -50,7 +57,7 @@
         </div>
       </div>
       <div class="split-view-contents split-view-contents-details">
-        <div id="message-box">
+        <div id="message-box" ng-show="outdatedMetaRequest()" >
           You are using outdated version of meta_request gem. Please upgrade the gem.
         </div>
         <div id="vdivider"></div>

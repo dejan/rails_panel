@@ -1,16 +1,22 @@
 function TransactionsCtrl($scope) {
 
-  $scope.transactionKeys    = [];
-  $scope.requestsMap        = {}; // {transactionKey: {...}, ... }
-  $scope.exceptionCallsMap  = {}; // {transactionKey: {...}, ... }
-  $scope.logsMap            = {}; // {transactionKey: [{...}, {...}], ... }
-  $scope.viewsMap           = {}; // {transactionKey: [{...}, {...}], ... }
-  $scope.paramsMap          = {}; // {transactionKey: [{...}, {...}], ... }
-  $scope.sqlsMap            = {}; // {transactionKey: [{...}, {...}], ... }
-  $scope.sqlsCachedCountMap = {}; // {transactionKey: count, ...}
-  $scope.showCachedSqls     = true;
+  $scope.transactionKeys     = [];
+  $scope.requestsMap         = {}; // {transactionKey: {...}, ... }
+  $scope.exceptionCallsMap   = {}; // {transactionKey: {...}, ... }
+  $scope.logsMap             = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.viewsMap            = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.paramsMap           = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.sqlsMap             = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.sqlsCachedCountMap  = {}; // {transactionKey: count, ...}
+  $scope.showCachedSqls      = true;
 
-  
+  $scope.expectedMetaRequestVersion = '0.3.0'
+  $scope.metaRequestVersion  = $scope.expectedMetaRequestVersion;
+
+  $scope.outdatedMetaRequest = function() {
+    return $scope.metaRequestVersion < $scope.expectedMetaRequestVersion;
+  }
+
   $scope.requests = function() {
     return $scope.transactionKeys.map(function(n) {
       request = $scope.requestsMap[n];
@@ -31,7 +37,7 @@ function TransactionsCtrl($scope) {
     $scope.sqlsMap = {};
     $scope.activeKey = null;
   }
-
+  
   $scope.activeRequest = function() {
     return $scope.requestsMap[$scope.activeKey];
   }
