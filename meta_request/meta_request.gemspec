@@ -1,9 +1,14 @@
+# -*- encoding: utf-8 -*-
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'meta_request/version'
+
 Gem::Specification.new do |gem|
   gem.name         = 'meta_request'
   gem.summary      = 'Request your Rails request'
   gem.description  = 'Supporting gem for Rails Panel (Google Chrome extension for Rails development)'
 
-  gem.version      = '0.3.1'
+  gem.version      = MetaRequest::VERSION
 
   gem.author       = 'Dejan Simic'
   gem.email        = 'desimic@gmail.com'
