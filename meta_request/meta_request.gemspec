@@ -1,23 +1,21 @@
-# -*- encoding: utf-8 -*-
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'meta_request/version'
-
 Gem::Specification.new do |gem|
-  gem.name          = "meta_request"
-  gem.version       = MetaRequest::VERSION
-  gem.authors       = ["Dejan Simic"]
-  gem.email         = ["desimic@gmail.com"]
-  gem.description   = %q{Request your request}
-  gem.summary       = %q{Supporting gem for Rails Panel (Google Chrome extension for Rails development)}
-  gem.homepage      = "https://github.com/dejan/rails_panel/tree/master/meta_request"
-  
-  gem.add_dependency('railties')
-  gem.add_dependency('rack-contrib')
-  gem.add_dependency('callsite')
+  gem.name         = 'meta_request'
+  gem.summary      = 'Request your Rails request'
+  gem.description  = 'Supporting gem for Rails Panel (Google Chrome extension for Rails development)'
 
-  gem.files         = `git ls-files`.split($/)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.require_paths = ["lib"]
+  gem.version      = '0.3.1'
+
+  gem.author       = 'Dejan Simic'
+  gem.email        = 'desimic@gmail.com'
+  gem.homepage     = 'https://github.com/dejan/rails_panel/tree/master/meta_request'
+  gem.license      = 'MIT'
+
+  gem.add_dependency 'railties'
+  gem.add_dependency 'rack-contrib'
+  gem.add_dependency 'callsite'
+
+  gem.files        = Dir[
+    "README.md",
+    "lib/**/*.rb",
+  ]
 end

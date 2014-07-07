@@ -1,3 +1,6 @@
+## 2014-07-07 meta_request 0.3.1
+* gemspec cleanup
+
 ## 2014-05-19 RailsPanel 0.2.1
 * Fix width of Response Time column in horizontal mode
 * Maintain minimum width of the details panel while resizing in vertical mode
