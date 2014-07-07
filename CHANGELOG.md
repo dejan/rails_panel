@@ -1,4 +1,4 @@
-## 2014-07-07 meta_request 0.3.1
+## 2014-07-07 meta_request 0.3.2
 * gemspec cleanup
 
 ## 2014-05-19 RailsPanel 0.2.1
