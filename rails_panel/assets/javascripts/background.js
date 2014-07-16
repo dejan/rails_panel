@@ -1,9 +1,8 @@
-function onRequest(request, sender, callback) {
+chrome.extension.onRequest.addListener(function(request, sender, callback) {
   if (request.action == 'getJSON') {
     $.getJSON(request.url, callback);
   }
-}
-chrome.extension.onRequest.addListener(onRequest);
+});
 
 // set default editor 
 var editor = localStorage.getItem("railspanel.editor") 
