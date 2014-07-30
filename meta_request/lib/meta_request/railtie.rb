@@ -6,7 +6,13 @@ module MetaRequest
     initializer 'meta_request.inject_middlewares' do |app|
       app.middleware.use Middlewares::RequestId unless defined?(ActionDispatch::RequestId)
       app.middleware.use Middlewares::MetaRequestHandler
-      app.middleware.use Middlewares::Headers, app.config
+
+      if defined? ActionDispatch::DebugExceptions
+        app.middleware.insert_after ActionDispatch::DebugExceptions, Middlewares::Headers, app.config
+      else
+        app.middleware.use BetterErrors::Middleware
+      end
+
       app.middleware.use Middlewares::AppRequestHandler
     end
 
