@@ -1,4 +1,7 @@
-## 2014-07-07 meta_request 0.3.2
+## 2014-07-30 meta_request 0.3.4 & RailsPanel 0.2.2
+* Fix error panel & conflict with BetterErrors
+
+## 2014-07-07 meta_request 0.3.3
 * gemspec cleanup
 
 ## 2014-05-19 RailsPanel 0.2.1
