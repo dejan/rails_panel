@@ -9,7 +9,7 @@ var requests = {
       headers = request.response.headers;
       var requestId = headers.find(function(x) { return x.name.toLowerCase() == 'x-request-id' });
       var metaRequestVersion = headers.find(function(x) { return x.name.toLowerCase() == 'x-meta-request-version' });
-      if (request.response.status === 500 || typeof metaRequestVersion != 'undefined') {
+      if (typeof metaRequestVersion != 'undefined') {
         scope.metaRequestVersion = metaRequestVersion.value;
         var uri = new URI(request.request.url);
         uri.pathname('/__meta_request/' + requestId.value + '.json');
