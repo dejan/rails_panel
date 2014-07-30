@@ -8,9 +8,9 @@ module MetaRequest
       app.middleware.use Middlewares::MetaRequestHandler
 
       if defined? ActionDispatch::DebugExceptions
-        app.middleware.insert_after ActionDispatch::DebugExceptions, Middlewares::Headers, app.config
+        app.middleware.insert_before ActionDispatch::DebugExceptions, Middlewares::Headers, app.config
       else
-        app.middleware.use BetterErrors::Middleware
+        app.middleware.use Middlewares::Headers, app.config
       end
 
       app.middleware.use Middlewares::AppRequestHandler
