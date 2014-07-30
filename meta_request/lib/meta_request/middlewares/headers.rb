@@ -11,12 +11,19 @@ module MetaRequest
       def call(env)
         request_path = env['PATH_INFO']
         middleware = Rack::ResponseHeaders.new(@app) do |headers|
-          headers['X-Meta-Request-Version'] = MetaRequest::VERSION unless asset?(request_path)
+          headers['X-Meta-Request-Version'] = MetaRequest::VERSION unless skip?(request_path)
         end
         middleware.call(env)
       end
 
       private
+
+      # returns true if path should be ignored (not handled by RailsPanel extension)
+      #
+      def skip?(path)
+        asset?(path) || path.start_with?('/__better_errors/')
+      end
+
       def asset?(path)
         @app_config.respond_to?(:assets) && path.start_with?(assets_prefix)
       end
