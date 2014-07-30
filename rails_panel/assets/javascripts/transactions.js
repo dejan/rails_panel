@@ -10,7 +10,7 @@ function TransactionsCtrl($scope) {
   $scope.sqlsCachedCountMap  = {}; // {transactionKey: count, ...}
   $scope.showCachedSqls      = true;
 
-  $scope.expectedMetaRequestVersion = '0.3.0'
+  $scope.expectedMetaRequestVersion = '0.3.4'
   $scope.metaRequestVersion  = $scope.expectedMetaRequestVersion;
 
   $scope.outdatedMetaRequest = function() {
