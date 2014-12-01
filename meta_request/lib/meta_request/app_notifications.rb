@@ -20,6 +20,12 @@ module MetaRequest
         subscribe("process_action.action_controller.exception").
         subscribe("process_action.action_controller") do |*args|
           name, start, ending, transaction_id, payload = args
+          data = args.extract_options!
+          if data.has_key?(:controller)
+            controller_location = data[:controller].constantize.new.method(data[:action]).source_location
+            payload[:controller_filename] = controller_location[0]
+            payload[:controller_linenumber] = controller_location[1]
+          end
           payload[:format] ||= (payload[:formats]||[]).first # Rails 3.0.x Support
           payload[:status] = '500' if payload[:exception]
           Event.new(name, start, ending, transaction_id, payload)
