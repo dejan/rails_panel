@@ -2,6 +2,13 @@
   -webkit-box-sizing: border-box;
 }
 
+
+ul {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: -30px;
+}
+
 .data-grid {
   border: none;
   position: absolute;
@@ -243,7 +250,6 @@ table.header th {
 .tabbed-pane-header {
   height: 31px;
   padding-top: 8px;
-  padding-left: 25px;
   white-space: nowrap;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ECECEC), to(#D9D9D9));
   border-bottom: 1px solid #A3A3A3;
@@ -251,13 +257,6 @@ table.header th {
 
 .tabbed-pane-header-contents {
   margin: 0 10px;
-}
-
-ul.tabbed-pane-header-tabs {
-  position:relative;
-  top:-16px;
-  left:-50px;
-  min-width: 300px;
 }
 
 .fl {
