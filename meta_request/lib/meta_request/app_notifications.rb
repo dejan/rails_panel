@@ -8,7 +8,7 @@ module MetaRequest
         subscribe("meta_request.log").
         subscribe("sql.active_record") do |*args|
           name, start, ending, transaction_id, payload = args
-          dev_caller = caller.select { |c| c=~/#{Rails.root}/}.first
+          dev_caller = caller.detect { |c| c=~/#{Rails.root}/ }
           if dev_caller
             c = Callsite.parse(dev_caller)
             payload.merge!(:line => c.line, :filename => c.filename, :method => c.method)

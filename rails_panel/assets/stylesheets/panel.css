@@ -2,6 +2,9 @@
   -webkit-box-sizing: border-box;
 }
 
+body.rails-panel {
+  background: #fff;
+}
 
 ul {
   -webkit-margin-before: 0;
@@ -20,7 +23,7 @@ ul {
 
 #tabs, table, tbody, tr, th, .data-grid {
   -webkit-touch-callout: none;
-}  
+}
 
 .data-grid table {
   table-layout: fixed;
@@ -73,7 +76,7 @@ table#requests td {
 }
 
 .data-container tr {
-  height: 28px; 
+  height: 28px;
 }
 
 .data-container tr.filler {
@@ -290,7 +293,7 @@ table.header th {
   text-shadow: rgba(255, 255, 255, 0.5) 0 1px 0;
   white-space: nowrap;
   display:block;
-  padding: 0 10px; 
+  padding: 0 10px;
   text-align: center;
 }
 
@@ -370,5 +373,5 @@ table#breakdown td.meter-col {
 }
 
 
- 
+
 
