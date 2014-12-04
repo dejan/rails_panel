@@ -1,6 +1,8 @@
+## 2014-12-04 RailsPanel 0.2.4
+* Set background color so it doesn`t look broken with dark devtools theme
+
 ## 2014-12-04 RailsPanel 0.2.3
 * Fix padding issues with tabs
-* Set background color so it doesn`t look broken with dark devtools theme
 
 ## 2014-07-30 meta_request 0.3.4 & RailsPanel 0.2.2
 * Fix error panel & conflict with BetterErrors
