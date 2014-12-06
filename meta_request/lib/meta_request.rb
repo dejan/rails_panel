@@ -10,6 +10,12 @@ module MetaRequest
   def self.logger
     @@logger ||= Logger.new(File.join(Rails.root, 'log', 'meta_request.log'))
   end
+
+  # stash a frozen copy away so we're not allocating a new string over and over
+  # again in AppNotifications and LogInterceptor
+  def self.rails_root
+    @@rails_root ||= Rails.root.to_s.freeze
+  end
 end
 
 require "meta_request/railtie"
