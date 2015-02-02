@@ -43,6 +43,10 @@ If you're using [LiveReload](http://livereload.com/) or
 exclude watching your tmp/ folder because meta_request writes a lot of data there
 and your browser will refresh like a madman.
 
+## Clearing the Console
+
+You can clear the panel with the usual shortcuts of ⌘+k or ctrl+l.
+
 ## Licence
 
 Copyright (c) 2012 Dejan Simic
