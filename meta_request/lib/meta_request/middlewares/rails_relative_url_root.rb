@@ -9,7 +9,11 @@ module MetaRequest
 
       def call(env)
         middleware = Rack::ResponseHeaders.new(@app) do |headers|
-          headers["X-Rails-Relative-Url-Root"] = ENV["RAILS_RELATIVE_URL_ROOT"] if ENV["RAILS_RELATIVE_URL_ROOT"].present?
+          if ENV["RAILS_RELATIVE_URL_ROOT"].present?
+            headers["X-Rails-Relative-Url-Root"] = ENV["RAILS_RELATIVE_URL_ROOT"] if ENV["RAILS_RELATIVE_URL_ROOT"].present?
+          elsif
+            headers["X-Rails-Relative-Url-Root"] = Rails.application.config.relative_url_root
+          end
         end
         middleware.call(env)
       end
