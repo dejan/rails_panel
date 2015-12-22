@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.homepage     = 'https://github.com/dejan/rails_panel/tree/master/meta_request'
   gem.license      = 'MIT'
 
-  gem.add_dependency 'railties', '>= 3.0.0', '< 5.0.0'
+  gem.add_dependency 'railties', '>= 3.0.0', '< 5.1.0'
   gem.add_dependency 'rack-contrib', '~> 1.1'
   gem.add_dependency 'callsite', '~> 0.0', '>= 0.0.11'
 
