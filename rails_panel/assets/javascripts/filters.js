@@ -14,6 +14,7 @@ angular.module('RailsPanel', [])
         subl: "subl://open?url=file://%s&line=%d&column=%d",
         sblm: "sblm:///%s",
         emacs: "emacs://open?url=file://%s&line=%d&column=%d",
+        atom: "atm://open?url=file://%s&line=%d&column=%d",
         mine: "rubymine://open?url=file://%s&line=%d"}
       var editor = localStorage.getItem("railspanel.editor");
       var editorPrefix = mapping[editor]
@@ -29,7 +30,7 @@ angular.module('RailsPanel', [])
     }
   }).
   filter('normalizePath', function() {
-    return function(input) {      
+    return function(input) {
       return input.remove(/.*\/app\//);
     }
   }).
