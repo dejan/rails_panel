@@ -79,6 +79,9 @@
                   <a href="#tab-views" class="tabbed-pane-header-tab-title">Rendering</a>
                 </li>
                 <li class="tabbed-pane-header-tab">
+                  <a href="#tab-cache" class="tabbed-pane-header-tab-title">Cache</a>
+                </li>
+                <li class="tabbed-pane-header-tab">
                   <a href="#tab-log" class="tabbed-pane-header-tab-title">Log</a>
                 </li>
                 <li class="tabbed-pane-header-tab">
@@ -186,6 +189,34 @@
                 </tbody>
               </table>
             </div>
+            <div id="tab-cache">
+              <table class="stupidtable" id="cache"  ng-show="notEmpty(activeCaches())">
+                <thead>
+                  <tr>
+                    <th data-sort="string">Location</th>
+                    <th data-sort="string">Type</th>
+                    <th data-sort="string">Key</th>
+                    <th class="fluid">Options</th>
+                    <th data-sort="string">Hit</th>
+                    <th data-sort="float" class="duration">Duration</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="cache in activeCaches()" class="{{cache.payload.name}}">
+                    <td>
+                      <span ng-show="cache.payload.filename != undefined && cache.payload.line != undefined">
+                        <a href="{{cache.payload.filename | editorify:cache.payload.line }}">{{cache.payload.filename | normalizePath}}:{{cache.payload.line}}</a>
+                      </span>
+                    </td>
+                    <td>{{cache.payload.type}}</td>
+                    <td>{{cache.payload.key}}</td>
+                    <td>{{cache.payload.options}}</td>
+                    <td>{{cache.payload.hit}}</td>
+                    <td class="duration" data-sort-value="{{-cache.duration}}">{{cache.duration | number:0}} ms</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div id="tab-log">
               <table id="log" ng-show="notEmpty(activeLog())">
                 <thead>
@@ -197,7 +228,7 @@
                 <tbody>
                   <tr ng-repeat="log in activeLog()">
                     <td><a href="{{log.payload.filename | editorify:log.payload.line}}">{{log.payload.filename | normalizePath}}:{{log.payload.line}}</a></td>
-                    <td>{{log.payload.message | sanitize | ansi2html}}</td>
+                    <td ng-bind-html-unsafe="log.payload.message | sanitize | ansi2html"></td>
                   </tr>
                 </tbody>
               </table>

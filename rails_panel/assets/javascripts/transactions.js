@@ -9,6 +9,7 @@ function TransactionsCtrl($scope) {
   $scope.sqlsMap             = {}; // {transactionKey: [{...}, {...}], ... }
   $scope.sqlsCachedCountMap  = {}; // {transactionKey: count, ...}
   $scope.showCachedSqls      = true;
+  $scope.cachesMap           = {}; // {transactionKey: [{...}, {...}], ... }
 
   $scope.expectedMetaRequestVersion = '0.3.4'
   $scope.metaRequestVersion  = $scope.expectedMetaRequestVersion;
@@ -24,7 +25,7 @@ function TransactionsCtrl($scope) {
       return request;
     });
   }
-  
+
   $scope.activeKey = null;
 
   $scope.clear = function() {
@@ -36,8 +37,9 @@ function TransactionsCtrl($scope) {
     $scope.paramsMap = {};
     $scope.sqlsMap = {};
     $scope.activeKey = null;
+    $scope.cachesMap = {};
   }
-  
+
   $scope.activeRequest = function() {
     return $scope.requestsMap[$scope.activeKey];
   }
@@ -66,7 +68,11 @@ function TransactionsCtrl($scope) {
   $scope.activeSqls = function() {
     return $scope.sqlsMap[$scope.activeKey];
   }
-  
+
+  $scope.activeCaches = function() {
+    return $scope.cachesMap[$scope.activeKey];
+  }
+
   $scope.showQuery = function(type) {
     return $scope.showCachedSqls || type !== "CACHE";
   }
@@ -77,8 +83,8 @@ function TransactionsCtrl($scope) {
     } else {
       return col.length > 0;
     }
-  } 
-  
+  }
+
   $scope.activeParams = function() {
     return $scope.paramsMap[$scope.activeKey];
   }
@@ -119,7 +125,7 @@ function TransactionsCtrl($scope) {
         return data.durationRounded - data.payload.dbRuntimeRounded - data.payload.viewRuntimeRounded;
       }();
       $scope.requestsMap[key] = data;
-      Object.keys(data.payload.params).each(function(n) { 
+      Object.keys(data.payload.params).each(function(n) {
         $scope.pushToMap($scope.paramsMap, key, {name:n, value:data.payload.params[n]});
       });
       $scope.transactionKeys.push(key);
@@ -152,6 +158,14 @@ function TransactionsCtrl($scope) {
         $scope.sqlsCachedCountMap[key] = val;
       }
       break;
+    case "cache_read.active_support":
+    case "cache_generate.active_support":
+    case "cache_fetch_hit.active_support":
+    case "cache_write.active_support":
+    case "cache_delete.active_support":
+    case "cache_exist?.active_support":
+      $scope.pushToMap($scope.cachesMap, key, data);
+      break;
     default:
       console.log('Notification not supported:' + data.name);
     }
@@ -162,7 +176,7 @@ function TransactionsCtrl($scope) {
     if (typeof value == 'undefined') {
       map[key] = [data];
     } else {
-      value.push(data) 
+      value.push(data)
     }
   }
 
