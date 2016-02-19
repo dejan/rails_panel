@@ -1,3 +1,12 @@
+## 2016-02-18 meta_request 0.4.0 & RailsPanel 0.3.0
+* more rails 5 fixes https://github.com/dejan/rails_panel/pull/99
+* Add "Atom" to the list of supported editors https://github.com/dejan/rails_panel/pull/102
+* add cache tab, fix rendering of color logging https://github.com/dejan/rails_panel/pull/103
+* Accept rails 5.0 https://github.com/dejan/rails_panel/pull/97
+* Fix CI failure https://github.com/dejan/rails_panel/pull/98
+* Add instructions for clearing the console https://github.com/dejan/rails_panel/pull/89
+* use a frozen copy of Rails.root in AppNotifications and LogInterceptor https://github.com/dejan/rails_panel/pull/86
+
 ## 2014-12-04 RailsPanel 0.2.4
 * Set background color so it doesn`t look broken with dark devtools theme
 
@@ -17,7 +26,7 @@
 ## 2014-05-18 RailsPanel 0.2.0
 * UI changes: time units, breakdown tab, minor tweaks & fixes
 
-## 2014-04-16 RailsPanel 0.1.9 & meta_request 0.3.0 
+## 2014-04-16 RailsPanel 0.1.9 & meta_request 0.3.0
 * ActiveRecord & Log entries caller locations https://github.com/dejan/rails_panel/issues/13
 * Optional display for cached ActiveRecord queries https://github.com/dejan/rails_panel/pull/68
 
@@ -40,10 +49,10 @@
 * Fix problems with apps that change working dir
 
 ## 2013-05-08 meta_request 0.2.5
-* Fix bad signature logger methods 
+* Fix bad signature logger methods
 
 ## 2013-05-06 RailsPanel 0.1.5 & meta_request 0.2.4
-* Log pane for server logs 
+* Log pane for server logs
 
 ## 2013-04-07 RailsPanel 0.1.4
 * Sublime in Windows support
