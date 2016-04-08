@@ -3,33 +3,33 @@ require 'callsite'
 module MetaRequest
   module LogInterceptor
 
-    def debug(*message)
-      push_event(:debug, message.join(' '))
+    def debug(message=nil, *args)
+      push_event(:debug, message)
       super
     end
 
-    def info(*message)
-      push_event(:info, message.join(' '))
+    def info(message=nil, *args)
+      push_event(:info, message)
       super
     end
 
-    def warn(*message)
-      push_event(:warn, message.join(' '))
+    def warn(message=nil, *args)
+      push_event(:warn, message)
       super
     end
 
-    def error(*message)
-      push_event(:error, message.join(' '))
+    def error(message=nil, *args)
+      push_event(:error, message)
       super
     end
 
-    def fatal(*message)
-      push_event(:fatal, message.join(' '))
+    def fatal(message=nil, *args)
+      push_event(:fatal, message)
       super
     end
 
-    def unknown(*message)
-      push_event(:unknown, message.join(' '))
+    def unknown(message=nil, *args)
+      push_event(:unknown, message)
       super
     end
 
