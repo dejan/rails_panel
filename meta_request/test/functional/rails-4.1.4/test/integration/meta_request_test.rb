@@ -13,11 +13,11 @@ class MetaRequestTest < ActionDispatch::IntegrationTest
   end
 
   test 'it shold have a request_id header' do
-    assert @request_id 
+    assert @request_id
   end
 
   test 'it should have a meta_request version header' do
-    assert_equal '0.4.0', response.headers['X-Meta-Request-Version']
+    assert_equal MetaRequest::VERSION, response.headers['X-Meta-Request-Version']
   end
 
   test 'should create a request file' do
