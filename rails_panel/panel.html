@@ -76,6 +76,9 @@
                   <a href="#tab-db" class="tabbed-pane-header-tab-title">ActiveRecord</a>
                 </li>
                 <li class="tabbed-pane-header-tab">
+                  <a href="#tab-serializers" class="tabbed-pane-header-tab-title">ActiveModelSerializers</a>
+                </li>
+                <li class="tabbed-pane-header-tab">
                   <a href="#tab-views" class="tabbed-pane-header-tab-title">Rendering</a>
                 </li>
                 <li class="tabbed-pane-header-tab">
@@ -147,7 +150,7 @@
               </table>
             </div>
             <div id="tab-db">
-              <table class="stupidtable" id="db"  ng-show="notEmpty(activeSqls())">
+              <table class="stupidtable" id="db" ng-show="notEmpty(activeSqls())">
                 <thead>
                   <tr>
                     <th data-sort="string">Location</th>
@@ -169,6 +172,24 @@
                 <div class="cached-queries-control" ng-show="activeCachedSqlsCount() > 0"><input id="show_cached_queries" type="checkbox" ng-model="showCachedSqls"/><label for="show_cached_queries">Show cached queries ({{activeCachedSqlsCount()}})</label></div>
                 Number of executed queries: {{activeExecutedSqlsCount()}}
               </div>
+            </div>
+            <div id="tab-serializers">
+              <table class="stupidtable" id="serializers" ng-show="notEmpty(activeSerializers())">
+                <thead>
+                  <tr>
+                    <th data-sort="string">Class</th>
+                    <th data-sort="string">Caller</th>
+                    <th data-sort="float" class="duration">Duration</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="ams in activeSerializers()" class="{{ams.payload.name}}">
+                    <td><a href="{{ams.payload.serializer_filename | editorify:1}}">{{ams.payload.serializer}}</a></td>
+                    <td><a href="{{ams.payload.filename | editorify:ams.payload.line}}">{{ams.payload.filename | normalizePath}}:{{ams.payload.line}}</a></td>
+                    <td class="duration" data-sort-value="{{-ams.duration}}">{{ams.duration | number:0}} ms</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <div id="tab-views">
               <table class="stupidtable" id="views" ng-show="notEmpty(activeViews())">
