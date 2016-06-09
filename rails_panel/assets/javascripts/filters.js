@@ -4,7 +4,7 @@ angular.module('RailsPanel', [])
       scope.$watch(attrs.ngHtml, function(value) {
         element[0].innerHTML = value;
       });
-    }
+    };
   }).
   filter('editorify', function() {
     return function(filename, line) {
@@ -15,24 +15,25 @@ angular.module('RailsPanel', [])
         sblm: "sblm:///%s",
         emacs: "emacs://open?url=file://%s&line=%d&column=%d",
         atom: "atm://open?url=file://%s&line=%d&column=%d",
-        mine: "rubymine://open?url=file://%s&line=%d"}
+        mine: "rubymine://open?url=file://%s&line=%d"};
       var editor = localStorage.getItem("railspanel.editor");
-      var editorPrefix = mapping[editor]
+      var editorPrefix = mapping[editor];
+      var out = null;
       if (editor === 'sblm') {
-        var out = sprintf(editorPrefix, filename);
+        out = sprintf(editorPrefix, filename);
         // remove sblm:///c:/git/Icome/app/views/homes/index.html.erb the second :
         // so become sblm:///c/git/Icome/app/views/homes/index.html.erb
         out = out.slice(0, 9) + out.slice(10, out.len);
       } else {
-        var out = sprintf(editorPrefix, filename, line, 1);
+        out = sprintf(editorPrefix, filename, line, 1);
       }
       return out;
-    }
+    };
   }).
   filter('normalizePath', function() {
     return function(input) {
       return input.remove(/.*\/app\//);
-    }
+    };
   }).
   filter('sanitize', function() {
     return function(input) {
@@ -40,10 +41,10 @@ angular.module('RailsPanel', [])
         replace(/&/g, '&amp;').
         replace(/</g, '&lt;').
         replace(/>/g, '&gt;');
-    }
+    };
   }).
   filter('ansi2html', function() {
     return function(input) {
       return ansi2html(input);
-    }
+    };
 });

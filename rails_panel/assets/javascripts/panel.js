@@ -7,10 +7,10 @@ var panel = {
   },
 
   addData: function(requestId, scope, data) {
-    data.each(function(n) { 
+    data.each(function(n) {
       scope.$apply(function() {
         scope.parseNotification(requestId, n);
-      }); 
+      });
     });
   },
 
@@ -20,6 +20,5 @@ var panel = {
     this.addData('3', scope, mockTransactions3());
     this.addData('4', scope, mockTransactions4());
   }
-  
-};
 
+};

@@ -60,12 +60,26 @@ module MetaRequest
         subscribe("cache_fetch_hit.active_support", &CACHE_BLOCK).
         subscribe("cache_write.active_support", &CACHE_BLOCK).
         subscribe("cache_delete.active_support", &CACHE_BLOCK).
-        subscribe("cache_exist?.active_support", &CACHE_BLOCK)
+        subscribe("cache_exist?.active_support", &CACHE_BLOCK).
+        subscribe('render.active_model_serializers') do |*args|
+          name, start, ending, transaction_id, payload = args
+          dev_caller = caller.detect { |c| c.include? MetaRequest.rails_root }
+          if dev_caller
+            c = Callsite.parse(dev_caller)
+            payload.merge!(:line => c.line, :filename => c.filename, :method => c.method)
+          end
+          klass = payload[:serializer]
+          payload[:serializer_filename] = klass.instance_method(klass.instance_methods.first).source_location.first
+          payload[:serializer] = klass.to_s
+          payload[:adapter] = payload[:adapter].to_s
+          payload.delete(:options)
+          Event.new(name, start, ending, transaction_id, payload)
+        end
     end
 
     def subscribe(event_name)
       ActiveSupport::Notifications.subscribe(event_name) do |*args|
-        event = block_given?? yield(*args) : Event.new(*args)
+        event = block_given? ? yield(*args) : Event.new(*args)
         AppRequest.current.events << event if AppRequest.current
       end
       self

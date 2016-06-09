@@ -10,13 +10,14 @@ function TransactionsCtrl($scope) {
   $scope.sqlsCachedCountMap  = {}; // {transactionKey: count, ...}
   $scope.showCachedSqls      = true;
   $scope.cachesMap           = {}; // {transactionKey: [{...}, {...}], ... }
+  $scope.serializersMap      = {};
 
-  $scope.expectedMetaRequestVersion = '0.3.4'
+  $scope.expectedMetaRequestVersion = '0.3.4';
   $scope.metaRequestVersion  = $scope.expectedMetaRequestVersion;
 
   $scope.outdatedMetaRequest = function() {
     return $scope.metaRequestVersion < $scope.expectedMetaRequestVersion;
-  }
+  };
 
   $scope.requests = function() {
     return $scope.transactionKeys.map(function(n) {
@@ -24,7 +25,7 @@ function TransactionsCtrl($scope) {
       request.key = n;
       return request;
     });
-  }
+  };
 
   $scope.activeKey = null;
 
@@ -38,11 +39,12 @@ function TransactionsCtrl($scope) {
     $scope.sqlsMap = {};
     $scope.activeKey = null;
     $scope.cachesMap = {};
-  }
+    $scope.serializersMap = {};
+  };
 
   $scope.activeRequest = function() {
     return $scope.requestsMap[$scope.activeKey];
-  }
+  };
 
   $scope.activeExecutedSqlsCount = function() {
     if (typeof $scope.activeSqls() !== 'undefined') {
@@ -50,56 +52,60 @@ function TransactionsCtrl($scope) {
     } else {
       return 0;
     }
-  }
+  };
 
   $scope.activeCachedSqlsCount = function() {
     count = $scope.sqlsCachedCountMap[$scope.activeKey];
-    if (count == undefined) {
+    if (count === undefined) {
       return 0;
     } else {
       return count;
     }
-  }
+  };
 
   $scope.activeViews = function() {
     return $scope.viewsMap[$scope.activeKey];
-  }
+  };
 
   $scope.activeSqls = function() {
     return $scope.sqlsMap[$scope.activeKey];
-  }
+  };
 
   $scope.activeCaches = function() {
     return $scope.cachesMap[$scope.activeKey];
-  }
+  };
+
+  $scope.activeSerializers = function() {
+    return $scope.serializersMap[$scope.activeKey];
+  };
 
   $scope.showQuery = function(type) {
     return $scope.showCachedSqls || type !== "CACHE";
-  }
+  };
 
   $scope.notEmpty = function(col) {
-    if (col == undefined) {
+    if (col === undefined) {
       return false;
     } else {
       return col.length > 0;
     }
-  }
+  };
 
   $scope.activeParams = function() {
     return $scope.paramsMap[$scope.activeKey];
-  }
+  };
 
   $scope.activeLog = function() {
     return $scope.logsMap[$scope.activeKey];
-  }
+  };
 
   $scope.activeExceptionCalls = function() {
     return $scope.exceptionCallsMap[$scope.activeKey];
-  }
+  };
 
   $scope.setActive = function(transactionId) {
     $scope.activeKey = transactionId;
-  }
+  };
 
   $scope.getClass = function(transactionId) {
     if (transactionId == $scope.activeKey) {
@@ -107,7 +113,7 @@ function TransactionsCtrl($scope) {
     } else {
       return '';
     }
-  }
+  };
 
   $scope.parseNotification = function(key, data) {
     switch(data.name) {
@@ -135,10 +141,11 @@ function TransactionsCtrl($scope) {
       $scope.pushToMap($scope.exceptionCallsMap, key, data);
       break;
     case "render_template.action_view":
-      $scope.pushToMap($scope.viewsMap, key, data);
-      break;
     case "render_partial.action_view":
       $scope.pushToMap($scope.viewsMap, key, data);
+      break;
+    case "render.active_model_serializers":
+      $scope.pushToMap($scope.serializersMap, key, data);
       break;
     case "meta_request.log":
       $scope.pushToMap($scope.logsMap, key, data);
@@ -150,7 +157,7 @@ function TransactionsCtrl($scope) {
       }
       if (data.payload.name == "CACHE") {
         val = $scope.sqlsCachedCountMap[key];
-        if (val == undefined) {
+        if (val === undefined) {
           val = 1;
         } else {
           val += 1;
@@ -169,15 +176,14 @@ function TransactionsCtrl($scope) {
     default:
       console.log('Notification not supported:' + data.name);
     }
-  }
+  };
 
   $scope.pushToMap = function(map, key, data) {
     var value = map[key];
     if (typeof value == 'undefined') {
       map[key] = [data];
     } else {
-      value.push(data)
+      value.push(data);
     }
-  }
-
+  };
 }
