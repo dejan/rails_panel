@@ -1,0 +1,10 @@
+general:
+  build_dir: meta_request
+test:
+  override:
+   - bundle exec rake test TESTOPTS="--ci-dir=$CIRCLE_TEST_REPORTS":
+       parallel: true
+       files:
+         - test/**/*_test.rb
+
+
