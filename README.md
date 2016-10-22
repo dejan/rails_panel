@@ -48,6 +48,12 @@ and your browser will refresh like a madman.
 
 You can clear the panel with the usual shortcuts of ⌘+k or ctrl+l.
 
+## Code status
+
+Code status
+
+[![CircleCI](https://circleci.com/gh/dejan/rails_panel.svg?style=svg)](https://circleci.com/gh/dejan/rails_panel)
+
 ## Licence
 
 Copyright (c) 2012 Dejan Simic
