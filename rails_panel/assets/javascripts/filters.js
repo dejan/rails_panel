@@ -15,7 +15,7 @@ angular.module('RailsPanel', [])
         sblm: "sblm:///%s",
         emacs: "emacs://open?url=file://%s&line=%d&column=%d",
         atom: "atm://open?url=file://%s&line=%d&column=%d",
-        mine: "rubymine://open?url=file://%s&line=%d"}
+        mine: "x-mine://open?file=%s&line=%d"}
       var editor = localStorage.getItem("railspanel.editor");
       var editorPrefix = mapping[editor]
       if (editor === 'sblm') {
