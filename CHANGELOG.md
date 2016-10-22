@@ -1,6 +1,9 @@
+## 2016-04-11 RailsPanel 0.3.1
+* Fix RubyMine IDE integration
+
 ## 2016-04-11 meta_request 0.4.1
 * Don't override method signatures of base logger https://github.com/dejan/rails_panel/pull/107
- 
+
 ## 2016-02-18 meta_request 0.4.0 & RailsPanel 0.3.0
 * more rails 5 fixes https://github.com/dejan/rails_panel/pull/99
 * Add "Atom" to the list of supported editors https://github.com/dejan/rails_panel/pull/102
