@@ -1,3 +1,6 @@
+## 2017-05-03 meta_request 0.4.2
+* Support Rails 5.2
+
 ## 2016-04-11 RailsPanel 0.3.1
 * Fix RubyMine IDE integration
 
