@@ -7,6 +7,7 @@ module MetaRequest
   autoload :Middlewares,      "meta_request/middlewares"
   autoload :LogInterceptor,   "meta_request/log_interceptor"
   autoload :AppNotifications, "meta_request/app_notifications"
+  autoload :Config,           "meta_request/config"
 
   def self.config
     @config ||= Config.new

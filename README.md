@@ -37,6 +37,15 @@ Select your editor on the extension options page: chrome://extensions. Following
 * Atom
 * RubyMine
 
+## Meta Request Configuration
+
+If the ActiveRecord caller locations are including files you don't want, you can exclude those files by adding them to the configuration in config/meta_request.yml. Files in the backtrace that match a regex in the ingore paths list will be skipped.
+
+```yaml
+:ignore_paths:
+- .*/directory/exclude_this_file
+```
+
 ## Compatibility Warnings
 
 If you're using [LiveReload](http://livereload.com/) or
