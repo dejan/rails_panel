@@ -3,3 +3,4 @@ build:
 	bundle exec rake test:unit
 	@echo "\n-------------- Running functional tests -------------------\n"
 	cd test/functional/rails-4.1.4 && bundle install && bundle exec rake test
+	cd test/functional/rails-5.1.1 && bundle install && bundle exec rake test

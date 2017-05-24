@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.license      = 'MIT'
 
   gem.add_dependency 'railties', '>= 3.0.0', '< 5.2.0'
-  gem.add_dependency 'rack-contrib', '~> 1.1'
+  gem.add_dependency 'rack-contrib', '>= 1.1'
   gem.add_dependency 'callsite', '~> 0.0', '>= 0.0.11'
 
   gem.files        = Dir['README.md', 'lib/**/*.rb']
