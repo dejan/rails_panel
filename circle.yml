@@ -1,3 +1,6 @@
+machine:
+  ruby:
+    version: 2.1.0
 general:
   build_dir: meta_request
 test:
@@ -6,5 +9,3 @@ test:
        parallel: true
        files:
          - test/**/*_test.rb
-
-
