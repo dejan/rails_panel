@@ -1,3 +1,6 @@
+## 2017-04-25 meta_request 0.4.3
+* Relax rack-contrib requirement
+
 ## 2017-05-03 meta_request 0.4.2
 * Support Rails 5.2
 
