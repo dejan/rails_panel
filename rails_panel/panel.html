@@ -67,6 +67,9 @@
             <div class="tabbed-pane-header-contents">
               <ul class="tabbed-pane-header-tabs">
                 <li class="tabbed-pane-header-tab">
+                  <a href="#tab-overview" class="tabbed-pane-header-tab-title">Overview</a>
+                </li>
+                <li class="tabbed-pane-header-tab">
                   <a href="#tab-breakdown" class="tabbed-pane-header-tab-title">Breakdown</a>
                 </li>
                 <li class="tabbed-pane-header-tab">
@@ -125,6 +128,23 @@
                       </div>
                     </td>
                     <td class="duration" data-sort-value="-{{activeRequest().payload.otherRuntimeRounded}}">{{activeRequest().payload.otherRuntimeRounded | number:0}} ms</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          <div class="tabbed-pane-content data-grid data-grid-details">
+            <div id="tab-overview">
+              <table id="overview" ng-show="notEmpty(activeParams())" >
+                <thead>
+                  <tr>
+                    <th>Location</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <a href="{{activeRequest().payload.controller_filename | editorify:activeRequest().payload.controller_linenumber}}">{{activeRequest().payload.controller_filename | normalizePath}}:{{activeRequest().payload.controller_linenumber}}</a></td>
                   </tr>
                 </tbody>
               </table>
