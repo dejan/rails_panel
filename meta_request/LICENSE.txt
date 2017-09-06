@@ -1,4 +1,4 @@
-Copyright (c) 2012 Dejan Simic
+Copyright (c) 2012- Dejan Simic
 
 MIT License
 
