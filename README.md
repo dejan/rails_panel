@@ -52,6 +52,30 @@ You can clear the panel with the usual shortcuts of ⌘+k or ctrl+l.
 
 [![CircleCI](https://circleci.com/gh/dejan/rails_panel.svg?style=svg&circle-token=56cf52dd2729102bb9b6e23d5e2fcc8eff0875b3)](https://circleci.com/gh/dejan/rails_panel)
 
+## Conditional alternative initialization
+
+If you do not want to enable meta_request every time you start the server you can put it like this in your app's Gemfile:
+
+```ruby
+group :development do
+  gem 'meta_request', require: false
+end
+```
+
+Then create an initializer that determines the condition to initialize meta_request:
+
+```ruby
+  # In `config/initializers/benchmarking.rb` (for example)
+  if ENV['USE_RAILS_PANEL']
+    require 'meta_request'
+
+    # Initialize manually since we skipped it in the Gemfile
+    MetaRequest::initialize!(Rails.application)
+  end
+```
+
+This way you can turn meta_request on and off through environment variables. This is useful for projects with different people or when you don't need it every time you work on your app.
+
 ## Licence
 
 Copyright (c) 2012 Dejan Simic
