@@ -23,8 +23,8 @@ If you have a problem installing extension from Chrome Store or just want to run
 
 ## Supported environments
 
-* Rails 3, Rails 4, Rails 5
-* Ruby 1.9.3, Ruby 2.0, Ruby 2.1, Ruby 2.2, Ruby 2.3
+* Rails 4 and 5
+* Ruby 2.x
 
 ## Editor integration
 

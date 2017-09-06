@@ -23,6 +23,12 @@ If you're using [LiveReload](http://livereload.com/) or
 exclude watching your tmp/ folder because meta_request writes a lot of data there
 and your browser will refresh like a madman.
 
+## Development
+
+Run tests:
+
+    make
+
 ## Licence
 
 Copyright (c) 2012 Dejan Simic

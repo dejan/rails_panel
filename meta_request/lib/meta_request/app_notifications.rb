@@ -51,7 +51,6 @@ module MetaRequest
         subscribe("process_action.action_controller.exception").
         subscribe("process_action.action_controller") do |*args|
           name, start, ending, transaction_id, payload = args
-          payload[:format] ||= (payload[:formats]||[]).first # Rails 3.0.x Support
           payload[:status] = '500' if payload[:exception]
           Event.new(name, start, ending, transaction_id, payload)
         end.
