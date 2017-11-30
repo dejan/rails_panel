@@ -292,7 +292,7 @@ table.header th {
   color: #2E2E2E;
   text-shadow: rgba(255, 255, 255, 0.5) 0 1px 0;
   white-space: nowrap;
-  display:block;
+  display: inline-block;
   padding: 0 10px;
   text-align: center;
 }
