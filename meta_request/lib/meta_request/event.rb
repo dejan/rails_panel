@@ -34,6 +34,10 @@ module MetaRequest
     def json_encodable(payload)
       return {} unless payload.is_a?(Hash)
       transform_hash(payload, :deep => true) { |hash, key, value|
+        if value.class.to_s == 'ActionDispatch::Http::Headers'
+          value = value.to_h.select { |k, _| k.upcase == k }
+        end
+
         begin
           value.to_json(:methods => [:duration])
           new_value = value
