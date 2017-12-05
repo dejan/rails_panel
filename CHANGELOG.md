@@ -1,3 +1,7 @@
+## 2017-12-05 RailsPanel 0.3.2
+* Fix #134 - Broken in Chrome 62
+* Add support for VSCode
+
 ## 2017-04-25 meta_request 0.4.3
 * Relax rack-contrib requirement
 
