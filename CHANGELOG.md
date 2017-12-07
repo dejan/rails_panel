@@ -1,3 +1,6 @@
+## 2017-12-07 meta_request 0.5.0
+* Add rails 5.2 support https://github.com/dejan/rails_panel/pull/138
+
 ## 2017-12-05 RailsPanel 0.3.2
 * Fix #134 - Broken in Chrome 62
 * Add support for VSCode
