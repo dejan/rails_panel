@@ -16,7 +16,7 @@ angular.module('RailsPanel', [])
         emacs: "emacs://open?url=file://%s&line=%d&column=%d",
         atom: "atm://open?url=file://%s&line=%d&column=%d",
         mine: "x-mine://open?file=%s&line=%d",
-        vscode: "vscode://open?file=%s&line=%d"
+        vscode: "vscode://file%s:%d"
       }
       var editor = localStorage.getItem("railspanel.editor");
       var editorPrefix = mapping[editor]
