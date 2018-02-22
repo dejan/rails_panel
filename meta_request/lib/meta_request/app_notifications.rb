@@ -32,20 +32,31 @@ module MetaRequest
 
       Event.new(name, start, ending, transaction_id, payload)
     }
+
+    # sql processing block - used for sql.active_record and sql.sequel
+
+    # HACK: we hardcode the event name to 'sql.active_record' so that the ui will
+    # display sequel events without modification. otherwise the ui would need to
+    # be modified to support a sequel tab (or to change the display name on the
+    # active_record tab when necessary - which maybe makes more sense?)
+    SQL_EVENT_NAME = "sql.active_record"
+
+    SQL_BLOCK = Proc.new {|*args|
+      name, start, ending, transaction_id, payload = args
+      dev_caller = caller.detect { |c| c.include? MetaRequest.rails_root }
+      if dev_caller
+        c = Callsite.parse(dev_caller)
+        payload.merge!(:line => c.line, :filename => c.filename, :method => c.method)
+      end
+      Event.new(SQL_EVENT_NAME, start, ending, transaction_id, payload)
+    }
     # Subscribe to all events relevant to RailsPanel
     #
     def self.subscribe
       new.
         subscribe("meta_request.log").
-        subscribe("sql.active_record") do |*args|
-          name, start, ending, transaction_id, payload = args
-          dev_caller = caller.detect { |c| c.include? MetaRequest.rails_root }
-          if dev_caller
-            c = Callsite.parse(dev_caller)
-            payload.merge!(:line => c.line, :filename => c.filename, :method => c.method)
-          end
-          Event.new(name, start, ending, transaction_id, payload)
-        end.
+        subscribe("sql.active_record", &SQL_BLOCK).
+        subscribe("sql.sequel", &SQL_BLOCK).
         subscribe("render_partial.action_view").
         subscribe("render_template.action_view").
         subscribe("process_action.action_controller.exception").
