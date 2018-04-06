@@ -1,3 +1,6 @@
+## 2018-04-06 meta_request 0.6.0
+* Add Sequel support https://github.com/dejan/rails_panel/pull/127
+
 ## 2017-12-07 meta_request 0.5.0
 * Add rails 5.2 support https://github.com/dejan/rails_panel/pull/138
 
