@@ -36,7 +36,7 @@ module MetaRequest
 
     private
     def push_event(level, message)
-      dev_log = AppRequest.current && caller[1].include?(MetaRequest.rails_root)
+      dev_log = AppRequest.current && caller[1].start_with?(MetaRequest.rails_root)
       if dev_log
         c = Callsite.parse(caller[1])
         payload = {:message => message, :level => level, :line => c.line, :filename => c.filename, :method => c.method}
