@@ -6,6 +6,7 @@ module MetaRequest
   autoload :Middlewares,      "meta_request/middlewares"
   autoload :LogInterceptor,   "meta_request/log_interceptor"
   autoload :AppNotifications, "meta_request/app_notifications"
+  autoload :Utils,            "meta_request/utils"
 
   def self.logger
     @@logger ||= Logger.new(File.join(Rails.root, 'log', 'meta_request.log'))
