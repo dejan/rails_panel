@@ -372,6 +372,15 @@ table#breakdown td.meter-col {
   float:left;
 }
 
+.clear-button {
+  float: left;
+  width: 13px;
+  height: 13px;
+  opacity: 0.6;
+  background-image: -webkit-image-set(url(../images/clear-button.png) 1x,url(../images/clear-button_2x.png) 2x);
+  margin-left: 3px;
+}
 
-
-
+.clear-button:hover {
+  opacity: 1;
+}

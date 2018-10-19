@@ -1,5 +1,7 @@
+
 <html ng-app="RailsPanel" ng-csp="">
   <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="assets/stylesheets/panel.css">
 
     // 3rd party
@@ -64,6 +66,7 @@
         <div id="tabs" class="tabbed-pane">
           <div id="hdivider"></div>
           <div class="tabbed-pane-header">
+            <div class="clear-button" ng-click="clear()" title="Clear requests log ⌘+k, ctrl+l"></div>
             <div class="tabbed-pane-header-contents">
               <ul class="tabbed-pane-header-tabs">
                 <li class="tabbed-pane-header-tab">
