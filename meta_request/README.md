@@ -23,6 +23,18 @@ If you're using [LiveReload](http://livereload.com/) or
 exclude watching your tmp/ folder because meta_request writes a lot of data there
 and your browser will refresh like a madman.
 
+## Configuration
+
+Gem can be configured using block:
+
+```ruby
+MetaRequest.configure do |config|
+  config.storage_pool_size = 30
+end
+```
+
+List of available attributes and defaults can be found in [lib/meta_request/config.rb](lib/meta_request/config.rb).
+
 ## Development
 
 Run tests:
