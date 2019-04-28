@@ -1,6 +1,7 @@
-chrome.extension.onRequest.addListener(function(request, sender, callback) {
-  if (request.action == 'getJSON') {
-    $.getJSON(request.url, callback);
+chrome.runtime.onMessage.addListener(function(message, sender, callback) {
+  if (message.action == 'getJSON') {
+    $.getJSON(message.url, callback);
+    return true;
   }
 });
 
