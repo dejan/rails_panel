@@ -27,7 +27,7 @@ var panel = {
   },
 
   mockDataTimer: function(scope) {
-    var timeout = setTimeout(
+    setTimeout(
       function() { panel.addMockData(scope) },
       5000
     );
