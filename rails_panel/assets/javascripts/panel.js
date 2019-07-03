@@ -1,3 +1,4 @@
+var mockDataIndex = 0;
 var panel = {
 
   clearData: function(scope) {
@@ -7,19 +8,29 @@ var panel = {
   },
 
   addData: function(requestId, scope, data) {
-    data.each(function(n) { 
+    data.each(function(n) {
       scope.$apply(function() {
         scope.parseNotification(requestId, n);
-      }); 
+      });
     });
   },
 
   addMockData: function(scope) {
-    this.addData('1', scope, mockTransactions1());
-    this.addData('2', scope, mockTransactions2());
-    this.addData('3', scope, mockTransactions3());
-    this.addData('4', scope, mockTransactions4());
+    this.addData(mockDataIndex + 1, scope, mockTransactions1());
+    this.addData(mockDataIndex + 2, scope, mockTransactions2());
+    this.addData(mockDataIndex + 3, scope, mockTransactions3());
+    this.addData(mockDataIndex + 4, scope, mockTransactions4());
+    mockDataIndex = mockDataIndex + 4;
+
+    // Simulate new requests coming in every couple of seconds
+    panel.mockDataTimer(scope);
+  },
+
+  mockDataTimer: function(scope) {
+    var timeout = setTimeout(
+      function() { panel.addMockData(scope) },
+      5000
+    );
   }
-  
 };
 
