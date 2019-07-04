@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  unit_tests:
     working_directory: ~/project/meta_request
     docker:
       - image: circleci/ruby:2.6.3-node-browsers
@@ -9,4 +9,20 @@ jobs:
           path: ~/project
       - run: bundle install
       - run: bundle exec rake test
-      - run: cd test/functional/rails-5.1.1 && bundle install && bundle exec rake test
+
+  test_rails_5_1:
+    working_directory: ~/project/meta_request/test/functional/rails-5.1.1
+    docker:
+      - image: circleci/ruby:2.6.3-node-browsers
+    steps:
+      - checkout:
+          path: ~/project
+      - run: bundle install
+      - run: bundle exec rake test
+
+workflows:
+  version: 2
+  test_everything:
+    jobs:
+      - unit_tests
+      - test_rails_5_1

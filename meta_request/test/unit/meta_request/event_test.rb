@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'tempfile'
 
 describe MetaRequest::Event do
   describe "ignores objects that can't be encoded as json" do
