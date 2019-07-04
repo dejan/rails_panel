@@ -9,5 +9,4 @@ jobs:
           path: ~/project
       - run: bundle install
       - run: bundle exec rake test
-      - run: cd test/functional/rails-4.1.4 && bundle install && bundle exec rake test
       - run: cd test/functional/rails-5.1.1 && bundle install && bundle exec rake test
