@@ -10,7 +10,7 @@ module MetaRequest
     # Number of files kept in storage.
     # Increase when using an application loading many simultaneous requests.
     def storage_pool_size
-      @storage_pool_size ||= 10
+      @storage_pool_size ||= 20
     end
   end
 end
