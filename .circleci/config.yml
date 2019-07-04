@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/project/meta_request
+    docker:
+      - image: circleci/ruby:2.6.3
+    steps:
+      - checkout:
+          path: ~/project
+      - run: bundle install
+      - run: bundle exec rake test
+      - run: cd test/functional/rails-4.1.4 && bundle install && bundle exec rake test
+      - run: cd test/functional/rails-5.1.1 && bundle install && bundle exec rake test
