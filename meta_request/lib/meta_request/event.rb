@@ -38,7 +38,7 @@ module MetaRequest
       transform_hash(payload, :deep => true) { |hash, key, value|
         if value.class.to_s == 'ActionDispatch::Http::Headers'
           value = value.to_h.select { |k, _| k.upcase == k }
-        elsif value.is_a?(ActiveRecord::ConnectionAdapters::AbstractAdapter)
+        elsif defined?(ActiveRecord) && value.is_a?(ActiveRecord::ConnectionAdapters::AbstractAdapter)
           value = NOT_JSON_ENCODABLE
         end
 
