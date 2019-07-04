@@ -27,7 +27,7 @@ describe MetaRequest::Utils do
       assert_equal expected_callsite_line, MetaRequest::Utils.dev_callsite(stacktrace)
     end
 
-    it 'returns nil if single-line trace doesn't match app root' do
+    it "returns nil if single-line trace doesn't match app root" do
       stacktrace =  "/gem/gem_file.rb:1:in `func'`"
 
       assert_nil MetaRequest::Utils.dev_callsite(stacktrace)
