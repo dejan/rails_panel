@@ -158,7 +158,11 @@
                 </thead>
                 <tbody>
                   <tr ng-repeat="sql in activeSqls()" ng-show="showQuery(sql.payload.name)" class="{{sql.payload.name}}">
-                    <td><a href="{{sql.payload.filename | editorify:sql.payload.line}}">{{sql.payload.filename | normalizePath}}:{{sql.payload.line}}</a>
+                    <td>
+                      <span ng-show="sql.payload.filename != undefined && sql.payload.line != undefined">
+                        <a href="{{sql.payload.filename | editorify:sql.payload.line}}">{{sql.payload.filename | normalizePath}}:{{sql.payload.line}}</a>
+                      </span>
+                    </td>
                     <td>{{sql.payload.name}}</td>
                     <td>{{sql.payload.sql}}</td>
                     <td class="duration" data-sort-value="{{-sql.duration}}">{{sql.duration | number:0}} ms</td>
