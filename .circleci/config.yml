@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/project/meta_request
     docker:
-      - image: circleci/ruby:2.6.3
+      - image: circleci/ruby:2.6.3-node-browsers
     steps:
       - checkout:
           path: ~/project
