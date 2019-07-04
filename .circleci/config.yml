@@ -7,7 +7,14 @@ jobs:
     steps:
       - checkout:
           path: ~/project
-      - run: bundle install
+      - restore_cache:
+          key: main-bundle-{{ checksum "Gemfile" }}
+      - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      # Store bundle cache
+      - save_cache:
+          key: main-bundle-{{ checksum "Gemfile" }}
+          paths:
+            - vendor/bundle
       - run: bundle exec rake test
 
   test_rails_5_1:
@@ -17,7 +24,14 @@ jobs:
     steps:
       - checkout:
           path: ~/project
-      - run: bundle install
+      - restore_cache:
+          key: rails-5-1-bundle-{{ checksum "Gemfile" }}
+      - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      # Store bundle cache
+      - save_cache:
+          key: rails-5-1-bundle-{{ checksum "Gemfile" }}
+          paths:
+            - vendor/bundle
       - run: bundle exec rake test
 
 workflows:
