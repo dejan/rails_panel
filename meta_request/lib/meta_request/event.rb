@@ -7,6 +7,8 @@ module MetaRequest
   # Subclass of ActiveSupport Event that is JSON encodable
   #
   class Event < ActiveSupport::Notifications::Event
+    NOT_JSON_ENCODABLE = 'Not JSON Encodable'.freeze
+
     attr_reader :duration
 
     def initialize(name, start, ending, transaction_id, payload)
@@ -36,13 +38,15 @@ module MetaRequest
       transform_hash(payload, :deep => true) { |hash, key, value|
         if value.class.to_s == 'ActionDispatch::Http::Headers'
           value = value.to_h.select { |k, _| k.upcase == k }
+        elsif defined?(ActiveRecord) && value.is_a?(ActiveRecord::ConnectionAdapters::AbstractAdapter)
+          value = NOT_JSON_ENCODABLE
         end
 
         begin
           value.to_json(:methods => [:duration])
           new_value = value
         rescue
-          new_value = 'Not JSON Encodable'
+          new_value = NOT_JSON_ENCODABLE
         end
         hash[key] = new_value
       }.with_indifferent_access

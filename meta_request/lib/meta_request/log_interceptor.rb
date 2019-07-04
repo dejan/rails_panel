@@ -40,7 +40,7 @@ module MetaRequest
         AppRequest.current.events << Event.new('meta_request.log', 0, 0, 0, payload)
       end
     rescue Exception => e
-      MetaRequest.logger.fatal(e.message + "\n " + e.backtrace.join("\n "))
+      MetaRequest.config.logger.fatal(e.message + "\n " + e.backtrace.join("\n "))
     end
   end
 end
