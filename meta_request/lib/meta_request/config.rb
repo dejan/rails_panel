@@ -1,5 +1,7 @@
 module MetaRequest
   class Config
+    attr_writer :logger, :storage_pool_size
+
     # logger used for reporting gem's fatal errors
     def logger
       @logger ||= Logger.new(File.join(Rails.root, 'log', 'meta_request.log'))
