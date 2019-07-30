@@ -1,3 +1,3 @@
 module MetaRequest
-  VERSION = '0.7.0'
+  VERSION = Gem.loaded_specs["meta_request"].version.to_s
 end

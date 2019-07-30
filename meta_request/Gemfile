@@ -4,7 +4,7 @@ group :development do
   gem 'bundler'
   gem 'rake'
   gem 'minitest'
-  gem 'minitest-ci', :git => 'git@github.com:circleci/minitest-ci.git'
+  gem 'minitest-ci'
 end
 
 gemspec
