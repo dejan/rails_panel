@@ -24,10 +24,10 @@ module MetaRequest
         payload[:options][k] = payload.delete(k) unless k.in? CACHE_KEY_COLUMNS
       end
 
-      dev_caller = caller.detect { |c| c.include? MetaRequest.rails_root }
-      if dev_caller
-        c = Callsite.parse(dev_caller)
-        payload.merge!(:line => c.line, :filename => c.filename, :method => c.method)
+      dev_callsite = Utils.dev_callsite(caller)
+
+      if dev_callsite
+        payload.merge!(:line => dev_callsite.line, :filename => dev_callsite.filename, :method => dev_callsite.method)
       end
 
       Event.new(name, start, ending, transaction_id, payload)
@@ -43,11 +43,12 @@ module MetaRequest
 
     SQL_BLOCK = Proc.new {|*args|
       name, start, ending, transaction_id, payload = args
-      dev_caller = caller.detect { |c| c.include? MetaRequest.rails_root }
-      if dev_caller
-        c = Callsite.parse(dev_caller)
-        payload.merge!(:line => c.line, :filename => c.filename, :method => c.method)
+      dev_callsite = Utils.dev_callsite(caller)
+
+      if dev_callsite
+        payload.merge!(:line => dev_callsite.line, :filename => dev_callsite.filename, :method => dev_callsite.method)
       end
+
       Event.new(SQL_EVENT_NAME, start, ending, transaction_id, payload)
     }
     # Subscribe to all events relevant to RailsPanel

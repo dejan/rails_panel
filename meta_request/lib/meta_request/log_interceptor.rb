@@ -1,5 +1,3 @@
-require 'callsite'
-
 module MetaRequest
   module LogInterceptor
 
@@ -36,10 +34,9 @@ module MetaRequest
 
     private
     def push_event(level, message)
-      dev_log = AppRequest.current && caller[1].include?(MetaRequest.rails_root)
-      if dev_log
-        c = Callsite.parse(caller[1])
-        payload = {:message => message, :level => level, :line => c.line, :filename => c.filename, :method => c.method}
+      dev_callsite = AppRequest.current && Utils.dev_callsite(caller[1])
+      if dev_callsite
+        payload = {:message => message, :level => level, :line => dev_callsite.line, :filename => dev_callsite.filename, :method => dev_callsite.method}
         AppRequest.current.events << Event.new('meta_request.log', 0, 0, 0, payload)
       end
     rescue Exception => e
