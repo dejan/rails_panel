@@ -37,9 +37,9 @@ List of available attributes and defaults can be found in [lib/meta_request/conf
 
 ## Development
 
-Run tests:
+Run all tests:
 
-    make
+    docker-compose up
 
 ## Licence
 

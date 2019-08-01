@@ -1,42 +1,72 @@
 version: 2
 jobs:
   unit_tests:
-    working_directory: ~/project/meta_request
     docker:
-      - image: circleci/ruby:2.6.3-node-browsers
+      - image: circleci/buildpack-deps
+    working_directory: ~/project/meta_request
     steps:
       - checkout:
           path: ~/project
-      - restore_cache:
-          key: main-bundle-{{ checksum "Gemfile" }}
-      - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-      # Store bundle cache
-      - save_cache:
-          key: main-bundle-{{ checksum "Gemfile" }}
-          paths:
-            - vendor/bundle
-      - run: bundle exec rake test
+      - setup_remote_docker
+      - run: docker-compose run test-unit
+
+  test_rails_4_1:
+    docker:
+      - image: circleci/buildpack-deps
+    working_directory: ~/project/meta_request
+    steps:
+      - checkout:
+          path: ~/project
+      - setup_remote_docker
+      - run: docker-compose run test-rails-4.1
+
+  test_rails_5_0:
+    docker:
+      - image: circleci/buildpack-deps
+    working_directory: ~/project/meta_request
+    steps:
+      - checkout:
+          path: ~/project
+      - setup_remote_docker
+      - run: docker-compose run test-rails-5.0
 
   test_rails_5_1:
-    working_directory: ~/project/meta_request/test/functional/rails-5.1.1
     docker:
-      - image: circleci/ruby:2.6.3-node-browsers
+      - image: circleci/buildpack-deps
+    working_directory: ~/project/meta_request
     steps:
       - checkout:
           path: ~/project
-      - restore_cache:
-          key: rails-5-1-bundle-{{ checksum "Gemfile" }}
-      - run: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-      # Store bundle cache
-      - save_cache:
-          key: rails-5-1-bundle-{{ checksum "Gemfile" }}
-          paths:
-            - vendor/bundle
-      - run: bundle exec rake test
+      - setup_remote_docker
+      - run: docker-compose run test-rails-5.1
+
+  test_rails_5_2:
+    docker:
+      - image: circleci/buildpack-deps
+    working_directory: ~/project/meta_request
+    steps:
+      - checkout:
+          path: ~/project
+      - setup_remote_docker
+      - run: docker-compose run test-rails-5.2
+
+  test_rails_6_0:
+    docker:
+      - image: circleci/buildpack-deps
+    working_directory: ~/project/meta_request
+    steps:
+      - checkout:
+          path: ~/project
+      - setup_remote_docker
+      - run: docker-compose run test-rails-6.0
 
 workflows:
   version: 2
-  test_everything:
+  test_all:
     jobs:
       - unit_tests
+      - test_rails_4_1
+      - test_rails_5_0
       - test_rails_5_1
+      - test_rails_5_2
+      - test_rails_6_0
