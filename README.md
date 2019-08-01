@@ -23,7 +23,7 @@ If you have a problem installing extension from Chrome Store or just want to run
 
 ## Supported environments
 
-* Rails 4 and 5
+* Rails 4, 5 and 6
 * Ruby 2.x
 
 ## Editor integration
