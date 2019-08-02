@@ -1,3 +1,8 @@
+## 2019-08-02 meta_request 0.7.1
+* Fix dev caller localtion https://github.com/dejan/rails_panel/pull/146
+* Handle missing SQL location https://github.com/dejan/rails_panel/pull/148
+* Storage pool size configuration https://github.com/dejan/rails_panel/pull/149
+
 ## 2019-05-09 RailsPanel 0.3.2
 * Fix empty rails panel in Chrome https://github.com/dejan/rails_panel/pull/150
 

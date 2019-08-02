@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |gem|
   gem.name         = 'meta_request'
-  gem.version      = '0.7.0'
+  gem.version      = '0.7.1'
 
   gem.summary      = 'Request your Rails request'
   gem.description  = 'Supporting gem for Rails Panel (Google Chrome extension for Rails development)'
-  
+
   gem.author       = 'Dejan Simic'
   gem.email        = 'desimic@gmail.com'
   gem.homepage     = 'https://github.com/dejan/rails_panel/tree/master/meta_request'
