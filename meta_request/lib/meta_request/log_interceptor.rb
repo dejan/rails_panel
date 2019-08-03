@@ -31,12 +31,11 @@ module MetaRequest
       super
     end
 
-
     private
     def push_event(level, message)
-      dev_callsite = AppRequest.current && Utils.dev_callsite(caller[1])
-      if dev_callsite
-        payload = {:message => message, :level => level, :line => dev_callsite.line, :filename => dev_callsite.filename, :method => dev_callsite.method}
+      callsite = AppRequest.current && Utils.dev_callsite(caller.drop(1))
+      if callsite
+        payload = callsite.merge(message: message, level: level)
         AppRequest.current.events << Event.new('meta_request.log', 0, 0, 0, payload)
       end
     rescue Exception => e

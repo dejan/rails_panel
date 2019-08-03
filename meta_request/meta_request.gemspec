@@ -14,7 +14,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'railties', '>= 3.0.0', '< 7'
   gem.add_dependency 'rack-contrib', '>= 1.1', '< 3'
-  gem.add_dependency 'callsite', '~> 0.0', '>= 0.0.11'
 
   gem.files        = Dir['README.md', 'lib/**/*.rb']
 end

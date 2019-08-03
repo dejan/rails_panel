@@ -24,11 +24,8 @@ module MetaRequest
         payload[:options][k] = payload.delete(k) unless k.in? CACHE_KEY_COLUMNS
       end
 
-      dev_callsite = Utils.dev_callsite(caller)
-
-      if dev_callsite
-        payload.merge!(:line => dev_callsite.line, :filename => dev_callsite.filename, :method => dev_callsite.method)
-      end
+      callsite = Utils.dev_callsite(caller)
+      payload.merge!(callsite) if callsite
 
       Event.new(name, start, ending, transaction_id, payload)
     }
@@ -43,14 +40,19 @@ module MetaRequest
 
     SQL_BLOCK = Proc.new {|*args|
       name, start, ending, transaction_id, payload = args
-      dev_callsite = Utils.dev_callsite(caller)
-
-      if dev_callsite
-        payload.merge!(:line => dev_callsite.line, :filename => dev_callsite.filename, :method => dev_callsite.method)
-      end
+      callsite = Utils.dev_callsite(caller)
+      payload.merge!(callsite) if callsite
 
       Event.new(SQL_EVENT_NAME, start, ending, transaction_id, payload)
     }
+
+    VIEW_BLOCK = Proc.new {|*args|
+      name, start, ending, transaction_id, payload = args
+      payload[:identifier] = MetaRequest::Utils.sub_source_path(payload[:identifier])
+
+      Event.new(name, start, ending, transaction_id, payload)
+    }
+
     # Subscribe to all events relevant to RailsPanel
     #
     def self.subscribe
@@ -58,8 +60,8 @@ module MetaRequest
         subscribe("meta_request.log").
         subscribe("sql.active_record", &SQL_BLOCK).
         subscribe("sql.sequel", &SQL_BLOCK).
-        subscribe("render_partial.action_view").
-        subscribe("render_template.action_view").
+        subscribe("render_partial.action_view", &VIEW_BLOCK).
+        subscribe("render_template.action_view", &VIEW_BLOCK).
         subscribe("process_action.action_controller.exception").
         subscribe("process_action.action_controller") do |*args|
           name, start, ending, transaction_id, payload = args

@@ -35,6 +35,18 @@ end
 
 List of available attributes and defaults can be found in [lib/meta_request/config.rb](lib/meta_request/config.rb).
 
+## Docker
+
+Apps runing in Docker container will have filepaths of the container so links to editor would not work. To fix this, you need to propagate working directory through enviroment variable `SOURCE_PATH`. With docker-compose it can be done like this:
+
+```yaml
+services:
+  app:
+    environment:
+      - SOURCE_PATH=$PWD
+    # ...
+```
+
 ## Development
 
 Run all tests:

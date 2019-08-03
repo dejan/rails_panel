@@ -1,13 +1,25 @@
-require 'callsite'
-
 module MetaRequest
   module Utils
     extend self
 
-    # @return [Callsite::Line, nil]
     def dev_callsite(caller)
-      app_line = Array(caller).detect { |c| c.start_with? MetaRequest.rails_root }
-      Callsite.parse(app_line) if app_line
+      app_line = caller.detect { |c| c.start_with? MetaRequest.rails_root }
+      return nil unless app_line
+
+      _, filename, _, line, _, method = app_line.split(/^(.*?)(:(\d+))(:in `(.*)')?$/)
+
+      {
+        filename: sub_source_path(filename),
+        line: line.to_i,
+        method: method
+      }
+    end
+
+    def sub_source_path(path)
+      rails_root = MetaRequest.rails_root
+      source_path = MetaRequest.config.source_path
+      return path if rails_root == source_path
+      path.sub(rails_root, source_path)
     end
   end
 end
