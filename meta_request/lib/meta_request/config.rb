@@ -1,6 +1,6 @@
 module MetaRequest
   class Config
-    attr_writer :logger, :storage_pool_size
+    attr_writer :logger, :storage_pool_size, :source_path
 
     # logger used for reporting gem's fatal errors
     def logger
@@ -11,6 +11,10 @@ module MetaRequest
     # Increase when using an application loading many simultaneous requests.
     def storage_pool_size
       @storage_pool_size ||= 20
+    end
+
+    def source_path
+      @source_path ||= ENV['SOURCE_PATH'] || Rails.root.to_s
     end
   end
 end
