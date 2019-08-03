@@ -1,3 +1,6 @@
+## 2019-08-03 meta_request 0.7.2
+* Added source_path config for better xp working with Docker https://github.com/dejan/rails_panel/pull/162
+
 ## 2019-08-02 meta_request 0.7.1
 * Fix dev caller localtion https://github.com/dejan/rails_panel/pull/146
 * Handle missing SQL location https://github.com/dejan/rails_panel/pull/148
