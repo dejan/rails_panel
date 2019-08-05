@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rack/contrib/response_headers'
 
 module MetaRequest
@@ -29,9 +31,8 @@ module MetaRequest
       end
 
       def assets_prefix
-        "/#{@app_config.assets.prefix[/\A\/?(.*?)\/?\z/, 1]}/"
+        "/#{@app_config.assets.prefix[%r{\A/?(.*?)/?\z}, 1]}/"
       end
-
     end
   end
 end

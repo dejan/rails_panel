@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 describe MetaRequest::Utils do
   describe '.dev_callsite' do
     it 'returns first call site from the app iself' do
-      filename = File.join(MetaRequest.rails_root, "test_file.rb") 
+      filename = File.join(MetaRequest.rails_root, 'test_file.rb')
       line = 87
       method = 'app_func'
 
       stacktrace = [
         "/gem/gem_file.rb:1:in `func'`",
         "#{filename}:#{line}:in `#{method}'",
-        "/gem/gem_file.rb:1:in `func2'`",
+        "/gem/gem_file.rb:1:in `func2'`"
       ]
 
       expected = { filename: filename, line: line, method: method }
@@ -20,7 +22,7 @@ describe MetaRequest::Utils do
     it 'returns nil if the stacktrace contains only call sites outside of the app' do
       stacktrace = [
         "/gem/gem_file.rb:1:in `func'`",
-        "/gem/gem_file.rb:1:in `func2'`",
+        "/gem/gem_file.rb:1:in `func2'`"
       ]
 
       assert_nil MetaRequest::Utils.dev_callsite(stacktrace)
@@ -29,7 +31,7 @@ describe MetaRequest::Utils do
     it 'replaces filename with the proovided source path configuration' do
       MetaRequest.config.source_path = '/Users/foo/bar'
 
-      filename = File.join(MetaRequest.rails_root, "test_file.rb")
+      filename = File.join(MetaRequest.rails_root, 'test_file.rb')
       line = 87
       method = 'app_func'
       stacktrace = [

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 describe MetaRequest::AppNotifications do
@@ -10,18 +12,16 @@ describe MetaRequest::AppNotifications do
 
     describe 'status' do
       it 'sets it to 500 if payload has exception key present' do
-        ActiveSupport::Notifications.instrument 'process_action.action_controller', {:exception => '...'}
+        ActiveSupport::Notifications.instrument 'process_action.action_controller', exception: '...'
         assert_equal '500', @app_request.events.last.payload[:status]
       end
     end
 
     describe 'format' do
       it 'sets it' do
-        ActiveSupport::Notifications.instrument 'process_action.action_controller', {:format => 'html'}
+        ActiveSupport::Notifications.instrument 'process_action.action_controller', format: 'html'
         assert_equal 'html', @app_request.events.last.payload[:format]
       end
     end
   end
 end
-
-

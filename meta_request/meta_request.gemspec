@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# frozen_string_literal: true
 
 Gem::Specification.new do |gem|
   gem.name         = 'meta_request'
@@ -12,8 +12,8 @@ Gem::Specification.new do |gem|
   gem.homepage     = 'https://github.com/dejan/rails_panel/tree/master/meta_request'
   gem.license      = 'MIT'
 
-  gem.add_dependency 'railties', '>= 3.0.0', '< 7'
   gem.add_dependency 'rack-contrib', '>= 1.1', '< 3'
+  gem.add_dependency 'railties', '>= 3.0.0', '< 7'
 
-  gem.files        = Dir['README.md', 'lib/**/*.rb']
+  gem.files = Dir['README.md', 'lib/**/*.rb']
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 
 module MetaRequest
@@ -8,19 +10,19 @@ module MetaRequest
       end
 
       def call(env)
-        app_request = AppRequest.new env["action_dispatch.request_id"]
+        app_request = AppRequest.new env['action_dispatch.request_id']
         app_request.current!
         @app.call(env)
-      rescue Exception => exception
+      rescue StandardError => e
         if defined?(ActionDispatch::ExceptionWrapper)
           wrapper = if ActionDispatch::ExceptionWrapper.method_defined? :env
-                      ActionDispatch::ExceptionWrapper.new(env, exception)
+                      ActionDispatch::ExceptionWrapper.new(env, e)
                     else
-                      ActionDispatch::ExceptionWrapper.new(env['action_dispatch.backtrace_cleaner'], exception)
+                      ActionDispatch::ExceptionWrapper.new(env['action_dispatch.backtrace_cleaner'], e)
                     end
           app_request.events.push(*Event.events_for_exception(wrapper))
         else
-          app_request.events.push(*Event.events_for_exception(exception))
+          app_request.events.push(*Event.events_for_exception(e))
         end
         raise
       ensure
@@ -29,4 +31,3 @@ module MetaRequest
     end
   end
 end
-

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module MetaRequest
   module Utils
-    extend self
+    module_function
 
     def dev_callsite(caller)
       app_line = caller.detect { |c| c.start_with? MetaRequest.rails_root }
@@ -19,6 +21,7 @@ module MetaRequest
       rails_root = MetaRequest.rails_root
       source_path = MetaRequest.config.source_path
       return path if rails_root == source_path
+
       path.sub(rails_root, source_path)
     end
   end

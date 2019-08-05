@@ -1,5 +1,15 @@
 version: 2
 jobs:
+  rubocop:
+    docker:
+      - image: circleci/buildpack-deps
+    working_directory: ~/project/meta_request
+    steps:
+      - checkout:
+          path: ~/project
+      - setup_remote_docker
+      - run: docker-compose run --rm rubocop
+
   unit_tests:
     docker:
       - image: circleci/buildpack-deps
@@ -8,7 +18,7 @@ jobs:
       - checkout:
           path: ~/project
       - setup_remote_docker
-      - run: docker-compose run test-unit
+      - run: docker-compose run --rm test-unit
 
   test_rails_4_1:
     docker:
@@ -18,7 +28,7 @@ jobs:
       - checkout:
           path: ~/project
       - setup_remote_docker
-      - run: docker-compose run test-rails-4.1
+      - run: docker-compose run --rm test-rails-4.1
 
   test_rails_5_0:
     docker:
@@ -28,7 +38,7 @@ jobs:
       - checkout:
           path: ~/project
       - setup_remote_docker
-      - run: docker-compose run test-rails-5.0
+      - run: docker-compose run --rm test-rails-5.0
 
   test_rails_5_1:
     docker:
@@ -38,7 +48,7 @@ jobs:
       - checkout:
           path: ~/project
       - setup_remote_docker
-      - run: docker-compose run test-rails-5.1
+      - run: docker-compose run --rm test-rails-5.1
 
   test_rails_5_2:
     docker:
@@ -48,7 +58,7 @@ jobs:
       - checkout:
           path: ~/project
       - setup_remote_docker
-      - run: docker-compose run test-rails-5.2
+      - run: docker-compose run --rm test-rails-5.2
 
   test_rails_6_0:
     docker:
@@ -58,12 +68,13 @@ jobs:
       - checkout:
           path: ~/project
       - setup_remote_docker
-      - run: docker-compose run test-rails-6.0
+      - run: docker-compose run --rm test-rails-6.0
 
 workflows:
   version: 2
   test_all:
     jobs:
+      - rubocop
       - unit_tests
       - test_rails_4_1
       - test_rails_5_0
