@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 describe MetaRequest::Storage do
@@ -15,7 +17,7 @@ describe MetaRequest::Storage do
 
   describe 'read' do
     it 'reads from file' do
-      File.open("#{@dir_path}/foo.json", "w") { |file| file.write('bar') }
+      File.open("#{@dir_path}/foo.json", 'w') { |file| file.write('bar') }
       assert_equal 'bar', MetaRequest::Storage.new('foo').read
     end
   end

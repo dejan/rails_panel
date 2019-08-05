@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module MetaRequest
-  autoload :VERSION,          "meta_request/version"
-  autoload :Config,           "meta_request/config"
-  autoload :Event,            "meta_request/event"
-  autoload :AppRequest,       "meta_request/app_request"
-  autoload :Storage,          "meta_request/storage"
-  autoload :Middlewares,      "meta_request/middlewares"
-  autoload :LogInterceptor,   "meta_request/log_interceptor"
-  autoload :AppNotifications, "meta_request/app_notifications"
-  autoload :Utils,            "meta_request/utils"
+  autoload :VERSION,          'meta_request/version'
+  autoload :Config,           'meta_request/config'
+  autoload :Event,            'meta_request/event'
+  autoload :AppRequest,       'meta_request/app_request'
+  autoload :Storage,          'meta_request/storage'
+  autoload :Middlewares,      'meta_request/middlewares'
+  autoload :LogInterceptor,   'meta_request/log_interceptor'
+  autoload :AppNotifications, 'meta_request/app_notifications'
+  autoload :Utils,            'meta_request/utils'
 
   def self.config
     @config ||= Config.new
@@ -24,4 +26,4 @@ module MetaRequest
   end
 end
 
-require "meta_request/railtie"
+require 'meta_request/railtie'

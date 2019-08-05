@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'logger'
 
@@ -6,7 +8,7 @@ describe MetaRequest::LogInterceptor do
     @app_request = MetaRequest::AppRequest.new(17)
     @app_request.current!
     @app_request.events << 'mock'
-    @logger = Logger.new("/dev/null")
+    @logger = Logger.new('/dev/null')
     @logger.extend(MetaRequest::LogInterceptor)
   end
 
@@ -15,8 +17,8 @@ describe MetaRequest::LogInterceptor do
     assert_equal 2, @app_request.events.size
     last_event = @app_request.events.last
     assert_equal 'Ohai!', last_event.payload[:message]
-    assert_equal 14, last_event.payload[:line]
-    assert_match /test\/unit\/meta_request\/log_interceptor_test.rb$/, last_event.payload[:filename]
+    assert_equal 16, last_event.payload[:line]
+    assert_match %r{test/unit/meta_request/log_interceptor_test.rb$}, last_event.payload[:filename]
     assert_equal :info, last_event.payload[:level]
   end
 end

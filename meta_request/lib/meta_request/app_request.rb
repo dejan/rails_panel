@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MetaRequest
   class AppRequest
     attr_reader :id, :events
@@ -14,6 +16,5 @@ module MetaRequest
     def current!
       Thread.current[:meta_request_id] = self
     end
-
   end
 end

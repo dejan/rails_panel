@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails/railtie'
 
 module MetaRequest
   class Railtie < ::Rails::Railtie
-
     initializer 'meta_request.inject_middlewares' do |app|
       app.middleware.use Middlewares::MetaRequestHandler
 
@@ -16,14 +17,11 @@ module MetaRequest
     end
 
     initializer 'meta_request.log_interceptor' do
-      Rails.logger.extend(LogInterceptor) if Rails.logger
+      Rails.logger&.extend(LogInterceptor)
     end
 
     initializer 'meta_request.subscribe_to_notifications' do
       AppNotifications.subscribe
     end
-
   end
 end
-
-

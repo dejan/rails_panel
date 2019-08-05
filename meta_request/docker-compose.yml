@@ -1,5 +1,8 @@
 version: '3.7'
 services:
+  rubocop:
+    build: .
+    command: bundle exec rubocop
   test-unit:
     build: .
   test-rails-4.1:

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class MetaRequestTest < ActionDispatch::IntegrationTest
-
   def cleanup
     FileUtils.rm_rf(Rails.root.join('tmp', 'data', 'meta_request'))
   end
@@ -28,5 +29,4 @@ class MetaRequestTest < ActionDispatch::IntegrationTest
     get "/__meta_request/#{@request_id}.json"
     assert_response 200
   end
-
 end

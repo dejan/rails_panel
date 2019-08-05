@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 describe MetaRequest::Config do
@@ -21,7 +23,7 @@ describe MetaRequest::Config do
       assert_equal 20, config.storage_pool_size
     end
 
-    it "can be customized" do
+    it 'can be customized' do
       config.storage_pool_size = 50
       assert_equal 50, config.storage_pool_size
     end

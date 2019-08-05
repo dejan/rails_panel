@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MetaRequest
   class Config
     attr_writer :logger, :storage_pool_size, :source_path
