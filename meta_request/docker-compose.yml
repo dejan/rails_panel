@@ -21,6 +21,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-rails-5.2
+    command: bundle exec rails s -b 0.0.0.0
+    ports:
+      - 3000:3000
   test-rails-6.0:
     build:
       context: .

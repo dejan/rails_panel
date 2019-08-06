@@ -14,16 +14,8 @@ module MetaRequest
         app_request.current!
         @app.call(env)
       rescue StandardError => e
-        if defined?(ActionDispatch::ExceptionWrapper)
-          wrapper = if ActionDispatch::ExceptionWrapper.method_defined? :env
-                      ActionDispatch::ExceptionWrapper.new(env, e)
-                    else
-                      ActionDispatch::ExceptionWrapper.new(env['action_dispatch.backtrace_cleaner'], e)
-                    end
-          app_request.events.push(*Event.events_for_exception(wrapper))
-        else
-          app_request.events.push(*Event.events_for_exception(e))
-        end
+        ActionDispatch::ExceptionWrapper.new(env['action_dispatch.backtrace_cleaner'], e)
+        app_request.events.push(*Event.events_for_exception(wrapper))
         raise
       ensure
         Storage.new(app_request.id).write(app_request.events.to_json) unless app_request.events.empty?

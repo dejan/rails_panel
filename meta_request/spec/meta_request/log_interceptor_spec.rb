@@ -20,10 +20,10 @@ RSpec.describe MetaRequest::LogInterceptor do
   it 'adds app request events on log calls' do
     logger.info('Ohai!')
     expect(app_request.events.size).to eq(2)
-    last_event = app_request.events.last
-    expect(last_event.payload[:message]).to eq('Ohai!')
-    expect(last_event.payload[:line]).to eq(21)
-    expect(last_event.payload[:filename]).to match(%r{spec/meta_request/log_interceptor_spec.rb$})
-    expect(last_event.payload[:level]).to eq(:info)
+    last_event_payload = app_request.events.last.to_h[:payload]
+    expect(last_event_payload[:message]).to eq('Ohai!')
+    expect(last_event_payload[:line]).to eq(21)
+    expect(last_event_payload[:filename]).to match(%r{spec/meta_request/log_interceptor_spec.rb$})
+    expect(last_event_payload[:level]).to eq(:info)
   end
 end

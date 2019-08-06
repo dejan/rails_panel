@@ -1,18 +1,13 @@
 # frozen_string_literal: true
 
 require 'rails/railtie'
+require 'meta_request/event'
 
 module MetaRequest
   class Railtie < ::Rails::Railtie
     initializer 'meta_request.inject_middlewares' do |app|
       app.middleware.use Middlewares::MetaRequestHandler
-
-      if defined? ActionDispatch::DebugExceptions
-        app.middleware.insert_before ActionDispatch::DebugExceptions, Middlewares::Headers, app.config
-      else
-        app.middleware.use Middlewares::Headers, app.config
-      end
-
+      app.middleware.insert_before ActionDispatch::DebugExceptions, Middlewares::Headers, app.config
       app.middleware.use Middlewares::AppRequestHandler
     end
 
@@ -21,7 +16,7 @@ module MetaRequest
     end
 
     initializer 'meta_request.subscribe_to_notifications' do
-      AppNotifications.subscribe
+      MetaRequest::Event.subscribe_to_notifications
     end
   end
 end
