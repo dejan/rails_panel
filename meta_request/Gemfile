@@ -2,12 +2,4 @@
 
 source 'https://rubygems.org'
 
-group :development do
-  gem 'bundler'
-  gem 'minitest'
-  gem 'minitest-ci'
-  gem 'rake'
-  gem 'rubocop', '~> 0.74.0', require: false
-end
-
 gemspec

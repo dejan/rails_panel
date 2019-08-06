@@ -13,4 +13,4 @@ RUN bundle install
 
 COPY . /app
 
-CMD ["bundle", "exec", "rake"]
+CMD ["bundle", "exec", "rspec"]
