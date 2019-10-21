@@ -46,7 +46,7 @@ and your browser will refresh like a madman.
 
 ## Clearing the Console
 
-You can clear the panel with the usual shortcuts of ⌘+k or ctrl+l.
+You can clear the panel with the usual shortcuts of ⌘+K or ctrl+L.
 
 ## Code status
 
