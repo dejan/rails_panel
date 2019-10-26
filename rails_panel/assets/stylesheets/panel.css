@@ -10,6 +10,9 @@ ul {
   -webkit-margin-before: 0;
   -webkit-margin-after: 0;
   -webkit-margin-start: -30px;
+  -moz-margin-start: -30px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .data-grid {
