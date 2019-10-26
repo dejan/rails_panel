@@ -4,7 +4,9 @@
   "manifest_version": 2,
   "description": "Devtools panel for Rails development",
   "devtools_page": "devtools.html",
-  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html"
+  },
   "background": {
     "scripts": [
       "vendor/assets/javascripts/jquery-1.8.3.min.js",
