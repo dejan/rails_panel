@@ -1,4 +1,4 @@
-FROM ruby:2.3-alpine
+FROM ruby:2.6-alpine
 
 RUN apk add --update --no-cache \
      build-base curl-dev git sqlite-dev \
@@ -7,7 +7,7 @@ RUN apk add --update --no-cache \
 RUN mkdir /app /gem
 WORKDIR /app
 
-RUN gem install rails -v 4.1.16
+RUN gem install rails -v 4.2.11
 RUN rails new . --skip-spring
 
 RUN bundle remove sqlite3

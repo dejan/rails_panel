@@ -20,7 +20,7 @@ jobs:
       - setup_remote_docker
       - run: docker-compose run --rm test-unit
 
-  test_rails_4_1:
+  test_rails_4_2:
     docker:
       - image: circleci/buildpack-deps
     working_directory: ~/project/meta_request
@@ -28,7 +28,7 @@ jobs:
       - checkout:
           path: ~/project
       - setup_remote_docker
-      - run: docker-compose run --rm test-rails-4.1
+      - run: docker-compose run --rm test-rails-4.2
 
   test_rails_5_0:
     docker:
@@ -76,7 +76,7 @@ workflows:
     jobs:
       - rubocop
       - unit_tests
-      - test_rails_4_1
+      - test_rails_4_2
       - test_rails_5_0
       - test_rails_5_1
       - test_rails_5_2
