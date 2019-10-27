@@ -1,1 +1,1 @@
-chrome.devtools.panels.create("Rails", "assets/images/toolbarIcon.png", "panel.html");
+chrome.devtools.panels.create("Rails", "assets/images/toolbarIconBW.png", "panel.html");
