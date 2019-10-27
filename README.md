@@ -1,7 +1,7 @@
 RailsPanel
 ===========
 
-RailsPanel is a Chrome extension for Rails development that will end your tailing of development.log. Have all information about your Rails app requests in the browser - in the Developer Tools panel. Provides insight to db/rendering/total times, parameter list, rendered views and more.
+RailsPanel is a Browser (Chrome/Firefox) extension for Rails development that will end your tailing of development.log. Have all information about your Rails app requests in the browser - in the Developer Tools panel. Provides insight to db/rendering/total times, parameter list, rendered views and more.
 
 ![railspanel](https://cloud.githubusercontent.com/assets/4494/3090049/917e5378-e586-11e3-9bd4-1db232968126.png)
 
@@ -15,7 +15,7 @@ group :development do
 end
 ```
 
-Install RailsPanel extension from the [Chrome WebStore](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg). This is recommended way of installing extension, since it will auto-update on every new version. Note that you still need to update meta_request gem yourself.
+After this, install RailsPanel extension for [Chrome](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg) or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/rails-panel). This is recommended way of installing the extension, since it will auto-update on every new version.
 
 ## Install unpacked version
 
@@ -28,7 +28,7 @@ If you have a problem installing extension from Chrome Store or just want to run
 
 ## Editor integration
 
-Select your editor on the extension options page: chrome://extensions. Following editors are supported:
+Select your preferred editor on the extension options page. Following editors are supported:
 
 * MacVim
 * TextMate
