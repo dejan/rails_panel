@@ -48,4 +48,9 @@ angular.module('RailsPanel', [])
     return function(input) {
       return ansi2html(input);
     }
+  })
+  .filter('toString', function() {
+    return function(input) {
+      return input || "";
+    }
 });

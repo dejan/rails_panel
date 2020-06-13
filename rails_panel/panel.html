@@ -232,7 +232,7 @@
                 <tbody>
                   <tr ng-repeat="log in activeLog()">
                     <td><a href="{{log.payload.filename | editorify:log.payload.line}}">{{log.payload.filename | normalizePath}}:{{log.payload.line}}</a></td>
-                    <td ng-bind-html-unsafe="log.payload.message | sanitize | ansi2html"></td>
+                    <td ng-bind-html-unsafe="log.payload.message | toString | sanitize | ansi2html"></td>
                   </tr>
                 </tbody>
               </table>
