@@ -12,6 +12,7 @@ module MetaRequest
 
       {
         filename: sub_source_path(filename),
+        relative_filename: relative_path(filename),
         line: line.to_i,
         method: method
       }
@@ -23,6 +24,10 @@ module MetaRequest
       return path if rails_root == source_path
 
       path.sub(rails_root, source_path)
+    end
+
+    def relative_path(path)
+      path.sub(MetaRequest.rails_root, '').sub(%r{\A/}, '')
     end
   end
 end
