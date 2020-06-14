@@ -23,11 +23,11 @@ module MetaRequest
       source_path = MetaRequest.config.source_path
       return path if rails_root == source_path
 
-      path.sub(rails_root, source_path)
+      path.sub(%r{\A#{rails_root}}, source_path)
     end
 
     def relative_path(path)
-      path.sub(MetaRequest.rails_root, '').sub(%r{\A/}, '')
+      path.sub(%r{\A#{MetaRequest.rails_root}/?}, '')
     end
   end
 end
