@@ -129,7 +129,10 @@ function TransactionsCtrl($scope) {
         $scope.pushToMap($scope.paramsMap, key, {name:n, value:data.payload.params[n]});
       });
       $scope.transactionKeys.push(key);
-      $scope.setActive(key);
+
+      if ($scope.activeKey === null) {
+        $scope.setActive(key);
+      }
       break;
     case "process_action.action_controller.exception":
       $scope.pushToMap($scope.exceptionCallsMap, key, data);
