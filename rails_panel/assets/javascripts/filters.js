@@ -8,6 +8,9 @@ angular.module('RailsPanel', [])
   }).
   filter('editorify', function() {
     return function(filename, line) {
+      filename = encodeURI(filename);
+      filename = filename.replace("\(", "%28");
+      filename = filename.replace("\)", "%29");
       var mapping = {
         mvim: "mvim://open?url=file://%s&line=%d&column=%d",
         mate: "txmt://open?url=file://%s&line=%d&column=%d",
