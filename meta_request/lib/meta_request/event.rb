@@ -56,7 +56,8 @@ module MetaRequest
 
     def not_encodable?(value)
       (defined?(ActiveRecord) && value.is_a?(ActiveRecord::ConnectionAdapters::AbstractAdapter)) ||
-        (defined?(ActionDispatch) && (value.is_a?(ActionDispatch::Request)) || value.is_a?(ActionDispatch::Response))
+        (defined?(ActionDispatch) &&
+          (value.is_a?(ActionDispatch::Request) || value.is_a?(ActionDispatch::Response)))
     end
 
     # https://gist.github.com/dbenhur/1070399
