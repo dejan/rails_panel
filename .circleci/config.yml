@@ -70,6 +70,16 @@ jobs:
       - setup_remote_docker
       - run: docker-compose run --rm test-rails-6.0
 
+  test_rails_6_1:
+    docker:
+      - image: circleci/buildpack-deps
+    working_directory: ~/project/meta_request
+    steps:
+      - checkout:
+          path: ~/project
+      - setup_remote_docker
+      - run: docker-compose run --rm test-rails-6.1
+
 workflows:
   version: 2
   test_all:
@@ -81,3 +91,4 @@ workflows:
       - test_rails_5_1
       - test_rails_5_2
       - test_rails_6_0
+      - test_rails_6_1

@@ -25,3 +25,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-rails-6.0
+  test-rails-6.1:
+    build:
+      context: .
+      dockerfile: Dockerfile-rails-6.1
