@@ -37,7 +37,7 @@ List of available attributes and defaults can be found in [lib/meta_request/conf
 
 ## Docker
 
-Apps runing in Docker container will have filepaths of the container so links to editor would not work. To fix this, you need to propagate working directory through enviroment variable `SOURCE_PATH`. With docker-compose it can be done like this:
+Apps running in Docker container will have filepaths of the container so links to editor would not work. To fix this, you need to propagate working directory through environment variable `SOURCE_PATH`. With docker-compose it can be done like this:
 
 ```yaml
 services:
