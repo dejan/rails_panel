@@ -15,7 +15,8 @@ RSpec.describe MetaRequest::Utils, '.dev_callsite' do
     ]
 
     expect(MetaRequest::Utils.dev_callsite(stacktrace)).to eq(
-      filename: filename, line: line, method: method
+      filename: filename, relative_filename: 'test_file.rb',
+      line: line, method: method
     )
   end
 
@@ -39,7 +40,8 @@ RSpec.describe MetaRequest::Utils, '.dev_callsite' do
     ]
 
     expect(MetaRequest::Utils.dev_callsite(stacktrace)).to eq(
-      filename: '/Users/foo/bar/test_file.rb', line: line, method: method
+      filename: '/Users/foo/bar/test_file.rb',
+      relative_filename: 'test_file.rb', line: line, method: method
     )
 
     # revert configuration
