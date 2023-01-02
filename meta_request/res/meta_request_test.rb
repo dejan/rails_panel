@@ -13,7 +13,7 @@ class MetaRequestTest < ActionDispatch::IntegrationTest
     @request_id = response.headers['X-Request-Id']
   end
 
-  test 'it shold have a request_id header' do
+  test 'it should have a request_id header' do
     assert @request_id
   end
 
