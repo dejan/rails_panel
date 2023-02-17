@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine
+FROM ruby:3.0-alpine
 
 RUN apk add --update --no-cache \
         build-base \
@@ -16,7 +16,7 @@ RUN mkdir /app /gem
 WORKDIR /app
 
 RUN gem update --system
-RUN gem install rails -v 5.2.3
+RUN gem install rails -v 7.0.4
 RUN rails new .
 
 COPY . /gem
@@ -27,5 +27,9 @@ COPY res/routes.rb /app/config/
 COPY res/dummy_controller.rb /app/app/controllers/
 COPY res/dummy /app/app/views/dummy
 COPY res/meta_request_test.rb /app/test/integration/
+
+RUN bundle exec rails db:migrate
+
+ENV PARALLEL_WORKERS 1
 
 CMD ["bin/rake"]

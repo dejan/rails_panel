@@ -1,23 +1,27 @@
 FROM ruby:2.6-alpine
 
 RUN apk add --update --no-cache \
-     build-base curl-dev git sqlite-dev \
-     yaml-dev zlib-dev nodejs yarn tzdata
+        build-base \
+        curl-dev \
+        git \
+        nodejs \
+        shared-mime-info \
+        sqlite-dev \
+        tzdata \
+        yaml-dev \
+        yarn \
+        zlib-dev
 
 RUN mkdir /app /gem
 WORKDIR /app
 
-RUN gem install rails -v 6.0.0.rc2
+RUN gem update --system
+RUN gem install rails -v 6.0.6
 RUN rails new .
 
-RUN bundle install
-
 COPY . /gem
-
-RUN gem build /gem/meta_request.gemspec
-RUN gem install /gem/meta_request-*.gem
-RUN bundle add meta_request
-RUN bundle install --local
+RUN bundle add meta_request --path /gem
+RUN bundle install
 
 COPY res/routes.rb /app/config/
 COPY res/dummy_controller.rb /app/app/controllers/
@@ -25,6 +29,12 @@ COPY res/dummy /app/app/views/dummy
 COPY res/meta_request_test.rb /app/test/integration/
 
 RUN bundle exec rails db:migrate
+
+# Webpacker 4 does not work well with Node v16
+RUN bundle remove webpacker
+RUN bundle add webpacker -v 5.4.3
+RUN bundle install
+RUN bundle exec rails webpacker:install
 
 ENV PARALLEL_WORKERS 1
 
