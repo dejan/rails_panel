@@ -1,0 +1,14 @@
+name: Ruby
+
+on: [push]
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Start containers
+      working-directory: meta_request
+      run: docker-compose up

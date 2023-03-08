@@ -5,18 +5,6 @@ services:
     command: bundle exec rubocop
   test-unit:
     build: .
-  test-rails-4.2:
-    build:
-      context: .
-      dockerfile: Dockerfile-rails-4.2
-  test-rails-5.0:
-    build:
-      context: .
-      dockerfile: Dockerfile-rails-5.0
-  test-rails-5.1:
-    build:
-      context: .
-      dockerfile: Dockerfile-rails-5.1
   test-rails-5.2:
     build:
       context: .
