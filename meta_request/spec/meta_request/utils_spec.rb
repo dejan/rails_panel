@@ -45,4 +45,29 @@ RSpec.describe MetaRequest::Utils, '.dev_callsite' do
     # revert configuration
     MetaRequest.config.source_path = MetaRequest.rails_root
   end
+
+  it 'ignores ignored paths' do
+    filename = File.join(MetaRequest.rails_root, 'test_file.rb')
+    line = 87
+    method = 'app_func'
+    vendor_filename = File.join(MetaRequest.rails_root, 'vendor', 'test_file.rb')
+
+    stacktrace = [
+      "/gem/gem_file.rb:1:in `func'`",
+      "#{vendor_filename}:#{line}:in `#{method}'",
+      "#{filename}:#{line}:in `#{method}'",
+      "#{vendor_filename}:#{line}:in `#{method}'",
+      "/gem/gem_file.rb:1:in `func2'`"
+    ]
+
+    expect(MetaRequest::Utils.dev_callsite(stacktrace)).to eq(
+      filename: filename, line: line, method: method
+    )
+
+    stacktrace = [
+      "#{vendor_filename}:#{line}:in `#{method}'"
+    ]
+
+    expect(MetaRequest::Utils.dev_callsite(stacktrace)).to be(nil)
+  end
 end
