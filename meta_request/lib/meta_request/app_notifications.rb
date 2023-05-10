@@ -57,6 +57,10 @@ module MetaRequest
     # Subscribe to all events relevant to RailsPanel
     #
     def self.subscribe
+      if Mongo and Mongo::Monitoring and Mongo::Monitoring::Global
+        Mongo::Monitoring::Global.subscribe(Mongo::Monitoring::COMMAND, MetaRequest::Subscribers::MongoCommandSubscriber.new)
+      end
+
       new
         .subscribe('meta_request.log')
         .subscribe('sql.active_record', &SQL_BLOCK)

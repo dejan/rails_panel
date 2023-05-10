@@ -7,6 +7,7 @@ module MetaRequest
   autoload :AppRequest,       'meta_request/app_request'
   autoload :Storage,          'meta_request/storage'
   autoload :Middlewares,      'meta_request/middlewares'
+  autoload :Subscribers,      'meta_request/subscribers'
   autoload :LogInterceptor,   'meta_request/log_interceptor'
   autoload :AppNotifications, 'meta_request/app_notifications'
   autoload :Utils,            'meta_request/utils'
