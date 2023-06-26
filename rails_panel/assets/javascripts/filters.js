@@ -9,13 +9,14 @@ angular.module('RailsPanel', [])
   filter('editorify', function() {
     return function(filename, line) {
       var mapping = {
-        mvim: "mvim://open?url=file://%s&line=%d&column=%d",
-        mate: "txmt://open?url=file://%s&line=%d&column=%d",
-        subl: "subl://open?url=file://%s&line=%d&column=%d",
-        sblm: "sblm:///%s",
-        emacs: "emacs://open?url=file://%s&line=%d&column=%d",
         atom: "atm://open?url=file://%s&line=%d&column=%d",
+        emacs: "emacs://open?url=file://%s&line=%d&column=%d",
+        idea: "idea://open?file=%s&line=%d",
+        mate: "txmt://open?url=file://%s&line=%d&column=%d",
         mine: "x-mine://open?file=%s&line=%d",
+        mvim: "mvim://open?url=file://%s&line=%d&column=%d",
+        sblm: "sblm:///%s",
+        subl: "subl://open?url=file://%s&line=%d&column=%d",
         vscode: "vscode://file%s:%d"
       }
       var editor = localStorage.getItem("railspanel.editor");
