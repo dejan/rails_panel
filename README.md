@@ -17,6 +17,8 @@ end
 
 After this, install RailsPanel extension for [Chrome](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg) or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/rails-panel). This is recommended way of installing the extension, since it will auto-update on every new version.
 
+You may need to restart your Rails server.
+
 ## Install unpacked version
 
 If you have a problem installing extension from Chrome Store or just want to run latest and hack on it, just clone the repo (say under `~/workspace/rails_panel`) and in "Developer mode" Chrome Extensions page select "Load Unpacked extension..." and select `~/workspace/rails_panel/rails_panel`.
