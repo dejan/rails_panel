@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support'
+require 'active_support/cache'
 require 'active_support/json'
 require 'active_support/core_ext'
 
@@ -13,6 +14,7 @@ module MetaRequest
     attr_reader :duration
 
     def initialize(name, start, ending, transaction_id, payload)
+      @name = name
       super(name, start, ending, transaction_id, json_encodable(payload))
       @duration = 1000.0 * (ending - start)
     end
@@ -37,7 +39,7 @@ module MetaRequest
     def json_encodable(payload)
       return {} unless payload.is_a?(Hash)
 
-      transform_hash(payload, deep: true) do |hash, key, value|
+      transform_hash(sanitize_hash(payload), deep: true) do |hash, key, value|
         if value.class.to_s == 'ActionDispatch::Http::Headers'
           value = value.to_h.select { |k, _| k.upcase == k }
         elsif not_encodable?(value)
@@ -52,6 +54,14 @@ module MetaRequest
         end
         hash[key] = new_value
       end.with_indifferent_access
+    end
+
+    def sanitize_hash(payload)
+      if @name =~ /\Acache_\w+\.active_support\z/
+        payload[:key] = ActiveSupport::Cache::Store.new.send(:normalize_key, payload[:key])
+      end
+
+      payload
     end
 
     def not_encodable?(value)
