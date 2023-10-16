@@ -1,4 +1,4 @@
-FROM ruby:3.0
+FROM ruby:3.2
 
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends \
@@ -18,7 +18,7 @@ RUN mkdir /app /gem
 WORKDIR /app
 
 RUN gem update --system && \
-    gem install rails -v 7.0.4 && |
+    gem install rails -v 7.1.1 && |
     rails new .
 
 COPY . /gem
