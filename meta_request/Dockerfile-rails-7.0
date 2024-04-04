@@ -15,7 +15,8 @@ RUN apk add --update --no-cache \
 RUN mkdir /app /gem
 WORKDIR /app
 
-RUN gem update --system
+RUN gem update --system 3.5.7
+RUN bundle config force_ruby_platform true
 RUN gem install rails -v 7.0.4
 RUN rails new .
 
