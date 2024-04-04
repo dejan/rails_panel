@@ -3,6 +3,7 @@ FROM ruby:2.6-alpine
 RUN apk add --update --no-cache \
         build-base \
         curl-dev \
+        gcompat \
         git \
         nodejs \
         shared-mime-info \
@@ -15,7 +16,7 @@ RUN apk add --update --no-cache \
 RUN mkdir /app /gem
 WORKDIR /app
 
-RUN gem update --system
+RUN gem update --system 3.4.22
 RUN gem install rails -v 6.1.7
 RUN rails new .
 
