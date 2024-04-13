@@ -15,7 +15,6 @@ RUN apk add --update --no-cache \
 RUN mkdir /app /gem
 WORKDIR /app
 
-RUN gem update --system
 RUN gem install rails -v 5.2.3
 RUN rails new .
 
