@@ -14,7 +14,7 @@ end
 
 module Rails
   def self.root
-    Dir.pwd
+    Pathname(Dir.pwd)
   end
 end
 
