@@ -160,7 +160,10 @@
                   <tr ng-repeat="sql in activeSqls()" ng-show="showQuery(sql.payload.name)" class="{{sql.payload.name}}">
                     <td>
                       <span ng-show="sql.payload.filename != undefined && sql.payload.line != undefined">
-                        <a href="{{sql.payload.filename | editorify:sql.payload.line}}">{{sql.payload.filename | normalizePath}}:{{sql.payload.line}}</a>
+                        <a href="{{sql.payload.filename | editorify:sql.payload.line}}">
+                          <span ng-show="!sql.payload.relative_filename">{{ sql.payload.filename | normalizePath}}:{{sql.payload.line}}</span>
+                          <span ng-show="sql.payload.relative_filename">{{ sql.payload.relative_filename}}:{{sql.payload.line}}</span>
+                        </a>
                       </span>
                     </td>
                     <td>{{sql.payload.name}}</td>
@@ -185,7 +188,10 @@
                 <tbody>
                   <tr ng-repeat="view in activeViews()">
                     <td>
-                      <a href="{{view.payload.identifier | editorify:1}}">{{view.payload.identifier | normalizePath}}</a>
+                      <a href="{{view.payload.identifier | editorify:1}}">
+                        <span ng-show="!view.payload.relative_identifier">{{view.payload.identifier | normalizePath}}</span>
+                        <span ng-show="view.payload.relative_identifier">{{view.payload.relative_identifier}}</span>
+                      </a>
                       <span ng-show="view.payload.layout">within {{view.payload.layout}}</span>
                     </td>
                     <td class="duration" data-sort-value="{{-view.duration}}">{{view.duration | number:0}} ms</td>
@@ -209,7 +215,10 @@
                   <tr ng-repeat="cache in activeCaches()" class="{{cache.payload.name}}">
                     <td>
                       <span ng-show="cache.payload.filename != undefined && cache.payload.line != undefined">
-                        <a href="{{cache.payload.filename | editorify:cache.payload.line }}">{{cache.payload.filename | normalizePath}}:{{cache.payload.line}}</a>
+                        <a href="{{cache.payload.filename | editorify:cache.payload.line }}">
+                          <span ng-show="!cache.payload.relative_filename">{{cache.payload.filename | normalizePath}}:{{cache.payload.line}}</span>
+                          <span ng-show="cache.payload.relative_filename">{{cache.payload.relative_filename}}:{{cache.payload.line}}</span>
+                        </a>
                       </span>
                     </td>
                     <td>{{cache.payload.type}}</td>
@@ -231,7 +240,10 @@
                 </thead>
                 <tbody>
                   <tr ng-repeat="log in activeLog()">
-                    <td><a href="{{log.payload.filename | editorify:log.payload.line}}">{{log.payload.filename | normalizePath}}:{{log.payload.line}}</a></td>
+                    <td><a href="{{log.payload.filename | editorify:log.payload.line}}">
+                      <span ng-show="!log.payload.relative_filename">{{log.payload.filename | normalizePath}}:{{log.payload.line}}</span>
+                      <span ng-show="log.payload.relative_filename">{{log.payload.relative_filename}}:{{log.payload.line}}</span>
+                    </a></td>
                     <td ng-bind-html-unsafe="log.payload.message | toString | sanitize | ansi2html"></td>
                   </tr>
                 </tbody>

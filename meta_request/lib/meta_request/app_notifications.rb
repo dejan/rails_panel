@@ -49,7 +49,9 @@ module MetaRequest
 
     VIEW_BLOCK = proc { |*args|
       name, start, ending, transaction_id, payload = args
-      payload[:identifier] = MetaRequest::Utils.sub_source_path(payload[:identifier])
+      identifier = payload[:identifier]
+      payload[:identifier] = MetaRequest::Utils.sub_source_path(identifier)
+      payload[:relative_identifier] = MetaRequest::Utils.relative_path(identifier)
 
       Event.new(name, start, ending, transaction_id, payload)
     }
