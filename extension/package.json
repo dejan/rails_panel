@@ -1,0 +1,26 @@
+{
+  "name": "rails_panel_vue",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "ansi-to-html": "^0.7.2",
+    "highlight.js": "^11.9.0",
+    "pinia": "^2.1.7",
+    "primeicons": "^7.0.0",
+    "primevue": "^3.49.1",
+    "vue": "^3.4.19"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.1.4"
+  }
+}
