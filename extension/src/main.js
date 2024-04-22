@@ -2,7 +2,6 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config';
-// import Lara from './presets/lara';
 import Wind from './presets/wind';
 import './style.css';
 
