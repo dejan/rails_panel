@@ -1,7 +1,9 @@
+## Development mode
+
+    npm run dev
+
 ## Preview the extension
 
-```bash
-npm run build
-```
+    npm run build
 
 In Chrome > Plugins > Load unpacked select `dist` directory.
