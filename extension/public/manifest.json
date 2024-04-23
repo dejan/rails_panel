@@ -1,0 +1,24 @@
+{
+  "name": "RailsPanel",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "description": "Devtools panel for Rails development",
+  "devtools_page": "devtools.html",
+  "background": {
+    "service_worker": "background.js"
+  
+  },
+  "permissions": [
+    "activeTab",
+    "offscreen",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "http://localhost/*"
+  ],
+  "icons": {
+     "16": "Rails_Logo_16x16.png",
+     "48": "Rails_Logo_48x48.png",
+    "128": "Rails_Logo_128x128.png"
+  }
+}

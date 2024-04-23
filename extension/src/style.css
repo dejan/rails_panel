@@ -1,0 +1,40 @@
+@import "highlight.js/styles/foundation.css";
+@import "primeicons/primeicons.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    font-family: 'Lucida Grande', sans-serif;
+    font-size: 14px;
+    --surface-0: 255 255 255;
+    --surface-50: 250 250 249;
+    --surface-100: 245 245 244;
+    --surface-200: 231 229 228;
+    --surface-300: 214 211 209;
+    --surface-400: 168 162 158;
+    --surface-500: 120 113 108;
+    --surface-600: 87 83 78;
+    --surface-700: 68 64 60;
+    --surface-800: 46 42 41;
+    --surface-900: 36 33 31;
+    --surface-950: 28 25 23;
+    --primary-50: 254 242 242;
+    --primary-100: 254 226 226;
+    --primary-200: 254 202 202;
+    --primary-300: 252 165 165;
+    --primary-400: 248 113 113;
+    --primary-500: 239 68 68;
+    --primary-600: 220 38 38;
+    --primary-700: 185 28 28;
+    --primary-800: 153 27 27;
+    --primary-900: 127 29 29;
+    --primary-950: 69 10 10;  
+
+}
+
+/* custom scrollbar */
+/* ::-webkit-scrollbar {
+  width: 0px;
+} */
