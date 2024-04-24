@@ -3,8 +3,7 @@ RailsPanel
 
 RailsPanel is a Chrome/Firefox extension for Rails development that will end your tailing of development.log. Have all information about your Rails app requests in the browser - in the Developer Tools panel. Provides insight to db/rendering/total times, parameter list, rendered views and more.
 
-![railspanel](https://github.com/dejan/rails_panel/assets/4494/c205d2ea-298f-448e-8d03-1deb0825c44f)
-
+![railspanel](https://github.com/dejan/rails_panel/assets/4494/d79be73b-abd1-4803-9830-3d8352f8900b)
 
 ## Installation
 
@@ -16,38 +15,16 @@ group :development do
 end
 ```
 
-After this, install RailsPanel extension for [Chrome](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg) or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/rails-panel). This is recommended way of installing the extension, since it will auto-update on every new version.
+After this, install RailsPanel extension for [Chrome](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg). This is recommended way of installing the extension, since it will auto-update on every new version.
 
 ## Install unpacked version
 
-If you have a problem installing extension from Chrome Store or just want to run latest and hack on it, just clone the repo (say under `~/workspace/rails_panel`) and in "Developer mode" Chrome Extensions page select "Load Unpacked extension..." and select `~/workspace/rails_panel/rails_panel`.
+If you have a problem installing extension from Chrome Store or just want to run latest and hack on it, just clone the repo (say under `~/workspace/rails_panel`) and in "Developer mode" Chrome Extensions page select "Load Unpacked extension..." and select `~/workspace/rails_panel/extension`.
 
 ## Supported environments
 
 * Rails 5, 6 and 7
 * Ruby 3
-
-## Editor integration
-
-Select your preferred editor on the extension options page. Following editors are supported:
-
-* MacVim
-* TextMate
-* Sublime
-* Emacs
-* Atom
-* RubyMine
-
-## Compatibility Warnings
-
-If you're using [LiveReload](http://livereload.com/) or
-[Rack::LiveReload](https://github.com/johnbintz/rack-livereload) make sure to
-exclude watching your tmp/ folder because meta_request writes a lot of data there
-and your browser will refresh like a madman.
-
-## Clearing the Console
-
-You can clear the panel with the usual shortcuts of ⌘+K or ctrl+L.
 
 ## Licence
 
