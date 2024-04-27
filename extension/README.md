@@ -8,6 +8,6 @@
 
 In Chrome > Plugins > Load unpacked select `dist` directory.
 
-## Create release for upload to stores
+## Create release for uploading to stores
 
-  make release
+  npm run release
