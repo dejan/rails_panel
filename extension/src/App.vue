@@ -6,16 +6,18 @@
 import Requests from './components/Requests.vue'
 import { fakeEvents } from './fixtures/fakeEvents'
 import { useEventsStore } from './stores/events';
+import { useSettingsStore } from './stores/settings';
 import { onMounted, onUnmounted, nextTick } from 'vue'
 
-const store = useEventsStore()
+const eventsStore = useEventsStore();
+const settingsStore = useSettingsStore();
 
-onUnmounted(() => store.clear())
+onUnmounted(() => eventsStore.clear());
 
 onMounted(() => {
   if (typeof chrome.devtools == 'undefined') {
-    console.log("STANDALONE mode... mocking requests")
-    fakeEvents.forEach((data) => store.pushEvents(data.request_id, data.events));
+    console.log("STANDALONE mode... mocking requests");
+    fakeEvents.forEach((data) => eventsStore.pushEvents(data.request_id, data.events));
   } else {
     chrome.devtools.network.onRequestFinished.addListener(function(request) {
       var headers = request.response.headers;
@@ -28,9 +30,12 @@ onMounted(() => {
         url.search = "";
         console.log(url)
         chrome.runtime.sendMessage({action:'getJSON',url:url}, (data) => {
-          store.pushEvents(requestId, data);
+          const autoReselect = !settingsStore.lockOn;
+          eventsStore.pushEvents(requestId, data, autoReselect);
           nextTick(() => {
-            document.querySelectorAll('[data-pc-section="wrapper"]')[0].scrollTop = 1000000
+            if (autoReselect) {
+              document.querySelectorAll('[data-pc-section="wrapper"]')[0].scrollTop = 1000000;
+            }
           })
         });
       };
