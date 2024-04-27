@@ -9,7 +9,7 @@
     <Column field="type" header="Type" class="whitespace-nowrap"/>
     <Column field="query" header="Query">
       <template #body="slotProps">
-        <div v-html="hljs.highlight(slotProps.data.query, { language: 'sql' }).value" class="font-mono"></div>
+        <pre v-html="hljs.highlight(slotProps.data.query, { language: 'sql' }).value" class="font-mono whitespace-pre-wrap"></pre>
       </template>
     </Column>
     <Column field="binds" header="Binds"> 

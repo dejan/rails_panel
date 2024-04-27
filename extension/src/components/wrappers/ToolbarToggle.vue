@@ -103,7 +103,7 @@ const preset = {
       'transition-transform duration-200',
       {
         '-rotate-45': !props.modelValue,
-        '-rotate-90': props.modelValue
+        'rotate-0': props.modelValue
       },
 
     ]
