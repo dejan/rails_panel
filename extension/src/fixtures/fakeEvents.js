@@ -849,5 +849,351 @@ export const fakeEvents = [
         "duration": 58.175268
       }
     ]
+  },
+  {
+    request_id: "5e77aac7-aeae-460d-a6f8-424b93bbd5d2", events: [
+      {
+        "name": "sql.active_record",
+        "payload": {
+          "sql": "SELECT \"quotes\".* FROM \"quotes\" WHERE \"quotes\".\"id\" = ? LIMIT ?",
+          "name": "Quote Load",
+          "binds": "Not JSON Encodable",
+          "type_casted_binds": [
+            65,
+            1
+          ],
+          "statement_name": null,
+          "async": false,
+          "connection": "Not JSON Encodable",
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 63,
+          "method": "set_quote"
+        },
+        "time": 1714195459466.1008,
+        "transaction_id": "cddc5762136011526a25",
+        "end": 1714195459466.1633,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.062417999999999994
+      },
+      {
+        "name": "meta_request.log",
+        "payload": {
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 63,
+          "method": "set_quote",
+          "message": "  \u001b[1m\u001b[36mQuote Load (0.4ms)\u001b[0m  \u001b[1m\u001b[34mSELECT \"quotes\".* FROM \"quotes\" WHERE \"quotes\".\"id\" = ? LIMIT ?\u001b[0m  [[\"id\", 65], [\"LIMIT\", 1]]",
+          "level": "debug"
+        },
+        "time": 0.0,
+        "transaction_id": 0,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "meta_request.log",
+        "payload": {
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 63,
+          "method": "set_quote",
+          "message": "  ↳ app/controllers/quotes_controller.rb:63:in `set_quote'",
+          "level": "debug"
+        },
+        "time": 0.0,
+        "transaction_id": 0,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "sql.active_record",
+        "payload": {
+          "sql": "begin transaction",
+          "name": "TRANSACTION",
+          "binds": [
+            
+          ],
+          "type_casted_binds": [
+            
+          ],
+          "statement_name": null,
+          "async": false,
+          "connection": "Not JSON Encodable",
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 40,
+          "method": "block in update"
+        },
+        "time": 1714195459467.7502,
+        "transaction_id": "cddc5762136011526a25",
+        "end": 1714195459467.7832,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.032823
+      },
+      {
+        "name": "meta_request.log",
+        "payload": {
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 40,
+          "method": "block in update",
+          "message": "  \u001b[1m\u001b[36mTRANSACTION (0.3ms)\u001b[0m  \u001b[1m\u001b[36mbegin transaction\u001b[0m",
+          "level": "debug"
+        },
+        "time": 0.0,
+        "transaction_id": 0,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "meta_request.log",
+        "payload": {
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 40,
+          "method": "block in update",
+          "message": "  ↳ app/controllers/quotes_controller.rb:40:in `block in update'",
+          "level": "debug"
+        },
+        "time": 0.0,
+        "transaction_id": 0,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "sql.active_record",
+        "payload": {
+          "sql": "UPDATE \"quotes\" SET \"quote\" = ?, \"updated_at\" = ? WHERE \"quotes\".\"id\" = ?",
+          "name": "Quote Update",
+          "binds": "Not JSON Encodable",
+          "type_casted_binds": [
+            "Just as one spoils the stomach by overfeeding and thereby impairs the whole body, so can one overload and choke the mind by giving it too much nourishment. For the more one reads the fewer are the traces left of what one has read; the mind is like a tablet that has been written over and over. Hence it is impossible to reflect; and it is only by reflection that one can assimilate what one has read. If one reads straight ahead without pondering over it later, what has been read does not take root, but is for the most part lost.",
+            "2024-04-27 05:24:19.467424",
+            65
+          ],
+          "statement_name": null,
+          "async": false,
+          "connection": "Not JSON Encodable",
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 40,
+          "method": "block in update"
+        },
+        "time": 1714195459467.736,
+        "transaction_id": "cddc5762136011526a25",
+        "end": 1714195459468.8564,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 1.1202409999999998
+      },
+      {
+        "name": "meta_request.log",
+        "payload": {
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 40,
+          "method": "block in update",
+          "message": "  \u001b[1m\u001b[36mQuote Update (1.5ms)\u001b[0m  \u001b[1m\u001b[33mUPDATE \"quotes\" SET \"quote\" = ?, \"updated_at\" = ? WHERE \"quotes\".\"id\" = ?\u001b[0m  [[\"quote\", \"Just as one spoils the stomach by overfeeding and thereby impairs the whole body, so can one overload and choke the mind by giving it too much nourishment. For the more one reads the fewer are the traces left of what one has read; the mind is like a tablet that has been written over and over. Hence it is impossible to reflect; and it is only by reflection that one can assimilate what one has read. If one reads straight ahead without pondering over it later, what has been read does not take root, but is for the most part lost.\"], [\"updated_at\", \"2024-04-27 05:24:19.467424\"], [\"id\", 65]]",
+          "level": "debug"
+        },
+        "time": 0.0,
+        "transaction_id": 0,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "meta_request.log",
+        "payload": {
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 40,
+          "method": "block in update",
+          "message": "  ↳ app/controllers/quotes_controller.rb:40:in `block in update'",
+          "level": "debug"
+        },
+        "time": 0.0,
+        "transaction_id": 0,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "sql.active_record",
+        "payload": {
+          "sql": "commit transaction",
+          "name": "TRANSACTION",
+          "binds": [
+            
+          ],
+          "type_casted_binds": [
+            
+          ],
+          "statement_name": null,
+          "async": false,
+          "connection": "Not JSON Encodable",
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 40,
+          "method": "block in update"
+        },
+        "time": 1714195459470.0083,
+        "transaction_id": "cddc5762136011526a25",
+        "end": 1714195459470.068,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.059803
+      },
+      {
+        "name": "meta_request.log",
+        "payload": {
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 40,
+          "method": "block in update",
+          "message": "  \u001b[1m\u001b[36mTRANSACTION (0.2ms)\u001b[0m  \u001b[1m\u001b[36mcommit transaction\u001b[0m",
+          "level": "debug"
+        },
+        "time": 0.0,
+        "transaction_id": 0,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "meta_request.log",
+        "payload": {
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 40,
+          "method": "block in update",
+          "message": "  ↳ app/controllers/quotes_controller.rb:40:in `block in update'",
+          "level": "debug"
+        },
+        "time": 0.0,
+        "transaction_id": 0,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "meta_request.log",
+        "payload": {
+          "filename": "/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb",
+          "line": 41,
+          "method": "block (2 levels) in update",
+          "message": null,
+          "level": "info"
+        },
+        "time": 0.0,
+        "transaction_id": 0,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "process_action.action_controller",
+        "payload": {
+          "controller": "QuotesController",
+          "action": "update",
+          "request": "Not JSON Encodable",
+          "params": {
+            "_method": "patch",
+            "authenticity_token": "[FILTERED]",
+            "quote": {
+              "author": "schopenhauer",
+              "quote": "Just as one spoils the stomach by overfeeding and thereby impairs the whole body, so can one overload and choke the mind by giving it too much nourishment. For the more one reads the fewer are the traces left of what one has read; the mind is like a tablet that has been written over and over. Hence it is impossible to reflect; and it is only by reflection that one can assimilate what one has read. If one reads straight ahead without pondering over it later, what has been read does not take root, but is for the most part lost."
+            },
+            "commit": "Update Quote",
+            "controller": "quotes",
+            "action": "update",
+            "id": "65"
+          },
+          "headers": {
+            "SCRIPT_NAME": "",
+            "QUERY_STRING": "",
+            "SERVER_SOFTWARE": "puma 6.4.2 The Eagle of Durango",
+            "GATEWAY_INTERFACE": "CGI/1.2",
+            "REQUEST_METHOD": "PATCH",
+            "REQUEST_PATH": "/quotes/65",
+            "REQUEST_URI": "/quotes/65",
+            "SERVER_PROTOCOL": "HTTP/1.1",
+            "HTTP_HOST": "localhost:3000",
+            "HTTP_CONNECTION": "keep-alive",
+            "CONTENT_LENGTH": "729",
+            "HTTP_SEC_CH_UA": "\"Chromium\";v=\"122\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"122\"",
+            "HTTP_DNT": "1",
+            "HTTP_X_CSRF_TOKEN": "oW99MjFZ6zUnB54j7C3dTKwKSRNxSoVuHooD-iv-Z4vnR2bacdXDl2Qj0VGfoht5Qf6SLc5GMlpzDzbEfeNZMw",
+            "HTTP_SEC_CH_UA_MOBILE": "?0",
+            "HTTP_USER_AGENT": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+            "CONTENT_TYPE": "application/x-www-form-urlencoded;charset=UTF-8",
+            "HTTP_ACCEPT": "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+            "HTTP_X_TURBO_REQUEST_ID": "5c5bb028-5195-4077-ac20-35ddaac0e533",
+            "HTTP_SEC_CH_UA_PLATFORM": "\"Linux\"",
+            "HTTP_ORIGIN": "http://localhost:3000",
+            "HTTP_SEC_FETCH_SITE": "same-origin",
+            "HTTP_SEC_FETCH_MODE": "cors",
+            "HTTP_SEC_FETCH_DEST": "empty",
+            "HTTP_REFERER": "http://localhost:3000/quotes/65/edit",
+            "HTTP_ACCEPT_ENCODING": "gzip, deflate, br, zstd",
+            "HTTP_ACCEPT_LANGUAGE": "en-US,en;q=0.9,hr;q=0.8,bs;q=0.7",
+            "HTTP_COOKIE": "_hellorailsworld_session=J1hYo%2Ba7Sy%2BrLH2PKwkBEAEHuOPH70jG6AduSymroVy6kA9jrDWvMQmG4J5InAEk%2BNb6gVR%2BeBB1O5KQ3kW2MuDybbWOvS8uc%2FjTBf1eDDiQzRFbvIgBwnkkaubu%2FA9Wmu3s6xmk2fUsrMSAs7vF8lqAMlUuEcAZuRTZBZ5ok610K1wxCIH6NK6SJzGlwLZtUSZj3Z7Xfzsf%2Bj%2FaQEWI6hygNMis%2F5yRp8JacpCR41GjqpM72pUqorPd46GAYSi57RSQZVuX4cS8QBVUeS5fOigbhy8chYh3wgWJFQyJyv8%3D--2aMwTR1Yuyq94GxC--FJ2i22dxdzl4WIDehgn%2F1A%3D%3D; _quotes_session=iX3sUVGRJ%2Bx1u8EJ9Mc%2FhjxCg1sD8USIHDuZxoJN9SGnFX%2FxjSHqB4NWRzjSZTTTbGdk269x6TkuYld693kdufYplyetrTON9qqIaoTL7vpm4xx4LH6f8etscfP51Xvwsud5XTj0zzq9YWyTKaJ9IjK3mULawTeNT7D0cSY3gA6p2TVXl02LMXA1Wr1FB4InAZjx2OwRZM6Q0LTVgi6lcAVWxZG42V%2BnD6BzpOvYopOOWLj5bxJ48I2glU2Nyt5Q7kwbVsW%2FaiCR1xpDm6U02Q6bLSjFEHY%3D--RQQzQXfgVQEmo0zn--Dd8O11O8WbKGx7BLhZ%2FcLA%3D%3D",
+            "SERVER_NAME": "localhost",
+            "SERVER_PORT": "3000",
+            "PATH_INFO": "/quotes/65",
+            "REMOTE_ADDR": "::1",
+            "HTTP_VERSION": "HTTP/1.1",
+            "ROUTES_11320_SCRIPT_NAME": "",
+            "ORIGINAL_FULLPATH": "/quotes/65",
+            "ORIGINAL_SCRIPT_NAME": ""
+          },
+          "format": "turbo_stream",
+          "method": "PATCH",
+          "path": "/quotes/65",
+          "response": "Not JSON Encodable",
+          "status": 302,
+          "view_runtime": null,
+          "db_runtime": 1.2642820365726948
+        },
+        "time": 1714195459465.4858,
+        "transaction_id": "cddc5762136011526a25",
+        "end": 1714195459471.2656,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 5.779743000000001
+      }
+    ]
   }
 ]

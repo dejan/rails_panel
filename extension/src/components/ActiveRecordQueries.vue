@@ -12,12 +12,10 @@
         <div v-html="hljs.highlight(slotProps.data.query, { language: 'sql' }).value" class="font-mono"></div>
       </template>
     </Column>
-    <Column field="binds" header="Binds" class="whitespace-nowrap"> 
+    <Column field="binds" header="Binds"> 
       <template #body="slotProps">
         <span v-if="slotProps.data.binds.length > 0">
-          (<span v-for="e in (slotProps.data.binds || []).map((el, i) => `` + el).join(', ')">
-            {{ e }}
-          </span>)
+          {{ slotProps.data.binds  }}
         </span>
       </template>
     </Column>
