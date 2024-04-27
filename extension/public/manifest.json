@@ -1,12 +1,11 @@
 {
-  "name": "RailsPanel",
-  "version": "1.0.0",
+  "name": "Rails Panel",
+  "version": "1.0.1",
   "manifest_version": 3,
   "description": "Devtools panel for Rails development",
   "devtools_page": "devtools.html",
   "background": {
     "service_worker": "background.js"
-  
   },
   "permissions": [
     "activeTab",
