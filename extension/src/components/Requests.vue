@@ -44,7 +44,7 @@ function classForStatus(status) {
       cls = "bg-red-700/80"
       break;
     default:
-      cls = "bg-purple-700/70"
+      cls = "bg-blue-700/80"
   }
   return cls + " text-white p-1 rounded text-xs"
 }
