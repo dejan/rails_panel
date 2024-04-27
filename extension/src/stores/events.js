@@ -31,7 +31,7 @@ export const useEventsStore = defineStore('events',  () => {
   const selectedCacheCalls = computed(() => cacheCalls.value.get(selectedRequest.value.id));
   const selectedParams = computed(() => selectedRequest.value.params);
 
-  function pushEvents(requestId, newEvents) {
+  function pushEvents(requestId, newEvents, autoReselect = true) {
     const actionEvent = newEvents.find((event) => event.name == "process_action.action_controller")
     const action = {
       id: requestId,
@@ -44,7 +44,10 @@ export const useEventsStore = defineStore('events',  () => {
       params: Object.entries(actionEvent.payload.params).map(([name, value]) => ({ name, value }) )
     }
     actions.value.set(requestId, action);
-    selectedRequest.value = action;
+    
+    if (actions.value.size == 1 || autoReselect) {
+      selectedRequest.value = action;
+    }
 
     activeRecordQueries.value.set(requestId, newEvents.flatMap((event) => {
       if (event.name == "sql.active_record" && event.payload.name != "SCHEMA" && event.payload.name != "EXPLAIN") {

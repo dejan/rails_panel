@@ -1182,7 +1182,7 @@ const preset = {
       class: [
           // Color
           'dark:text-white/80',
-          { 'bg-slate-800 text-white dark:bg-surface-500/30': context.selected && context.stripedRows },
+          { 'bg-gray-700 text-white dark:bg-surface-500/30': context.selected && context.stripedRows },
           // { 'bg-surface-0 text-surface-600 dark:bg-surface-800': !context.selected },
           { 'odd:bg-surface-0 odd:text-surface-600 dark:odd:bg-surface-800 even:bg-surface-100 even:text-surface-600 dark:even:bg-surface-900/60': context.stripedRows && !context.selected },
 
