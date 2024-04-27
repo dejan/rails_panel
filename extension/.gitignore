@@ -1,4 +1,4 @@
 .vite
 dist
 node_modules
-build/*.zip
+releases/*.zip

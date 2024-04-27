@@ -1,6 +1,7 @@
-.PHONY: build clean
+.PHONY: release clean
 
-build:
-	zip -r0 build/rails_panel.zip dist
+release:
+	zip -r0 releases/rails_panel.zip dist
+
 clean: 
-	rm build/*
+	rm releases/*
