@@ -61,7 +61,7 @@ module MetaRequest
         payload[:key] = ActiveSupport::Cache::Store.new.send(:normalize_key, payload[:key])
       end
 
-      payload
+      payload.except(:locals)
     end
 
     def not_encodable?(value)
