@@ -61,13 +61,15 @@ module MetaRequest
         payload[:key] = ActiveSupport::Cache::Store.new.send(:normalize_key, payload[:key])
       end
 
-      payload
+      payload.except(:locals)
     end
 
     def not_encodable?(value)
-      (defined?(ActiveRecord) && value.is_a?(ActiveRecord::ConnectionAdapters::AbstractAdapter)) ||
-        (defined?(ActionDispatch) &&
-          (value.is_a?(ActionDispatch::Request) || value.is_a?(ActionDispatch::Response)))
+      return true if defined?(ActiveRecord) && value.is_a?(ActiveRecord::ConnectionAdapters::AbstractAdapter)
+      return true if defined?(ActionDispatch) && (value.is_a?(ActionDispatch::Request) || value.is_a?(ActionDispatch::Response))
+      return true if defined?(ActionView) && value.is_a?(ActionView::Helpers::FormBuilder)
+
+      false
     end
 
     # https://gist.github.com/dbenhur/1070399
