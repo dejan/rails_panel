@@ -11,4 +11,4 @@ jobs:
     - uses: actions/checkout@v2
     - name: Start containers
       working-directory: meta_request
-      run: docker-compose up
+      run: docker compose up
