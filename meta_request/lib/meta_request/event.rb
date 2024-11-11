@@ -66,6 +66,7 @@ module MetaRequest
 
     def not_encodable?(value)
       return true if defined?(ActiveRecord) && value.is_a?(ActiveRecord::ConnectionAdapters::AbstractAdapter)
+      return true if defined?(ActiveRecord) && defined?(ActiveRecord::Transaction) && value.is_a?(ActiveRecord::Transaction)
       return true if defined?(ActionDispatch) && (value.is_a?(ActionDispatch::Request) || value.is_a?(ActionDispatch::Response))
       return true if defined?(ActionView) && value.is_a?(ActionView::Helpers::FormBuilder)
 

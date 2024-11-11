@@ -21,3 +21,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-rails-7.0
+  test-rails-7.1:
+    build:
+      context: .
+      dockerfile: Dockerfile-rails-7.1
+  test-rails-7.2:
+    build:
+      context: .
+      dockerfile: Dockerfile-rails-7.2
