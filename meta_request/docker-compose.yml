@@ -29,3 +29,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-rails-7.2
+  test-rails-8.0:
+    build:
+      context: .
+      dockerfile: Dockerfile-rails-8.0
