@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name         = 'meta_request'
-  gem.version      = '0.8.4'
+  gem.version      = '0.8.5'
 
   gem.summary      = 'Request your Rails request'
   gem.description  = 'Supporting gem for Rails Panel (Google Chrome extension for Rails development)'
