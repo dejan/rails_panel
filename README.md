@@ -23,7 +23,7 @@ If you have a problem installing extension from Chrome Store or just want to run
 
 ## Supported environments
 
-* Rails 5, 6 and 7
+* Rails 5, 6, 7 and 8
 * Ruby 3
 
 ## Licence
