@@ -15,7 +15,7 @@ group :development do
 end
 ```
 
-After this, install RailsPanel extension for [Chrome](https://chrome.google.com/webstore/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg). This is recommended way of installing the extension, since it will auto-update on every new version.
+After this, install RailsPanel extension for [Chrome](https://chromewebstore.google.com/detail/railspanel/gjpfobpafnhjhbajcjgccbbdofdckggg). This is recommended way of installing the extension, since it will auto-update on every new version.
 
 ## Install unpacked version
 
