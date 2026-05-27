@@ -3,12 +3,25 @@ name: Ruby
 on: [push]
 
 jobs:
-  test:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '4.0.5'
+        bundler-cache: true
+        working-directory: meta_request
+    - name: Run unit tests
+      working-directory: meta_request
+      run: bundle exec rspec
+
+  integration-tests:
     strategy:
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Start containers
       working-directory: meta_request
       run: docker compose up
