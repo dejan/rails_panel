@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'active_support/core_ext/module/delegation'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
