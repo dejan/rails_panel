@@ -1,35 +1,247 @@
-@import "highlight.js/styles/foundation.css";
 @import "primeicons/primeicons.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    font-family: 'Lucida Grande', sans-serif;
+/*
+ * Chrome DevTools design system tokens
+ * (ref-palette-neutral / primary from design_system_tokens.css)
+ *
+ * Light and dark use the SAME scale: low = light surfaces, high = dark surfaces.
+ * Components pair `bg-surface-0` with `dark:bg-surface-800/900` (do not remap under .dark).
+ */
+:root,
+.light {
+    font-family: 'Lucida Grande', system-ui, sans-serif;
     font-size: 14px;
-    --surface-0: 255 255 255;
-    --surface-50: 250 250 249;
-    --surface-100: 245 245 244;
-    --surface-200: 231 229 228;
-    --surface-300: 214 211 209;
-    --surface-400: 168 162 158;
-    --surface-500: 120 113 108;
-    --surface-600: 87 83 78;
-    --surface-700: 68 64 60;
-    --surface-800: 46 42 41;
-    --surface-900: 36 33 31;
-    --surface-950: 28 25 23;
-    --primary-50: 254 242 242;
-    --primary-100: 254 226 226;
-    --primary-200: 254 202 202;
-    --primary-300: 252 165 165;
-    --primary-400: 248 113 113;
-    --primary-500: 239 68 68;
-    --primary-600: 220 38 38;
-    --primary-700: 185 28 28;
-    --primary-800: 153 27 27;
-    --primary-900: 127 29 29;
-    --primary-950: 69 10 10;  
+    color-scheme: light;
 
+    --surface-0: 255 255 255;
+    --surface-50: 253 252 251;
+    --surface-100: 242 242 242;
+    --surface-200: 227 227 227;
+    --surface-300: 199 199 199;
+    --surface-400: 143 143 143;
+    --surface-500: 117 117 117;
+    --surface-600: 94 94 94;
+    --surface-700: 71 71 71;
+    --surface-800: 40 40 40;
+    --surface-900: 31 31 31;
+    --surface-950: 0 0 0;
+
+    --primary-50: 250 251 255;
+    --primary-100: 236 243 254;
+    --primary-200: 211 227 253;
+    --primary-300: 168 199 250;
+    --primary-400: 124 172 248;
+    --primary-500: 27 110 243;
+    --primary-600: 11 87 208;
+    --primary-700: 8 66 160;
+    --primary-800: 6 46 111;
+    --primary-900: 4 30 73;
+    --primary-950: 0 0 0;
+
+    /* Semantic accents (status, SQL, links) */
+    --status-ok: 15 157 88;
+    --status-error: 217 48 37;
+    --status-info: 26 115 232;
+    --status-fg: 255 255 255;
+
+    --link: 11 87 208;
+    --link-hover: 8 66 160;
+
+    --toast-ok-bg: 230 244 234;
+    --toast-ok-fg: 13 110 61;
+    --toast-ok-border: 15 157 88;
+
+    --hljs-fg: 36 41 46;
+    --hljs-comment: 106 115 125;
+    --hljs-keyword: 215 58 73;
+    --hljs-string: 3 47 98;
+    --hljs-number: 0 92 197;
+    --hljs-title: 111 66 193;
+    --hljs-name: 34 134 58;
+    --hljs-meta: 106 115 125;
+
+    --json-key: 11 87 208;
+    --json-string: 15 117 60;
+    --json-number: 156 80 0;
+    --json-boolean: 111 66 193;
+    --json-null: 117 117 117;
+}
+
+.dark {
+    color-scheme: dark;
+
+    --link: 138 180 248;
+    --link-hover: 168 199 250;
+
+    --toast-ok-bg: 11 60 36;
+    --toast-ok-fg: 129 201 149;
+    --toast-ok-border: 15 157 88;
+
+    --hljs-fg: 227 227 227;
+    --hljs-comment: 139 148 158;
+    --hljs-keyword: 255 123 114;
+    --hljs-string: 165 214 255;
+    --hljs-number: 121 192 255;
+    --hljs-title: 210 168 255;
+    --hljs-name: 126 231 135;
+    --hljs-meta: 139 148 158;
+
+    --json-key: 138 180 248;
+    --json-string: 126 231 135;
+    --json-number: 255 171 64;
+    --json-boolean: 210 168 255;
+    --json-null: 143 143 143;
+}
+
+html,
+body,
+#app {
+    @apply bg-surface-0 text-surface-900 dark:bg-surface-900 dark:text-surface-100;
+    height: 100%;
+    margin: 0;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+#app > * {
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
+}
+
+/* Keep splitter panels from overflowing into each other */
+.rp-split [data-pc-name="splitterpanel"],
+.rp-split-panel {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden;
+}
+
+/* Links */
+.rp-link {
+    color: rgb(var(--link));
+}
+.rp-link:hover {
+    color: rgb(var(--link-hover));
+}
+
+/* Status badges */
+.rp-status {
+    @apply p-1 rounded text-xs font-medium;
+    color: rgb(var(--status-fg));
+}
+.rp-status-ok { background-color: rgb(var(--status-ok) / 0.85); }
+.rp-status-error { background-color: rgb(var(--status-error) / 0.85); }
+.rp-status-info { background-color: rgb(var(--status-info) / 0.85); }
+
+/* Copy toast */
+.rp-toast-ok {
+    color: rgb(var(--toast-ok-fg));
+    background-color: rgb(var(--toast-ok-bg));
+    border-color: rgb(var(--toast-ok-border));
+}
+
+/* highlight.js — themed tokens (SQL, etc.) */
+.hljs {
+    color: rgb(var(--hljs-fg));
+    background: transparent;
+}
+.hljs-comment,
+.hljs-quote {
+    color: rgb(var(--hljs-comment));
+    font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-type,
+.hljs-addition {
+    color: rgb(var(--hljs-keyword));
+    font-weight: 600;
+}
+.hljs-string,
+.hljs-attr,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+    color: rgb(var(--hljs-string));
+}
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable {
+    color: rgb(var(--hljs-number));
+}
+.hljs-built_in,
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+    color: rgb(var(--hljs-title));
+}
+.hljs-meta,
+.hljs-subst {
+    color: rgb(var(--hljs-meta));
+}
+.hljs-operator,
+.hljs-punctuation {
+    color: rgb(var(--hljs-fg) / 0.65);
+}
+
+/* pretty-print-json — Params values */
+.json-key { color: rgb(var(--json-key)); }
+.json-string { color: rgb(var(--json-string)); }
+.json-number { color: rgb(var(--json-number)); }
+.json-boolean { color: rgb(var(--json-boolean)); }
+.json-null { color: rgb(var(--json-null)); font-style: italic; }
+.json-mark { color: rgb(var(--hljs-fg) / 0.55); }
+
+/* Tables always fill the panel (100%). columnResizeMode=fit redistributes
+   internal column widths without growing/shrinking the table past the panel. */
+.rp-fill-table {
+    max-width: 100%;
+}
+.rp-fill-table table {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.rp-fill-table th,
+.rp-fill-table td {
+    vertical-align: middle;
+}
+
+/* Highlight row jumped-to from Timeline */
+.rp-fill-table tr.rp-row-highlight > td {
+    background-color: rgb(var(--primary-100)) !important;
+}
+.dark .rp-fill-table tr.rp-row-highlight > td {
+    background-color: rgb(var(--primary-500) / 0.22) !important;
+}
+.rp-fill-table tr.rp-row-highlight > td:first-child {
+    box-shadow: inset 3px 0 0 rgb(var(--primary-500));
+}
+.dark .rp-fill-table tr.rp-row-highlight > td:first-child {
+    box-shadow: inset 3px 0 0 rgb(var(--primary-400));
+}
+
+/* Error tab stack frames (matches Timeline exception tones) */
+.rp-row-highlight.rp-error-frame {
+    background-color: rgb(220 38 38 / 0.18) !important;
+    box-shadow: inset 3px 0 0 rgb(220 38 38);
+}
+.dark .rp-row-highlight.rp-error-frame {
+    background-color: rgb(239 68 68 / 0.28) !important;
+    box-shadow: inset 3px 0 0 rgb(248 113 113);
 }

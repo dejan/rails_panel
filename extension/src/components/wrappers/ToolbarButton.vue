@@ -30,8 +30,8 @@ const preset = {
       { 'rounded-none first:rounded-l-md last:rounded-r-md self-center': parent.instance.$name == 'InputGroup' },
     
       // Colors
-      'text-surface-500 hover:bg-surface-200 dark:hover:bg-surface-300 hover:ring-surface-600 dark:hover:ring-surface-300',
-      'active:bg-surface-400',
+      'text-surface-500 hover:bg-surface-200 dark:hover:bg-surface-700 hover:ring-surface-600 dark:hover:ring-surface-500',
+      'active:bg-surface-300 dark:active:bg-surface-600',
       
       // Disabled
       { 'opacity-60 pointer-events-none cursor-default': context.disabled },

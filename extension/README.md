@@ -1,13 +1,34 @@
 ## Development mode
 
-  npm run dev
+```bash
+npm run dev
+```
 
 ## Preview the extension
 
-  npm run build
+```bash
+npm run build
+```
 
-In Chrome > Plugins > Load unpacked select `dist` directory.
+In Chrome → Extensions → Load unpacked → select the `dist` directory.
 
-## Create release for uploading to stores
+## Create installable packages (share with others)
 
-  npm run release
+```bash
+npm run release
+```
+
+Creates in `releases/`:
+
+- `rails_panel-<version>.zip` — **recommended** for teams  
+  Unzip → Chrome → Extensions → Developer mode → **Load unpacked**
+- `rails_panel-<version>.crx` — packed extension  
+  Developer mode on → drag the `.crx` onto `chrome://extensions`
+
+GitHub Releases for this fork attach the same ZIP (see repo [Releases](https://github.com/smart-sgisistemas/rails_panel/releases) and root [CHANGELOG.md](../CHANGELOG.md)).
+
+Signing key (for stable extension id across packs) is stored at
+`packaging/rails_panel.pem` and is gitignored — back it up privately.
+
+**Note:** Chrome often blocks `.crx` installs outside the Web Store. If drag-and-drop
+fails, use the ZIP / Load unpacked path (same build).

@@ -43,8 +43,8 @@ const preset = {
 
       // States
       {
-        'peer-hover:bg-surface-200': !props.modelValue,
-        'peer-hover:bg-surface-700': props.modelValue
+        'peer-hover:bg-surface-200 dark:peer-hover:bg-surface-700': !props.modelValue,
+        'peer-hover:bg-surface-700 dark:peer-hover:bg-surface-600': props.modelValue
       },
       ,
 

@@ -2,3 +2,5 @@
 dist
 node_modules
 releases
+packaging/*.pem
+packaging/*.crx

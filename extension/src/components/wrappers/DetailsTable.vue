@@ -1,20 +1,62 @@
 <template>
-<div class="h-full overflow-auto">
-  <DataTable v-bind="$attrs" :pt="preset" :ptOptions="{ mergeSections: false, mergeProps: false }">
+<div ref="rootEl" class="rp-fill-table h-full min-h-0 w-full overflow-auto">
+  <DataTable
+    v-bind="$attrs"
+    :resizableColumns="resizableColumns"
+    :columnResizeMode="columnResizeMode"
+    :tableStyle="{ width: '100%', maxWidth: '100%' }"
+    :pt="preset"
+    :ptOptions="{ mergeSections: false, mergeProps: false }"
+  >
     <slot></slot>
-
+    <template v-if="$slots.expansion" #expansion="slotProps">
+      <slot name="expansion" v-bind="slotProps" />
+    </template>
   </DataTable>
 </div>
 </template>
 
 <script setup>
-import DataTable from 'primevue/datatable';
+import { ref } from 'vue'
+import DataTable from 'primevue/datatable'
+import { useHeaderColumnFit } from '../utils/useHeaderColumnFit'
 
-const props = defineProps(["columns"])
+const props = defineProps({
+    columns: {},
+    // table-fixed only when columns declare explicit widths (e.g. Database)
+    fixedLayout: {
+        type: Boolean,
+        default: false
+    },
+    resizableColumns: {
+        type: Boolean,
+        default: true
+    },
+    columnResizeMode: {
+        type: String,
+        // fit: drag redistributes width between columns; table stays at 100%.
+        default: 'fit'
+    },
+    // Kept for call-site compatibility; column widths are not persisted.
+    stateKey: {
+        type: String,
+        default: null
+    },
+    // Vertical separators on header cells only
+    headerSeparators: {
+        type: Boolean,
+        default: false
+    }
+})
 
 defineOptions({
     inheritAttrs: false
 });
+
+const rootEl = ref(null)
+useHeaderColumnFit(rootEl, {
+  enabled: () => props.resizableColumns,
+})
 
 const preset = {
     root: ({ props }) => ({
@@ -78,9 +120,16 @@ const preset = {
             'text-surface-700 dark:text-white/80'
         ]
     }),
-    table: {
-        class: 'w-full border-spacing-0 border-separate'
-    },
+    table: () => ({
+        class: [
+            'w-full min-w-full border-spacing-0 border-separate',
+            { 'table-fixed': props.fixedLayout }
+        ],
+        style: {
+            width: '100%',
+            minWidth: '100%'
+        }
+    }),
     thead: ({ context }) => ({
         class: [
             {
@@ -120,39 +169,40 @@ const preset = {
         ]
     },
     column: {
-        headercell: ({ context, props }) => ({
+        headercell: ({ context, props: columnProps }) => ({
             class: [
                 'font-semibold',
                 'text-sm',
 
                 // Position
-                { 'sticky z-20 border-b': props.frozen || props.frozen === '' },
+                { 'sticky z-20 border-b': columnProps.frozen || columnProps.frozen === '' },
                 { relative: context.resizable },
 
                 // Alignment
                 'text-left',
 
                 // Shape
-                { 'border-r last:border-r-0': context?.showGridlines },
                 'border-0 border-b border-solid',
+                { 'border-r last:border-r-0': props.headerSeparators },
 
                 // Spacing
-                context?.size === 'small' ? 'py-2.5 px-2' : context?.size === 'large' ? 'py-5 px-4' : 'py-1 px-2',
+                context?.size === 'small' ? 'py-1 px-3' : context?.size === 'large' ? 'py-5 px-4' : 'py-1 px-3',
                 // Color
-                (props.sortable === '' || props.sortable) && context.sorted ? 'text-primary-500' : 'bg-surface-0 text-surface-700',
-                (props.sortable === '' || props.sortable) && context.sorted ? 'dark:text-primary-400' : 'dark:text-white/80 dark:bg-surface-800',
-                'border-surface-200 dark:border-surface-700 ',
+                (columnProps.sortable === '' || columnProps.sortable) && context.sorted ? 'text-primary-500' : 'bg-surface-0 text-surface-700',
+                (columnProps.sortable === '' || columnProps.sortable) && context.sorted ? 'dark:text-primary-400' : 'dark:text-white/80 dark:bg-surface-800',
+                'border-surface-300 dark:border-surface-600',
 
                 // States
                 'focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
 
                 // Transition
-                { 'transition duration-200': props.sortable === '' || props.sortable },
+                { 'transition duration-200': columnProps.sortable === '' || columnProps.sortable },
 
                 // Misc
-                { 'cursor-pointer': props.sortable === '' || props.sortable },
+                { 'cursor-pointer': columnProps.sortable === '' || columnProps.sortable },
                 {
-                    'overflow-hidden space-nowrap bg-clip-padding': context.resizable
+                    // Keep resize handle padding; do not clip fit-column labels (DEBUG, etc.)
+                    'whitespace-nowrap bg-clip-padding': context.resizable
                 }
             ]
         }),
@@ -162,31 +212,30 @@ const preset = {
         sort: ({ context }) => ({
             class: [context.sorted ? 'text-primary-500' : 'text-surface-700', context.sorted ? 'dark:text-primary-400' : 'dark:text-white/80']
         }),
-        bodycell: ({ props, context, state, parent }) => ({
+        bodycell: ({ props: columnProps, context, state, parent }) => ({
             class: [
                 //Position
                 { 'sticky box-border border-b': parent.instance.frozenRow },
-                { 'sticky box-border border-b': props.frozen || props.frozen === '' },
+                { 'sticky box-border border-b': columnProps.frozen || columnProps.frozen === '' },
                 'text-sm',
 
                 // Alignment
-                'text-left align-top',
+                'text-left align-middle',
 
                 'border-0 border-b border-solid',
-                { 'last:border-r-0 border-r border-b': context?.showGridlines },
-                { 'bg-surface-0 dark:bg-surface-800': parent.instance.frozenRow || props.frozen || props.frozen === '' },
+                { 'bg-surface-0 dark:bg-surface-800': parent.instance.frozenRow || columnProps.frozen || columnProps.frozen === '' },
 
                 // Spacing
-                { 'py-2.5 px-2': context?.size === 'small' && !state['d_editing'] },
+                { 'py-0.5 px-3': context?.size === 'small' && !state['d_editing'] },
                 { 'py-5 px-4': context?.size === 'large' && !state['d_editing'] },
-                { 'py-0.5 px-2': context?.size !== 'large' && context?.size !== 'small' && !state['d_editing'] },
-                { 'py-[0.6rem] px-2': state['d_editing'] },
+                { 'py-0.5 px-3': context?.size !== 'large' && context?.size !== 'small' && !state['d_editing'] },
+                { 'py-[0.6rem] px-3': state['d_editing'] },
 
                 // Color
-                'border-surface-100 dark:border-surface-700',
+                'border-surface-200 dark:border-surface-700',
 
-                // Misc
-                'space-nowrap'
+                // Fit columns use overflow:visible via style so width:1% grows to content.
+                // Fill columns clip via style + inner .truncate.
             ]
         }),
         footercell: ({ context }) => ({
@@ -198,7 +247,6 @@ const preset = {
                 'text-left',
 
                 // Shape
-                { 'border-r last:border-r-0': context?.showGridlines },
                 'border-0 border-t border-solid',
                 
                 // Spacing
@@ -755,26 +803,28 @@ const preset = {
                 'cursor-pointer select-none'
             ]
         },
-        columnresizer: {
+        columnresizer: () => ({
             class: [
                 'block',
 
                 // Position
                 'absolute top-0 right-0',
 
-                // Sizing
+                // Sizing — wider hit target; visible only on hover (no permanent bars)
                 'w-2 h-full',
 
                 // Spacing
                 'm-0 p-0',
 
-                // Color
-                'border border-transparent',
+                'border-0',
+                props.headerSeparators
+                    ? 'border-r border-surface-300 dark:border-surface-500'
+                    : 'bg-transparent hover:bg-primary-500/30 dark:hover:bg-primary-400/30',
 
                 // Misc
-                'cursor-col-resize'
+                'cursor-col-resize z-10'
             ]
-        },
+        }),
         rowreordericon: {
             class: 'cursor-move'
         },
@@ -1185,17 +1235,17 @@ const preset = {
     bodyrow: ({ context, props }) => ({
         class: [
             // Color
-            'dark:text-white/80',
-            { 'bg-surface-100 dark:bg-surface-500/30': context.selected && context.stripedRows },
-            { 'bg-surface-50 dark:bg-surface-500/30': context.selected && !context.stripedRows },
-            { 'bg-surface-0 text-surface-600 dark:bg-surface-800': !context.selected },
+            'dark:text-surface-100',
+            { 'bg-primary-100 text-surface-900 dark:bg-primary-400/20 dark:text-white': context.selected && context.stripedRows },
+            { 'bg-primary-50 text-surface-900 dark:bg-primary-400/20 dark:text-white': context.selected && !context.stripedRows },
+            { 'bg-surface-0 text-surface-700 dark:bg-surface-800 dark:text-surface-100': !context.selected },
             { 'bg-surface-0 dark:bg-surface-800': props.frozenRow },
-            { 'odd:bg-surface-0 odd:text-surface-600 dark:odd:bg-surface-800 even:bg-surface-50 even:text-surface-600 dark:even:bg-surface-900/60': context.stripedRows && !context.selected },
+            { 'odd:bg-surface-0 odd:text-surface-700 dark:odd:bg-surface-800 dark:odd:text-surface-100 even:bg-surface-50 even:text-surface-700 dark:even:bg-surface-900/60 dark:even:text-surface-100': context.stripedRows && !context.selected },
             
             // State
             { 'focus:outline-none focus:outline-offset-0 focus:ring-2 focus:ring-primary-500 ring-inset dark:focus:ring-primary-400': props.selectionMode },
-            { 'hover:bg-surface-300/20 hover:text-surface-600': props.selectionMode && !context.selected },
-            'hover:bg-surface-400/10',
+            { 'hover:bg-surface-200 dark:hover:bg-surface-700/50 hover:text-surface-800 dark:hover:text-surface-100': props.selectionMode && !context.selected },
+            'hover:bg-surface-100 dark:hover:bg-surface-800',
 
             // Transition
             { 'transition duration-200': (props.selectionMode && !context.selected) || props.rowHover },
@@ -1205,7 +1255,7 @@ const preset = {
         ]
     }),
     rowexpansion: {
-        class: 'bg-surface-0 dark:bg-surface-800 text-surface-600 dark:text-white/80'
+        class: 'bg-surface-50 dark:bg-surface-900 text-surface-700 dark:text-surface-100'
     },
     rowgroupheader: {
         class: ['sticky z-20', 'bg-surface-0 text-surface-600 dark:text-white/70', 'dark:bg-surface-800']

@@ -1,4 +1,19 @@
-export const fakeEvents = [
+import {
+  withRequestId,
+  scaleTimedEvents,
+  injectSqlEvents,
+  patchProcessAction,
+  makeSqlEvent,
+  makeProcessAction,
+  makeViewEvent,
+  makeCacheEvent,
+  makeSqlDebugLogs,
+  makeExceptionEvents,
+  makeRequest,
+} from './fixtureHelpers.js'
+
+/** Raw captures used as bases for derived demo variants. */
+const capturedRequests = [
   {
     request_id: "31fc50ed-3d47-4d5c-9d54-2683b1b4a791", events: [
       {
@@ -419,7 +434,7 @@ export const fakeEvents = [
     ]  
   },
   {
-    request_id: "", events: [
+    request_id: "a8e3f2c1-4b5d-4e6f-8a9b-0c1d2e3f4a5b", events: [
       {
         "name": "sql.active_record",
         "payload": {
@@ -689,6 +704,104 @@ export const fakeEvents = [
         "name": "process_action.action_controller.exception",
         "payload": {
           "call": "app/controllers/diagrams_controller.rb:105:in `thumbnail'"
+        },
+        "time": 0.0,
+        "transaction_id": null,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "process_action.action_controller.exception",
+        "payload": {
+          "call": "app/models/diagram.rb:88:in `thumbnail_url'"
+        },
+        "time": 0.0,
+        "transaction_id": null,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "process_action.action_controller.exception",
+        "payload": {
+          "call": "app/uploaders/svg_uploader.rb:14:in `url'"
+        },
+        "time": 0.0,
+        "transaction_id": null,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "process_action.action_controller.exception",
+        "payload": {
+          "call": "shrine (3.5.0) lib/shrine/storage/file_system.rb:92:in `open'"
+        },
+        "time": 0.0,
+        "transaction_id": null,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "process_action.action_controller.exception",
+        "payload": {
+          "call": "actionpack (7.1.3) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'"
+        },
+        "time": 0.0,
+        "transaction_id": null,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "process_action.action_controller.exception",
+        "payload": {
+          "call": "actionpack (7.1.3) lib/abstract_controller/base.rb:224:in `process_action'"
+        },
+        "time": 0.0,
+        "transaction_id": null,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "process_action.action_controller.exception",
+        "payload": {
+          "call": "actionpack (7.1.3) lib/action_controller/metal/rendering.rb:165:in `process_action'"
+        },
+        "time": 0.0,
+        "transaction_id": null,
+        "end": 0.0,
+        "cpu_time_start": 0.0,
+        "cpu_time_finish": 0.0,
+        "allocation_count_start": 0,
+        "allocation_count_finish": 0,
+        "duration": 0.0
+      },
+      {
+        "name": "process_action.action_controller.exception",
+        "payload": {
+          "call": "activesupport (7.1.3) lib/active_support/notifications.rb:206:in `block in instrument'"
         },
         "time": 0.0,
         "transaction_id": null,
@@ -1196,4 +1309,610 @@ export const fakeEvents = [
       }
     ]
   }
+]
+
+const SHOW_FAST_ID = '31fc50ed-3d47-4d5c-9d54-2683b1b4a791'
+const SHOW_SLOW_ID = 'c4d5e6f7-8901-4a2b-9c3d-4e5f60718293'
+const THUMBNAIL_ID = 'a8e3f2c1-4b5d-4e6f-8a9b-0c1d2e3f4a5b'
+const HELLO_ID = '1860f1f3-a7a7-41b0-a2f3-a1bca089bb6d'
+const UPDATE_FAST_ID = '5e77aac7-aeae-460d-a6f8-424b93bbd5d2'
+const UPDATE_SLOW_ID = 'd5e6f7a8-9012-4b3c-8d4e-5f6071829304'
+const POSTS_FILTER_PLAIN_ID = 'c0d1e2f3-4567-4a70-b293-041526374859'
+const POSTS_FILTER_STATUS_ID = 'd1e2f3a4-5678-4b71-c304-152637485960'
+const POSTS_N1_ID = 'e6f7a8b9-0123-4c4d-9e5f-607182930415'
+const POSTS_CREATE_OK_ID = 'f7a8b9c0-1234-4d5e-8f60-718293041526'
+const POSTS_CREATE_422_ID = 'a8b9c0d1-2345-4e5f-9071-829304152637'
+const KITCHEN_SINK_ID = 'b9c0d1e2-3456-4f60-a182-930415263748'
+
+/** Stable ids for standalone Compare seed (posts index filter ≈ SQL / F?). */
+export const DEMO_COMPARE_IDS = { a: POSTS_FILTER_PLAIN_ID, b: POSTS_FILTER_STATUS_ID }
+
+const byId = Object.fromEntries(capturedRequests.map((r) => [r.request_id, r]))
+
+const showFast = byId[SHOW_FAST_ID]
+const showSlow = patchProcessAction(
+  injectSqlEvents(
+    scaleTimedEvents(withRequestId(showFast, SHOW_SLOW_ID), 3.5),
+    [
+      makeSqlEvent({
+        sql: 'SELECT "versions".* FROM "versions" WHERE "versions"."item_type" = $1 AND "versions"."item_id" = $2 ORDER BY "versions"."created_at" DESC',
+        name: 'Version Load',
+        duration: 4.2,
+        binds: ['Diagram', 93],
+        time: 1713308146488,
+        filename: '/home/dejan/src/github.com/diagrammatic/diagrammatic/app/models/diagram.rb',
+        line: 40,
+        method: 'versions',
+      }),
+      makeSqlEvent({
+        sql: 'SELECT "collaborators".* FROM "collaborators" WHERE "collaborators"."diagram_id" = $1',
+        name: 'Collaborator Load',
+        duration: 3.1,
+        binds: [93],
+        time: 1713308146492,
+        filename: '/home/dejan/src/github.com/diagrammatic/diagrammatic/app/controllers/diagrams_controller.rb',
+        line: 35,
+        method: 'show',
+      }),
+    ]
+  ),
+  {
+    path: '/diagrams/x9SlowCompare',
+    params: { id: 'x9SlowCompare' },
+  }
+)
+
+const updateFast = byId[UPDATE_FAST_ID]
+const updateSlow = patchProcessAction(
+  injectSqlEvents(
+    scaleTimedEvents(withRequestId(updateFast, UPDATE_SLOW_ID), 4),
+    [
+      makeSqlEvent({
+        sql: 'SELECT "audit_logs".* FROM "audit_logs" WHERE "audit_logs"."quote_id" = ? ORDER BY "audit_logs"."id" DESC LIMIT ?',
+        name: 'AuditLog Load',
+        duration: 2.8,
+        binds: [65, 10],
+        time: 1714195459468,
+        filename: '/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb',
+        line: 45,
+        method: 'update',
+      }),
+      makeSqlEvent({
+        sql: 'INSERT INTO "audit_logs" ("quote_id", "action", "created_at", "updated_at") VALUES (?, ?, ?, ?)',
+        name: 'AuditLog Create',
+        duration: 1.6,
+        binds: [65, 'update', '2024-04-27', '2024-04-27'],
+        time: 1714195459470,
+        filename: '/home/dejan/src/github.com/dejan/quotes/app/controllers/quotes_controller.rb',
+        line: 46,
+        method: 'update',
+      }),
+    ]
+  ),
+  {
+    path: '/quotes/99',
+    params: { id: '99' },
+  }
+)
+
+/** Compare pair: same Posts#index shape, B adds status filter → ≈ SQL + F?. */
+const filterPlainTime = 1715000000500
+const postsFilterPlain = makeRequest(POSTS_FILTER_PLAIN_ID, [
+  makeSqlEvent({
+    sql: 'SELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC LIMIT $1',
+    name: 'Post Load',
+    duration: 1.8,
+    binds: [20],
+    time: filterPlainTime,
+    filename: '/app/controllers/posts_controller.rb',
+    line: 8,
+    method: 'index',
+    transactionId: 'posts-filter-plain-tx',
+  }),
+  makeViewEvent({
+    kind: 'template',
+    identifier: '/app/views/posts/index.html.erb',
+    layout: 'layouts/application',
+    duration: 4.2,
+    time: filterPlainTime + 3,
+    transactionId: 'posts-filter-plain-tx',
+  }),
+  makeProcessAction({
+    controller: 'PostsController',
+    action: 'index',
+    method: 'GET',
+    path: '/posts',
+    status: 200,
+    format: 'html',
+    params: { page: '1' },
+    duration: 18,
+    dbRuntime: 1.8,
+    viewRuntime: 4.2,
+    time: filterPlainTime,
+    transactionId: 'posts-filter-plain-tx',
+  }),
+])
+
+const filterStatusTime = 1715000000800
+const postsFilterStatus = makeRequest(POSTS_FILTER_STATUS_ID, [
+  makeSqlEvent({
+    sql: 'SELECT "posts".* FROM "posts" WHERE "posts"."status" = $1 ORDER BY "posts"."created_at" DESC LIMIT $2',
+    name: 'Post Load',
+    duration: 2.6,
+    binds: ['published', 20],
+    time: filterStatusTime,
+    filename: '/app/controllers/posts_controller.rb',
+    line: 8,
+    method: 'index',
+    transactionId: 'posts-filter-status-tx',
+  }),
+  makeViewEvent({
+    kind: 'template',
+    identifier: '/app/views/posts/index.html.erb',
+    layout: 'layouts/application',
+    duration: 4.0,
+    time: filterStatusTime + 4,
+    transactionId: 'posts-filter-status-tx',
+  }),
+  makeProcessAction({
+    controller: 'PostsController',
+    action: 'index',
+    method: 'GET',
+    path: '/posts',
+    status: 200,
+    format: 'html',
+    params: { page: '1', status: 'published' },
+    duration: 22,
+    dbRuntime: 2.6,
+    viewRuntime: 4.0,
+    time: filterStatusTime,
+    transactionId: 'posts-filter-status-tx',
+  }),
+])
+
+const n1BaseTime = 1715000000000
+const postsNPlusOne = makeRequest(POSTS_N1_ID, [
+  makeSqlEvent({
+    sql: 'SELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC LIMIT $1',
+    name: 'Post Load',
+    duration: 2.4,
+    binds: [10],
+    time: n1BaseTime,
+    filename: '/app/controllers/posts_controller.rb',
+    line: 8,
+    method: 'index',
+    transactionId: 'n1-tx',
+  }),
+  ...[1, 2, 3, 4].flatMap((id, i) => [
+    makeSqlEvent({
+      sql: 'SELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1',
+      name: 'Comment Load',
+      duration: 0.9 + i * 0.15,
+      binds: [id],
+      time: n1BaseTime + 10 + i * 4,
+      filename: '/app/models/post.rb',
+      line: 12,
+      method: 'comments',
+      transactionId: 'n1-tx',
+    }),
+    makeSqlEvent({
+      sql: 'SELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2',
+      name: 'User Load',
+      duration: 0.55 + i * 0.1,
+      binds: [id, 1],
+      time: n1BaseTime + 12 + i * 4,
+      filename: '/app/models/post.rb',
+      line: 16,
+      method: 'author',
+      transactionId: 'n1-tx',
+    }),
+  ]),
+  makeProcessAction({
+    controller: 'PostsController',
+    action: 'index',
+    method: 'GET',
+    path: '/posts',
+    status: 200,
+    format: 'html',
+    duration: 48,
+    dbRuntime: 18.5,
+    viewRuntime: 22,
+    time: n1BaseTime,
+    transactionId: 'n1-tx',
+  }),
+])
+
+const createOkTime = 1715000001000
+const postsCreateOk = makeRequest(POSTS_CREATE_OK_ID, [
+  makeSqlEvent({
+    sql: 'BEGIN',
+    name: 'TRANSACTION',
+    duration: 0.05,
+    binds: [],
+    time: createOkTime,
+    filename: '/app/controllers/posts_controller.rb',
+    line: 22,
+    method: 'create',
+    transactionId: 'create-ok-tx',
+  }),
+  makeSqlEvent({
+    sql: 'INSERT INTO "posts" ("title", "body", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"',
+    name: 'Post Create',
+    duration: 1.8,
+    binds: ['Hello', 'World', 1, '2024-05-01', '2024-05-01'],
+    time: createOkTime + 1,
+    filename: '/app/controllers/posts_controller.rb',
+    line: 24,
+    method: 'create',
+    transactionId: 'create-ok-tx',
+  }),
+  makeSqlEvent({
+    sql: 'COMMIT',
+    name: 'TRANSACTION',
+    duration: 0.08,
+    binds: [],
+    time: createOkTime + 3,
+    filename: '/app/controllers/posts_controller.rb',
+    line: 24,
+    method: 'create',
+    transactionId: 'create-ok-tx',
+  }),
+  makeProcessAction({
+    controller: 'PostsController',
+    action: 'create',
+    method: 'POST',
+    path: '/posts',
+    status: 201,
+    format: 'html',
+    params: { post: { title: 'Hello', body: 'World', status: 'draft' } },
+    duration: 12,
+    dbRuntime: 2.1,
+    viewRuntime: 0,
+    time: createOkTime,
+    transactionId: 'create-ok-tx',
+  }),
+])
+
+const create422Time = 1715000002000
+const postsCreate422 = makeRequest(POSTS_CREATE_422_ID, [
+  makeSqlEvent({
+    sql: 'SELECT 1 AS one FROM "posts" WHERE "posts"."title" = $1 LIMIT $2',
+    name: 'Post Exists?',
+    duration: 0.4,
+    binds: ['', 1],
+    time: create422Time,
+    filename: '/app/models/post.rb',
+    line: 5,
+    method: 'validate',
+    transactionId: 'create-422-tx',
+  }),
+  ...makeSqlDebugLogs({
+    filename: '/app/models/post.rb',
+    line: 5,
+    method: 'validate',
+    typeName: 'Post Exists?',
+    durationMs: 0.4,
+    sql: 'SELECT 1 AS one FROM "posts" WHERE "posts"."title" = $1 LIMIT $2',
+    bindPairs: [['title', ''], ['LIMIT', 1]],
+  }),
+  makeViewEvent({
+    kind: 'partial',
+    identifier: '/app/views/posts/_form.html.erb',
+    duration: 1.8,
+    time: create422Time + 2,
+    transactionId: 'create-422-tx',
+    locals: { post: 'Not JSON Encodable' },
+  }),
+  makeViewEvent({
+    kind: 'template',
+    identifier: '/app/views/posts/new.html.erb',
+    layout: 'layouts/application',
+    duration: 4.2,
+    time: create422Time + 1,
+    transactionId: 'create-422-tx',
+  }),
+  makeProcessAction({
+    controller: 'PostsController',
+    action: 'create',
+    method: 'POST',
+    path: '/posts',
+    status: 422,
+    format: 'html',
+    params: { post: { title: '', body: 'World', status: 'draft' } },
+    duration: 8,
+    dbRuntime: 0.4,
+    viewRuntime: 4.2,
+    time: create422Time,
+    transactionId: 'create-422-tx',
+    exception: [
+      'ActiveRecord::RecordInvalid',
+      "Validation failed: Title can't be blank, Body can't be blank",
+    ],
+  }),
+  ...makeExceptionEvents({
+    klass: 'ActiveRecord::RecordInvalid',
+    message: "Validation failed: Title can't be blank, Body can't be blank",
+    frames: [
+      "app/models/post.rb:12:in `save!'",
+      "app/models/post.rb:18:in `create!'",
+      "app/controllers/posts_controller.rb:28:in `create'",
+      "actionpack (7.1.3) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'",
+      "actionpack (7.1.3) lib/abstract_controller/base.rb:224:in `process_action'",
+      "actionpack (7.1.3) lib/action_controller/metal/rendering.rb:165:in `process_action'",
+      "actionpack (7.1.3) lib/abstract_controller/callbacks.rb:259:in `block in process_action'",
+      "activesupport (7.1.3) lib/active_support/callbacks.rb:121:in `block in run_callbacks'",
+      "actionpack (7.1.3) lib/action_controller/metal/rescue.rb:25:in `call'",
+      "actionpack (7.1.3) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'",
+      "activesupport (7.1.3) lib/active_support/notifications.rb:206:in `block in instrument'",
+      "actionpack (7.1.3) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'",
+    ],
+  }),
+])
+
+/** Kitchen-sink request: DB + views + cache + logs + exception (all detail tabs). */
+const kitchenSinkTime = 1715000003000
+const kitchenSinkTx = 'kitchen-sink-tx'
+const kitchenSink = makeRequest(KITCHEN_SINK_ID, [
+  makeSqlEvent({
+    sql: 'SELECT "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT $2',
+    name: 'Order Load',
+    duration: 1.4,
+    binds: [42, 1],
+    time: kitchenSinkTime,
+    filename: '/app/controllers/orders_controller.rb',
+    line: 48,
+    method: 'checkout',
+    transactionId: kitchenSinkTx,
+  }),
+  ...makeSqlDebugLogs({
+    filename: '/app/controllers/orders_controller.rb',
+    line: 48,
+    method: 'checkout',
+    typeName: 'Order Load',
+    durationMs: 1.4,
+    sql: 'SELECT "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT $2',
+    bindPairs: [['id', 42], ['LIMIT', 1]],
+  }),
+  makeSqlEvent({
+    sql: 'SELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2',
+    name: 'User Load',
+    duration: 0.7,
+    binds: [7, 1],
+    time: kitchenSinkTime + 2,
+    filename: '/app/controllers/orders_controller.rb',
+    line: 49,
+    method: 'checkout',
+    transactionId: kitchenSinkTx,
+  }),
+  ...makeSqlDebugLogs({
+    filename: '/app/controllers/orders_controller.rb',
+    line: 49,
+    method: 'checkout',
+    typeName: 'User Load',
+    durationMs: 0.7,
+    sql: 'SELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2',
+    bindPairs: [['id', 7], ['LIMIT', 1]],
+  }),
+  makeSqlEvent({
+    sql: 'SELECT "line_items".* FROM "line_items" WHERE "line_items"."order_id" = $1',
+    name: 'LineItem Load',
+    duration: 2.1,
+    binds: [42],
+    time: kitchenSinkTime + 3,
+    filename: '/app/models/order.rb',
+    line: 22,
+    method: 'line_items',
+    transactionId: kitchenSinkTx,
+  }),
+  ...makeSqlDebugLogs({
+    filename: '/app/models/order.rb',
+    line: 22,
+    method: 'line_items',
+    typeName: 'LineItem Load',
+    durationMs: 2.1,
+    sql: 'SELECT "line_items".* FROM "line_items" WHERE "line_items"."order_id" = $1',
+    bindPairs: [['order_id', 42]],
+  }),
+  makeSqlEvent({
+    sql: 'SELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2',
+    name: 'Product Load',
+    duration: 0.85,
+    binds: [101, 1],
+    time: kitchenSinkTime + 6,
+    filename: '/app/models/line_item.rb',
+    line: 10,
+    method: 'product',
+    transactionId: kitchenSinkTx,
+  }),
+  ...makeSqlDebugLogs({
+    filename: '/app/models/line_item.rb',
+    line: 10,
+    method: 'product',
+    typeName: 'Product Load',
+    durationMs: 0.9,
+    sql: 'SELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2',
+    bindPairs: [['id', 101], ['LIMIT', 1]],
+  }),
+  makeSqlEvent({
+    sql: 'SELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2',
+    name: 'Product Load',
+    duration: 0.72,
+    binds: [102, 1],
+    time: kitchenSinkTime + 7,
+    filename: '/app/models/line_item.rb',
+    line: 10,
+    method: 'product',
+    transactionId: kitchenSinkTx,
+  }),
+  ...makeSqlDebugLogs({
+    filename: '/app/models/line_item.rb',
+    line: 10,
+    method: 'product',
+    typeName: 'Product Load',
+    durationMs: 0.7,
+    sql: 'SELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2',
+    bindPairs: [['id', 102], ['LIMIT', 1]],
+  }),
+  makeSqlEvent({
+    sql: 'SELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2',
+    name: 'Product Load',
+    duration: 0.91,
+    binds: [103, 1],
+    time: kitchenSinkTime + 8,
+    filename: '/app/models/line_item.rb',
+    line: 10,
+    method: 'product',
+    transactionId: kitchenSinkTx,
+  }),
+  ...makeSqlDebugLogs({
+    filename: '/app/models/line_item.rb',
+    line: 10,
+    method: 'product',
+    typeName: 'Product Load',
+    durationMs: 0.9,
+    sql: 'SELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2',
+    bindPairs: [['id', 103], ['LIMIT', 1]],
+  }),
+  makeCacheEvent({
+    type: 'read',
+    key: 'shipping/rates/br-sp',
+    hit: false,
+    duration: 0.12,
+    time: kitchenSinkTime + 10,
+    transactionId: kitchenSinkTx,
+    filename: '/app/services/shipping_calculator.rb',
+    line: 14,
+    method: 'rates_for',
+  }),
+  makeCacheEvent({
+    type: 'write',
+    key: 'shipping/rates/br-sp',
+    duration: 0.18,
+    time: kitchenSinkTime + 14,
+    transactionId: kitchenSinkTx,
+    filename: '/app/services/shipping_calculator.rb',
+    line: 22,
+    method: 'rates_for',
+  }),
+  makeCacheEvent({
+    type: 'read',
+    key: 'tax/rules/2024',
+    hit: true,
+    duration: 0.04,
+    time: kitchenSinkTime + 15,
+    transactionId: kitchenSinkTx,
+    filename: '/app/services/tax_calculator.rb',
+    line: 8,
+    method: 'rules',
+  }),
+  makeCacheEvent({
+    type: 'exist',
+    key: 'orders/42/invoice-preview',
+    duration: 0.03,
+    time: kitchenSinkTime + 16,
+    transactionId: kitchenSinkTx,
+    filename: '/app/controllers/orders_controller.rb',
+    line: 55,
+    method: 'checkout',
+  }),
+  makeViewEvent({
+    kind: 'partial',
+    identifier: '/app/views/orders/checkout/_line_item.html.erb',
+    duration: 1.2,
+    time: kitchenSinkTime + 20,
+    transactionId: kitchenSinkTx,
+    locals: { line_item: 'Not JSON Encodable' },
+  }),
+  makeViewEvent({
+    kind: 'partial',
+    identifier: '/app/views/orders/checkout/_line_item.html.erb',
+    duration: 0.9,
+    time: kitchenSinkTime + 22,
+    transactionId: kitchenSinkTx,
+    locals: { line_item: 'Not JSON Encodable' },
+  }),
+  makeViewEvent({
+    kind: 'partial',
+    identifier: '/app/views/orders/checkout/_summary.html.erb',
+    duration: 2.4,
+    time: kitchenSinkTime + 24,
+    transactionId: kitchenSinkTx,
+  }),
+  makeViewEvent({
+    kind: 'partial',
+    identifier: '/app/views/shared/_flash.html.erb',
+    duration: 0.35,
+    time: kitchenSinkTime + 27,
+    transactionId: kitchenSinkTx,
+    cacheHit: true,
+  }),
+  makeViewEvent({
+    kind: 'template',
+    identifier: '/app/views/orders/checkout.html.erb',
+    layout: 'layouts/application',
+    duration: 8.6,
+    time: kitchenSinkTime + 18,
+    transactionId: kitchenSinkTx,
+  }),
+  makeProcessAction({
+    controller: 'OrdersController',
+    action: 'checkout',
+    method: 'POST',
+    path: '/orders/42/checkout',
+    status: 500,
+    format: 'html',
+    params: {
+      id: '42',
+      order: { payment_method: 'card', coupon: 'SAVE10' },
+      authenticity_token: '[FILTERED]',
+    },
+    duration: 86,
+    dbRuntime: 7.6,
+    viewRuntime: 14.5,
+    time: kitchenSinkTime,
+    transactionId: kitchenSinkTx,
+    exception: [
+      'Payments::CardDeclined',
+      'card was declined (code: card_declined)',
+    ],
+  }),
+  ...makeExceptionEvents({
+    klass: 'Payments::CardDeclined',
+    message: 'card was declined (code: card_declined)',
+    frames: [
+      "app/services/payment_gateway.rb:64:in `charge'",
+      "app/services/payment_gateway.rb:41:in `block in charge'",
+      "app/services/checkout.rb:31:in `process!'",
+      "app/services/checkout.rb:18:in `call'",
+      "app/controllers/orders_controller.rb:72:in `checkout'",
+      "actionpack (7.1.3) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'",
+      "actionpack (7.1.3) lib/abstract_controller/base.rb:224:in `process_action'",
+      "actionpack (7.1.3) lib/action_controller/metal/rendering.rb:165:in `process_action'",
+      "actionpack (7.1.3) lib/abstract_controller/callbacks.rb:259:in `block in process_action'",
+      "activesupport (7.1.3) lib/active_support/callbacks.rb:121:in `block in run_callbacks'",
+      "actionpack (7.1.3) lib/action_controller/metal/rescue.rb:25:in `call'",
+      "actionpack (7.1.3) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'",
+    ],
+  }),
+])
+
+/**
+ * Standalone demo requests:
+ * show fast/slow, posts filter plain/status (Compare ≈ SQL / F?),
+ * thumbnail 500, hello cache, update fast/slow, posts N+1,
+ * create 201/422, kitchen-sink (all tabs).
+ */
+export const fakeEvents = [
+  showFast,
+  showSlow,
+  postsFilterPlain,
+  postsFilterStatus,
+  byId[THUMBNAIL_ID],
+  byId[HELLO_ID],
+  updateFast,
+  updateSlow,
+  postsNPlusOne,
+  postsCreateOk,
+  postsCreate422,
+  kitchenSink,
 ]

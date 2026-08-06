@@ -16,6 +16,7 @@ export default {
             'scale-100',
 
             // Color
+            'bg-surface-0 dark:bg-surface-800',
             'dark:border',
             'dark:border-surface-700',
 

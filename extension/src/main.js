@@ -3,7 +3,10 @@ import App from './App.vue';
 import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config';
 import Wind from './presets/wind';
+import { watchTheme } from './theme';
 import './style.css';
+
+watchTheme();
 
 const app = createApp(App);
 const pinia = createPinia();
